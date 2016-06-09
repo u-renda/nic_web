@@ -1,0 +1,35 @@
+.margintop0 {
+    margin-top: 0;
+}
+.margintop20 {
+    margin-top: 20px;
+}
+.marginbottom0 {
+    margin-bottom: 0;
+}
+.paddinglr0 {
+	padding-left: 0;
+	padding-right: 0;
+}.paddingleft0 {
+	padding-left: 0;
+}
+.wizard-tabs ul > li.active .badge {
+    background-color: #0088CC;
+}
+.tab-content {
+    box-shadow: none;
+    border: none;
+}
+.pointer {
+    cursor: pointer;
+}
+.btn-finish {
+    padding: 5px 14px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    color: #0088CC;
+}
+.btn-finish:hover {
+    background-color: #eee;
+}

@@ -1,0 +1,42 @@
+<div role="main" class="main">
+    <section class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="<?php echo $this->config->item('link_index'); ?>" class="a-default">Home</a></li>
+                        <li class="active">Pages</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>FAQ</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="container">
+		<h2>Frequently Asked <strong>Questions</strong></h2>
+		<div class="row">
+			<div class="col-md-12">
+				<p class="lead">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rutrum pellentesque imperdiet. Nulla lacinia iaculis nulla non pulvinar. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut eu risus enim, ut pulvinar lectus. Sed hendrerit nibh metus.
+				</p>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="toggle toggle-primary" data-plugin-toggle>
+					<?php foreach ($faq as $row) { ?>
+					<section class="toggle">
+						<label><?php echo $row->question; ?></label>
+						<p><?php echo $row->answer; ?></p>
+					</section>
+					<?php } ?>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
