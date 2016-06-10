@@ -11,8 +11,17 @@ class MY_Controller extends CI_Controller
         // DEVELOPMENT MODE
         if ($this->config->item('development_mode') == TRUE)
         {
+            $this->load->model('preferences_model');
+            
+            $query = $this->preferences_model->info(array('key' => 'about_us'));
+        
+            if ($query->code == 200)
+            {
+                $about_us = substr($query->result->value, 0, 200);
+            }
+            
             $data = array();
-            $data['text'] = "WEBSITE IS UNDER MAINTENANCE";
+            $data['about_us'] = $about_us;
             echo $this->load->view("development_mode", $data, TRUE);
             die();
         }

@@ -531,6 +531,9 @@ else
 }
 
 $config['development_mode'] = FALSE;
+$config['image_gallery_mode'] = FALSE; // TRUE = show, FALSE = hidden
+$config['shop_mode'] = FALSE; // TRUE = show, FALSE = hidden
+$config['login_mode'] = FALSE; // TRUE = show, FALSE = hidden
 $config['title'] = 'NEZindaCLUB';
 $config['nic_api'] = API_HOST;
 $config['nic_key'] = 'bd6fb882067e6896c1c193376cd411ee';

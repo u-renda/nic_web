@@ -62,16 +62,23 @@
 									<li><a href="<?php echo $this->config->item('link_about_us'); ?>">About Us</a></li>
 								</ul>
 							</li>
+							<?php if ($this->config->item('image_gallery_mode') == TRUE) { ?>
 							<li class="dropdown no-dropdown">
 								<a class="" href="<?php echo $this->config->item('link_image_gallery'); ?>">Image Gallery</a>
 							</li>
+							<?php }
+							if ($this->config->item('shop_mode') == TRUE) {
+							?>
 							<li class="dropdown no-dropdown">
 								<a class="" href="<?php echo $this->config->item('link_shop'); ?>">Shop</a>
 							</li>
-							<?php if ($this->session->userdata('is_login') == FALSE) { ?>
+							<?php }
+							if ($this->session->userdata('is_login') == FALSE) {
+								if ($this->config->item('login_mode') == TRUE) { ?>
 							<li class="dropdown no-dropdown">
 								<a class="" href="<?php echo $this->config->item('link_login'); ?>">Login</a>
 							</li>
+							<?php } ?>
 							<li class="dropdown no-dropdown">
 								<a class="" href="<?php echo $this->config->item('link_register'); ?>">Register</a>
 							</li>

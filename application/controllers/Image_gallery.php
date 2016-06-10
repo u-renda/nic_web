@@ -6,6 +6,10 @@ class Image_gallery extends MY_Controller {
 	function __construct()
     {
         parent::__construct();
+		if ($this->config->item('image_gallery_mode') == FALSE)
+		{
+			redirect($this->config->item('link_index'));
+		}
     }
 	
 	function detail()

@@ -36,53 +36,17 @@ class Home extends MY_Controller {
 		
 		$data = array();
 		$data['slider'] = $query->result;
-		$data['agnezmo'] = $this->get_agnezmo();
-		$data['nic'] = $this->get_nic();
+		$data['latest'] = $this->get_latest();
 		$data['view_content'] = 'home/home';
         $this->display_view('templates/frame', $data);
 	}
 	
-	function get_agnezmo()
+	function get_latest()
 	{
-		// Get 4 last post (type = agnezmo)
+		// Get 4 latest post (type = all)
 		$param = array();
 		$param['limit'] = 4;
 		$param['sort'] = 'desc';
-		$param['type'] = 2;
-		$param['status'] = 1;
-		$query = get_post_lists($param);
-		
-		$query2 = array();
-		foreach ($query->result as $row)
-		{
-			// Decode special character into HTML tag
-			$decode = html_entity_decode($row->content);
-			
-			// Remove HTML tag
-			$remove = strip_tags($decode);
-			
-			// Get part of the string
-			$content = substr($remove, 0, 300);
-			
-			$temp = array();
-			$temp['title'] = wordwrap($row->title, 33);
-			$temp['slug'] = $row->slug;
-			$temp['content'] = $content;
-			$temp['created_date'] = date('j F Y', strtotime($row->created_date));
-			$temp['media'] = $row->media;
-			$query2[] = (object) $temp;
-		}
-		
-		return $query2;
-	}
-	
-	function get_nic()
-	{
-		// Get 4 last post (type = nic)
-		$param = array();
-		$param['limit'] = 4;
-		$param['sort'] = 'desc';
-		$param['type'] = 1;
 		$param['status'] = 1;
 		$query = get_post_lists($param);
 		
@@ -112,6 +76,8 @@ class Home extends MY_Controller {
 	
 	function login()
 	{
+		
+		if ($this->config->item('image_gallery_mode') == FALSE) { redirect($this->config->item('link_index')); }
 		if ($this->session->userdata('is_login') == TRUE) { redirect($this->config->item('link_index')); }
 		
         $data = array();

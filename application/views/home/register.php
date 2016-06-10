@@ -21,8 +21,8 @@
 		<link rel="stylesheet" href="<?php echo base_url('assets/css').'/datepicker.css'; ?>" />
 
 		<!-- Theme Custom CSS -->
-		<link rel="stylesheet" href="<?php echo base_url('assets/css').'/login.css'; ?>">
 		<link rel="stylesheet" href="<?php echo base_url('assets/css').'/login_style.css'; ?>">
+		<link rel="stylesheet" href="<?php echo base_url('assets/css').'/register_style.css'; ?>">
 	</head>
 	<body id="register-page">
 		<!-- start: page -->

@@ -24,7 +24,9 @@
 					<article class="post post-large">
 						<?php if ($row->media != "") { ?>
                         <div class="post-image single align-center">
-                            <img class="img-thumbnail" src="<?php echo $row->media; ?>" alt="<?php echo ucwords($row->title); ?>">
+							<a href="<?php echo $this->config->item('link_pages_detail').$row->slug; ?>">
+								<img class="img-thumbnail" src="<?php echo $row->media; ?>" alt="<?php echo ucwords($row->title); ?>">
+							</a>
                         </div>
 						<?php } ?>
                         <div class="post-date">

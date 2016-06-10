@@ -6,6 +6,10 @@ class Shop extends MY_Controller {
 	function __construct()
     {
         parent::__construct();
+		if ($this->config->item('shop_mode') == FALSE)
+		{
+			redirect($this->config->item('link_index'));
+		}
     }
 	
 	function cart()

@@ -21,7 +21,7 @@
 		<link rel="stylesheet" href="<?php echo base_url('assets/css').'/font-awesome.min.css'; ?>" />
 
 		<!-- Theme Custom CSS -->
-		<link rel="stylesheet" href="<?php echo base_url('assets/css').'/login.css'; ?>">
+		<link rel="stylesheet" href="<?php echo base_url('assets/css').'/login_style.css'; ?>">
 	</head>
 	<body>
 		<!-- start: page -->
