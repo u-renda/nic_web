@@ -24,7 +24,7 @@
 					<article class="post post-large">
 						<?php if ($row->media != "") { ?>
                         <div class="post-image single align-center">
-							<a href="<?php echo $this->config->item('link_pages_detail').$row->slug; ?>">
+							<a href="<?php echo $this->config->item('link_pages_agnezmo').$row->slug; ?>">
 								<img class="img-thumbnail" src="<?php echo $row->media; ?>" alt="<?php echo ucwords($row->title); ?>">
 							</a>
                         </div>
@@ -33,11 +33,11 @@
                             <span class="day"><?php echo date('d', strtotime($row->created_date)); ?></span>
                             <span class="month"><?php echo date('M', strtotime($row->created_date)); ?></span>
                         </div>
-                        <div class="post-content-detail">
-                            <h2><a href="<?php echo $this->config->item('link_pages_detail').$row->slug; ?>" class="a-default"><?php echo ucwords($row->title); ?></a></h2>
+                        <div class="post-content-short">
+                            <h2><a href="<?php echo $this->config->item('link_pages_agnezmo').$row->slug; ?>" class="a-default"><?php echo ucwords($row->title); ?></a></h2>
                             <?php echo $row->content; ?>
                             <div class="post-meta">
-                                <a href="<?php echo $this->config->item('link_pages_detail').$row->slug; ?>" class="btn btn-xs btn-primary pull-right btn-read">Read more...</a>
+                                <a href="<?php echo $this->config->item('link_pages_agnezmo').$row->slug; ?>" class="btn btn-xs btn-primary pull-right btn-read">Read more...</a>
                             </div>
                         </div>
                     </article>
@@ -52,24 +52,7 @@
                 </div>
             </div>
             <div class="col-md-3">
-				<aside class="sidebar">
-                    <h4 class="heading-primary">History</h4>
-                    <ul class="nav nav-list mb-xlg">
-                        <li><a href="#">Design (2)</a></li>
-                        <li class="active">
-                            <a href="#">Photos (4)</a>
-                            <ul>
-                                <li><a href="#">Animals</a></li>
-                                <li class="active"><a href="#">Business</a></li>
-                                <li><a href="#">Sports</a></li>
-                                <li><a href="#">People</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Videos (3)</a></li>
-                        <li><a href="#">Lifestyle (2)</a></li>
-                        <li><a href="#">Technology (1)</a></li>
-                    </ul>
-                </aside>
+				<?php $this->load->view('pages/history'); ?>
             </div>
         </div>
     </div>

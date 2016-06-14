@@ -5,7 +5,7 @@
                 <div class="col-md-12">
                     <ul class="breadcrumb">
                         <li><a href="<?php echo $this->config->item('link_index'); ?>" class="a-default">Home</a></li>
-                        <li class="active">Pages</li>
+                        <li><a href="<?php echo $this->config->item('link_pages').$this->uri->segment(2); ?>" class="a-default"><?php echo "Pages ".$post->type; ?></a></li>
                     </ul>
                 </div>
             </div>
@@ -22,17 +22,15 @@
                 <div class="blog-posts single-post">
                     <article class="post post-large blog-single-post">
                         <div class="post-image">
-                            <img class="img-thumbnail" src="../../upload_nic/blog-image-3.jpg" alt="">
+                            <img class="img-thumbnail" src="<?php echo $post->media; ?>" alt="<?php echo ucwords($post->title); ?>">
                         </div>
                         <div class="post-date">
-                            <span class="day">10</span>
-                            <span class="month">Jan</span>
+                            <span class="day"><?php echo date('d', strtotime($post->created_date)); ?></span>
+                            <span class="month"><?php echo date('M', strtotime($post->created_date)); ?></span>
                         </div>
                         <div class="post-content">
-                            <h2><a href="blog-post.html" class="a-default">Post Format - Image Gallery</a></h2>
-                            <p>Euismod atras vulputate iltricies etri elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nunc dui, tristique in semper vel, congue sed ligula. Nam dolor ligula, faucibus id sodales in, auctor fringilla libero. Pellentesque pellentesque tempor tellus eget hendrerit. Morbi id aliquam ligula. Aliquam id dui sem. Proin rhoncus consequat nisl, eu ornare mauris tincidunt vitae. [...]</p>
-                            <p>Euismod atras vulputate iltricies etri elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nunc dui, tristique in semper vel, congue sed ligula. Nam dolor ligula, faucibus id sodales in, auctor fringilla libero. Pellentesque pellentesque tempor tellus eget hendrerit. Morbi id aliquam ligula. Aliquam id dui sem. Proin rhoncus consequat nisl, eu ornare mauris tincidunt vitae. [...]</p>
-                            <p>Euismod atras vulputate iltricies etri elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nunc dui, tristique in semper vel, congue sed ligula. Nam dolor ligula, faucibus id sodales in, auctor fringilla libero. Pellentesque pellentesque tempor tellus eget hendrerit. Morbi id aliquam ligula. Aliquam id dui sem. Proin rhoncus consequat nisl, eu ornare mauris tincidunt vitae. [...]</p>
+                            <h2><a class="a-default"><?php echo ucwords($post->title); ?></a></h2>
+                            <?php echo $post->content; ?>
                             <div class="post-block post-share">
 								<h3 class="heading-primary"><i class="fa fa-share"></i>Share this post</h3>
 								<!-- AddThis Button BEGIN -->

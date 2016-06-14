@@ -552,9 +552,10 @@ $config['link_index'] = $config['base_url'].'index';
 $config['link_login'] = $config['base_url'].'login';
 $config['link_logout'] = $config['base_url'].'logout';
 $config['link_member_profile'] = $config['base_url'].'member/profile';
-$config['link_pages_agnezmo'] = $config['base_url'].'pages/agnezmo';
-$config['link_pages_detail'] = $config['base_url'].'pages/detail?';
-$config['link_pages_nic'] = $config['base_url'].'pages/nic';
+$config['link_pages'] = $config['base_url'].'pages/';
+$config['link_pages_agnezmo'] = $config['base_url'].'pages/agnezmo/';
+$config['link_pages_detail'] = $config['base_url'].'pages/detail/';
+$config['link_pages_nic'] = $config['base_url'].'pages/nic/';
 $config['link_recovery_password'] = $config['base_url'].'recovery_password';
 $config['link_register'] = $config['base_url'].'register';
 $config['link_shop'] = $config['base_url'].'shop';
@@ -588,4 +589,9 @@ $config['code_religion'] = array(
     5 => 'Hindu',
     6 => 'Kong Hu Chu',
     7 => 'Lainnya'
+);
+
+$config['code_post_type'] = array(
+    1 => 'NEZindaCLUB',
+    2 => 'Agnez Mo'
 );

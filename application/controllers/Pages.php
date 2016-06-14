@@ -6,49 +6,80 @@ class Pages extends MY_Controller {
 	function __construct()
     {
         parent::__construct();
-		$this->load->model('admin_model');
+		$this->load->model('post_model');
     }
 	
 	function agnezmo()
 	{
-		$param = array();
-		$param['limit'] = 5;
-		$param['sort'] = 'desc';
-		$param['type'] = 2;
-		$param['status'] = 1;
-		$query = get_post_lists($param);
-		
-		$query2 = array();
-		foreach ($query->result as $row)
+		if (empty($this->uri->segment(3)))
 		{
-			// Decode special character into HTML tag
-			$decode = html_entity_decode($row->content);
+			$param = array();
+			$param['limit'] = 5;
+			$param['sort'] = 'desc';
+			$param['type'] = 2;
+			$param['status'] = 1;
+			$query = get_post_lists($param);
 			
-			// Remove HTML tag
-			$remove = strip_tags($decode);
+			$query2 = array();
+			foreach ($query->result as $row)
+			{
+				// Decode special character into HTML tag
+				$decode = html_entity_decode($row->content);
+				
+				// Remove HTML tag
+				$remove = strip_tags($decode);
+				
+				// Get part of the string
+				$content = substr($remove, 0, 400);
+				
+				$temp = array();
+				$temp['title'] = $row->title;
+				$temp['slug'] = $row->slug;
+				$temp['content'] = $content;
+				$temp['created_date'] = $row->created_date;
+				$temp['media'] = $row->media;
+				$query2[] = (object) $temp;
+			}
 			
-			// Get part of the string
-			$content = substr($remove, 0, 400);
-			
-			$temp = array();
-			$temp['title'] = $row->title;
-			$temp['slug'] = $row->slug;
-			$temp['content'] = $content;
-			$temp['created_date'] = $row->created_date;
-			$temp['media'] = $row->media;
-			$query2[] = (object) $temp;
+			$data = array();
+			$data['post'] = $query2;
+			$data['view_content'] = 'pages/agnezmo';
+			$this->display_view('templates/frame', $data);
 		}
-		
-		$data = array();
-		$data['post'] = $query2;
-		$data['view_content'] = 'pages/agnezmo';
-        $this->display_view('templates/frame', $data);
+		else
+		{
+			$this->detail();
+		}
 	}
 	
 	function detail()
 	{
-		$data['view_content'] = 'pages/pages_detail';
-        $this->display_view('templates/frame', $data);
+		$query = $this->post_model->info(array('slug' => $this->uri->segment(3)));
+		
+		if ($query->code == 200)
+		{
+			$result = $query->result;
+			$code_post_type = $this->config->item('code_post_type');
+			
+			// Decode special character into HTML tag
+			$content = html_entity_decode($result->content);
+			
+			$temp = array();
+			$temp['title'] = $result->title;
+			$temp['content'] = $content;
+			$temp['created_date'] = $result->created_date;
+			$temp['media'] = $result->media;
+			$temp['type'] = $code_post_type[$result->type];
+			$query2 = (object) $temp;
+			
+			$data['post'] = $query2;
+			$data['view_content'] = 'pages/detail';
+			$this->display_view('templates/frame', $data);
+		}
+		else
+		{
+			redirect($this->config->item('link_index'));
+		}
 	}
 	
 	function faq()
