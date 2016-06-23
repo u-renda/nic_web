@@ -6,53 +6,73 @@ class Pages extends MY_Controller {
 	function __construct()
     {
         parent::__construct();
+		$this->load->model('post_archived_model');
 		$this->load->model('post_model');
+		$this->load->model('preferences_model');
     }
 	
 	function agnezmo()
 	{
 		if (empty($this->uri->segment(3)))
 		{
+			$offset = $this->input->get('per_page') ? $this->input->get('per_page') : 0;
+			
 			$param = array();
 			$param['limit'] = 5;
+			$param['offset'] = $offset;
 			$param['sort'] = 'desc';
 			$param['type'] = 2;
 			$param['status'] = 1;
 			$query = get_post_lists($param);
 			
+			$data = array();
 			$query2 = array();
-			foreach ($query->result as $row)
+			if ($query != FALSE)
 			{
-				// Decode special character into HTML tag
-				$decode = html_entity_decode($row->content);
+				foreach ($query->result as $row)
+				{
+					// Decode special character into HTML tag
+					$decode = html_entity_decode($row->content);
+					
+					// Remove HTML tag
+					$remove = strip_tags($decode);
+					
+					// Get part of the string
+					$content = substr($remove, 0, 390);
+					
+					$temp = array();
+					$temp['title'] = $row->title;
+					$temp['slug'] = $row->slug;
+					$temp['content'] = $content;
+					$temp['created_date'] = $row->created_date;
+					$temp['media'] = $row->media;
+					$query2[] = (object) $temp;
+				}
 				
-				// Remove HTML tag
-				$remove = strip_tags($decode);
+				// Pagination
+				pages_pagination($query);
 				
-				// Get part of the string
-				$content = substr($remove, 0, 400);
-				
-				$temp = array();
-				$temp['title'] = $row->title;
-				$temp['slug'] = $row->slug;
-				$temp['content'] = $content;
-				$temp['created_date'] = $row->created_date;
-				$temp['media'] = $row->media;
-				$query2[] = (object) $temp;
+				$data['pagination'] = $this->pagination->create_links();
 			}
 			
-			$data = array();
+			// History
+			$data['history'] = $this->history($param);
+			
+			$data['link_pages'] = $this->config->item('link_pages_agnezmo');
 			$data['post'] = $query2;
 			$data['view_content'] = 'pages/agnezmo';
 			$this->display_view('templates/frame', $data);
 		}
 		else
 		{
-			$this->detail();
+			$param2 = array();
+			$param2['link_pages'] = $this->config->item('link_pages_agnezmo');
+			$param2['type'] = 2;
+			$this->detail($param2);
 		}
 	}
 	
-	function detail()
+	function detail($param)
 	{
 		$query = $this->post_model->info(array('slug' => $this->uri->segment(3)));
 		
@@ -72,6 +92,10 @@ class Pages extends MY_Controller {
 			$temp['type'] = $code_post_type[$result->type];
 			$query2 = (object) $temp;
 			
+			// History
+			$data['history'] = $this->history($param);
+			
+			$data['link_pages'] = $param['link_pages'];
 			$data['post'] = $query2;
 			$data['view_content'] = 'pages/detail';
 			$this->display_view('templates/frame', $data);
@@ -92,47 +116,100 @@ class Pages extends MY_Controller {
         $this->display_view('templates/frame', $data);
 	}
 	
-	function nic()
+	function history($param2)
 	{
 		$param = array();
-		$param['limit'] = 5;
+		$param['order'] = 'created_date,month';
 		$param['sort'] = 'desc';
-		$param['type'] = 1;
 		$param['status'] = 1;
-		$query = get_post_lists($param);
+		$param['type'] = $param2['type'];
+		$get = $this->post_archived_model->lists($param);
 		
-		$query2 = array();
-		foreach ($query->result as $row)
+		if ($get->code == 200)
 		{
-			// Decode special character into HTML tag
-			$decode = html_entity_decode($row->content);
-			
-			// Remove HTML tag
-			$remove = strip_tags($decode);
-			
-			// Get part of the string
-			$content = substr($remove, 0, 400);
+			$code_month_name = $this->config->item('code_month_name');
 			
 			$temp = array();
-			$temp['title'] = $row->title;
-			$temp['slug'] = $row->slug;
-			$temp['content'] = $content;
-			$temp['created_date'] = $row->created_date;
-			$temp['media'] = $row->media;
-			$query2[] = (object) $temp;
+			foreach($get->result as $row)
+			{
+				$year = $row->year;
+				$slug = $row->post->slug;
+				$month = $code_month_name[$row->month];
+				$temp[$year][$month][$slug] = $row->post->title;
+			}
+
+			krsort($temp);
+			return $temp;
 		}
-		
-		$data = array();
-		$data['post'] = $query2;
-		$data['view_content'] = 'pages/nic';
-        $this->display_view('templates/frame', $data);
+	}
+	
+	function nic()
+	{
+		if (empty($this->uri->segment(3)))
+		{
+			$offset = $this->input->get('per_page') ? $this->input->get('per_page') : 0;
+			
+			$param = array();
+			$param['limit'] = 5;
+			$param['offset'] = $offset;
+			$param['sort'] = 'desc';
+			$param['type'] = 1;
+			$param['status'] = 1;
+			$query = get_post_lists($param);
+			
+			$data = array();
+			$query2 = array();
+			if ($query != FALSE)
+			{
+				foreach ($query->result as $row)
+				{
+					// Decode special character into HTML tag
+					$decode = html_entity_decode($row->content);
+					
+					// Remove HTML tag
+					$remove = strip_tags($decode);
+					
+					// Get part of the string
+					$content = substr($remove, 0, 390);
+					
+					$temp = array();
+					$temp['title'] = $row->title;
+					$temp['slug'] = $row->slug;
+					$temp['content'] = $content;
+					$temp['created_date'] = $row->created_date;
+					$temp['media'] = $row->media;
+					$query2[] = (object) $temp;
+				}
+				
+				// Pagination
+				pages_pagination($query);
+				
+				$data['pagination'] = $this->pagination->create_links();
+			}
+			
+			// History
+			$data['history'] = $this->history($param);
+			
+			$data['link_pages'] = $this->config->item('link_pages_nic');
+			$data['post'] = $query2;
+			$data['view_content'] = 'pages/nic';
+			$this->display_view('templates/frame', $data);
+		}
+		else
+		{
+			$param2 = array();
+			$param2['link_pages'] = $this->config->item('link_pages_nic');
+			$param2['type'] = 1;
+			$this->detail($param2);
+		}
 	}
 	
 	function team()
 	{
+		$data = array();
 		$code_admin_group = $this->config->item('code_admin_group');
 		
-		$query = get_admin_lists(array('limit' => 30, 'order' => 'admin_group'));
+		$query = get_admin_lists(array('limit' => 30, 'order' => 'admin_group', 'sort' => 'desc'));
 		
 		$query2 = array();
 		foreach ($query->result as $row)
@@ -146,7 +223,13 @@ class Pages extends MY_Controller {
 			$query2[] = (object) $temp;
 		}
 		
-		$data = array();
+		$query3 = $this->preferences_model->info(array('key' => 'about_us'));
+		
+		if ($query3->code == 200)
+		{
+			$data['the_team'] = $query3->result;
+		}
+		
 		$data['admin'] = $query2;
 		$data['view_content'] = 'pages/team';
         $this->display_view('templates/frame', $data);

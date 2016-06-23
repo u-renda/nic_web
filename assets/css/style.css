@@ -355,3 +355,9 @@ html .heading-primary, html .lnk-primary, html .text-color-primary {
         padding-bottom: 10px;
     }
 }
+
+@media (min-width: 768px) {
+  .lead {
+      font-size: 16px;
+  }
+}

@@ -33,39 +33,13 @@
                             <?php echo $post->content; ?>
                             <div class="post-block post-share">
 								<h3 class="heading-primary"><i class="fa fa-share"></i>Share this post</h3>
-								<!-- AddThis Button BEGIN -->
-								<div class="addthis_toolbox addthis_default_style ">
-									<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-									<a class="addthis_button_tweet"></a>
-									<a class="addthis_button_pinterest_pinit"></a>
-									<a class="addthis_counter addthis_pill_style"></a>
-								</div>
-								<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-50faf75173aadc53"></script>
-								<!-- AddThis Button END -->
 							</div>
                         </div>
                     </article>
                 </div>
             </div>
             <div class="col-md-3">
-				<aside class="sidebar">
-                    <h4 class="heading-primary">History</h4>
-                    <ul class="nav nav-list mb-xlg">
-                        <li><a href="#">Design (2)</a></li>
-                        <li class="active">
-                            <a href="#">Photos (4)</a>
-                            <ul>
-                                <li><a href="#">Animals</a></li>
-                                <li class="active"><a href="#">Business</a></li>
-                                <li><a href="#">Sports</a></li>
-                                <li><a href="#">People</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Videos (3)</a></li>
-                        <li><a href="#">Lifestyle (2)</a></li>
-                        <li><a href="#">Technology (1)</a></li>
-                    </ul>
-                </aside>
+				<?php $this->load->view('pages/history'); ?>
             </div>
         </div>
     </div>

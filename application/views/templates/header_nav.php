@@ -45,10 +45,10 @@
 				<div class="header-nav-main header-nav-main-light header-nav-main-effect-1 header-nav-main-sub-effect-1 collapse">
 					<nav>
 						<ul class="nav nav-pills" id="mainNav">
-							<li class="dropdown active no-dropdown">
+							<li class="dropdown no-dropdown list-item">
 								<a class="" href="<?php echo $this->config->item('link_index'); ?>">Home</a>
 							</li>
-							<li class="dropdown">
+							<li class="dropdown list-item">
 								<a class="dropdown-toggle" href="#">Pages</a>
 								<ul class="dropdown-menu">
 									<li class="dropdown-submenu"><a href="#">Post</a>
@@ -58,33 +58,32 @@
 										</ul>
 									</li>
 									<li><a href="<?php echo $this->config->item('link_team'); ?>">Team</a></li>
-									<li><a href="<?php echo $this->config->item('link_faq'); ?>">FAQ</a></li>
-									<li><a href="<?php echo $this->config->item('link_about_us'); ?>">About Us</a></li>
+									<li><a href="<?php echo $this->config->item('link_faq'); ?>">F.A.Q.</a></li>
 								</ul>
 							</li>
 							<?php if ($this->config->item('image_gallery_mode') == TRUE) { ?>
-							<li class="dropdown no-dropdown">
+							<li class="dropdown no-dropdown list-item">
 								<a class="" href="<?php echo $this->config->item('link_image_gallery'); ?>">Image Gallery</a>
 							</li>
 							<?php }
 							if ($this->config->item('shop_mode') == TRUE) {
 							?>
-							<li class="dropdown no-dropdown">
+							<li class="dropdown no-dropdown list-item">
 								<a class="" href="<?php echo $this->config->item('link_shop'); ?>">Shop</a>
 							</li>
 							<?php }
 							if ($this->session->userdata('is_login') == FALSE) {
 								if ($this->config->item('login_mode') == TRUE) { ?>
-							<li class="dropdown no-dropdown">
+							<li class="dropdown no-dropdown list-item">
 								<a class="" href="<?php echo $this->config->item('link_login'); ?>">Login</a>
 							</li>
 							<?php } ?>
-							<li class="dropdown no-dropdown">
+							<li class="dropdown no-dropdown list-item">
 								<a class="" href="<?php echo $this->config->item('link_register'); ?>">Register</a>
 							</li>
 							<?php }
 							if ($this->session->userdata('is_login') == TRUE) { ?>
-							<li class="dropdown">
+							<li class="dropdown list-item">
 								<a class="dropdown-toggle" href="#">
 									<i class="fa fa-user marginright5"></i> <?php echo ucwords($this->session->userdata('name')); ?>
 								</a>

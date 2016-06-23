@@ -483,6 +483,34 @@ if ( ! function_exists('is_logged_in')) {
     }
 }
 
+if ( ! function_exists('pages_pagination'))
+{
+	function pages_pagination($param)
+	{
+		$CI =& get_instance();
+		$CI->load->library('pagination');
+		
+		$config['base_url'] = $CI->config->item('link_pages_agnezmo');
+		$config['total_rows'] = $param->total;
+		$config['per_page'] = $param->limit;
+		$config['first_link'] = FALSE;
+		$config['last_link'] = FALSE;
+		$config['full_tag_open'] = '<ul class="pagination pull-right">';
+		$config['full_tag_close'] = '</ul>';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a href="#">';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['page_query_string'] = TRUE;
+		
+		$CI->pagination->initialize($config);
+	}
+}
+
 if ( ! function_exists('save_resize'))
 {
     function save_resize($param, $width)

@@ -1,18 +1,21 @@
 <aside class="sidebar">
     <h4 class="heading-primary">History</h4>
     <ul class="nav nav-list mb-xlg">
-        <li><a href="#">Design (2)</a></li>
-        <li class="active">
-            <a href="#">Photos (4)</a>
-            <ul>
-                <li><a href="#">Animals</a></li>
-                <li class="active"><a href="#">Business</a></li>
-                <li><a href="#">Sports</a></li>
-                <li><a href="#">People</a></li>
-            </ul>
-        </li>
-        <li><a href="#">Videos (3)</a></li>
-        <li><a href="#">Lifestyle (2)</a></li>
-        <li><a href="#">Technology (1)</a></li>
+        <?php foreach ($history as $temp_year => $value)
+        {
+            echo '<li class="nav-grand-parent"><a class="hand-pointer grand-parent">'.$temp_year.'</a>';
+            echo '<ul class="nav nav-grand-children">';
+            foreach ($value as $month => $val)
+            {
+                echo '<li class="nav-parent"><a class="hand-pointer parent">'.$month.'</a>';
+                echo '<ul class="nav nav-children">';
+                foreach ($val as $slug => $title)
+                {
+                    echo '<li><a href="'.$link_pages.$slug.'">'.$title.'</a></li>';
+                }
+                echo '</ul></li>';
+            }
+            echo '</ul></li>';
+        } ?>
     </ul>
 </aside>

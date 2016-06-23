@@ -20,7 +20,7 @@
 			<div class="row mt-lg">
 				<?php foreach ($latest as $row2) { ?>
 				<div class="col-md-3">
-					<a href="<?php echo $this->config->item('link_pages_detail').$row2->slug; ?>">
+					<a href="<?php echo $row2->link.$row2->slug; ?>">
 						<?php if ($row2->media == "") { ?>
 						<div class="home-post-image post-no-image"><?php echo strtoupper($row2->title); ?></div>
 						<?php } else { ?>
@@ -31,7 +31,7 @@
 						<article class="post">
 							<div class="post-title marginbottom15">
 								<h5>
-									<a class="text-dark" href="<?php echo $this->config->item('link_pages_detail').$row2->slug; ?>">
+									<a class="text-dark" href="<?php echo $row2->link.$row2->slug; ?>">
 										<?php echo strtoupper($row2->title); ?>
 									</a>
 								</h5>

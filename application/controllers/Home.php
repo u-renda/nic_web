@@ -62,12 +62,23 @@ class Home extends MY_Controller {
 			// Get part of the string
 			$content = substr($remove, 0, 300);
 			
+			// Get link for type
+			if ($row->type == 1)
+			{
+				$link = $this->config->item('link_pages_nic');
+			}
+			else
+			{
+				$link = $this->config->item('link_pages_agnezmo');
+			}
+			
 			$temp = array();
 			$temp['title'] = wordwrap($row->title, 33);
 			$temp['slug'] = $row->slug;
 			$temp['content'] = $content;
 			$temp['created_date'] = date('j F Y', strtotime($row->created_date));
 			$temp['media'] = $row->media;
+			$temp['link'] = $link;
 			$query2[] = (object) $temp;
 		}
 		

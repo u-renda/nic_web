@@ -18,6 +18,14 @@
     </section>
     <div class="container">
 		<h2>Meet the <strong>Team</strong></h2>
+		<div class="row">
+			<div class="col-md-12">
+				<p class="lead">
+					<?php echo $the_team->value; ?>
+				</p>
+			</div>
+		</div>
+		<hr>
 		<ul class="nav nav-pills sort-source" data-sort-id="team" data-option-key="filter">
 			<li data-option-value="*" class="active"><a href="#" class="a-blue">Show All</a></li>
 			<li data-option-value=".leadership"><a href="#" class="a-blue">Leadership</a></li>

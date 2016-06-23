@@ -11,21 +11,13 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h1>FAQ</h1>
+                    <h1>F.A.Q.</h1>
                 </div>
             </div>
         </div>
     </section>
     <div class="container">
 		<h2>Frequently Asked <strong>Questions</strong></h2>
-		<div class="row">
-			<div class="col-md-12">
-				<p class="lead">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rutrum pellentesque imperdiet. Nulla lacinia iaculis nulla non pulvinar. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut eu risus enim, ut pulvinar lectus. Sed hendrerit nibh metus.
-				</p>
-			</div>
-		</div>
-		<hr>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="toggle toggle-primary" data-plugin-toggle>

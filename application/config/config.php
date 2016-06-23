@@ -544,7 +544,6 @@ $config['twitter'] = 'https://twitter.com/nicofficial';
 $config['facebook'] = 'https://www.facebook.com/NICoffc';
 $config['instagram'] = 'https://www.instagram.com/nic.official';
 
-$config['link_about_us'] = $config['base_url'].'pages/about_us';
 $config['link_faq'] = $config['base_url'].'pages/faq';
 $config['link_image_gallery'] = $config['base_url'].'image_gallery';
 $config['link_image_gallery_detail'] = $config['base_url'].'image_gallery/detail';
@@ -594,4 +593,19 @@ $config['code_religion'] = array(
 $config['code_post_type'] = array(
     1 => 'NEZindaCLUB',
     2 => 'Agnez Mo'
+);
+
+$config['code_month_name'] = array(
+    1 => 'Januari',
+    2 => 'Februari',
+    3 => 'Maret',
+    4 => 'April',
+    5 => 'Mei',
+    6 => 'Juni',
+    7 => 'Juli',
+    8 => 'Agustus',
+    9 => 'September',
+    10 => 'Oktober',
+    11 => 'November',
+    12 => 'Desember'
 );
