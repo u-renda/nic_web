@@ -1,9 +1,3 @@
-/*
-Name: 			Theme Base
-Written by: 	Okler Themes - (http://www.okler.net)
-Theme Version: 	1.5.1
-*/
-
 window.theme = {};
 
 // Datepicker
@@ -217,10 +211,8 @@ Theme Version: 	1.5.1
 
 	'use strict';
 
-	/*
-	Wizard #1
-	*/
 	var $w1finish = $('#w1').find('ul.pager li.finish'),
+	
 	$w1validator = $("#w1 form").validate({
 		rules: {
             phone_number: "digits",
@@ -301,11 +293,16 @@ Theme Version: 	1.5.1
             {
                 type: "POST",
                 url: $("#form-register").action,
-                data: $("#form-register").serialize()+'&submit=submit', 
+                data: $("#form-register").serialize()+dataString,
                 cache: false,
                 success: function(data)
                 {
-                    console.log(data);
+                    var response = $.parseJSON(data);
+					
+					if (response.type == 'success')
+					{
+						setTimeout("location.href = '"+response.location+"'",2000);
+					}
                 }
             });
             return false;
@@ -345,15 +342,14 @@ Theme Version: 	1.5.1
 
 $(document).ready(function() {
 	if (document.getElementById('register-page') != null) {
-		$("#provinsi").change(function() {
-			var provinsi = $(this).find("option:selected").attr("id");
-			var dataString = 'provinsi='+ provinsi
+		$("#id_provinsi").change(function() {
+			var id_provinsi = $(this).find("option:selected").attr("id");
+			var dataString = 'id_provinsi='+ id_provinsi
 			$.ajax({
-				url: 'check_validate/get_kota_lists',
+				url: 'check_validate/check_kota_lists',
 				type: "POST",
 				data: dataString,
 				beforeSend : function (){
-					$('#subarea').html('');
 					$('#area').html('<i class="fa fa-spinner fa-spin"></i>');
 				},
 				success: function(data) {

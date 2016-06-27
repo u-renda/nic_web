@@ -325,6 +325,12 @@ body .btn-primary:hover {
     display: table-cell;
     vertical-align: middle;
 }
+html .panel-group.panel-group-quaternary .panel-heading {
+    background-color: #383f48 !important;
+}
+html .panel-group.panel-group-quaternary .panel-heading a {
+    color: #ffffff;
+}
 
 /**
  * FOOTER

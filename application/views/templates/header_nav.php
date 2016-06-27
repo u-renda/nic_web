@@ -49,7 +49,7 @@
 								<a class="" href="<?php echo $this->config->item('link_index'); ?>">Home</a>
 							</li>
 							<li class="dropdown list-item">
-								<a class="dropdown-toggle" href="#">Pages</a>
+								<a class="dropdown-toggle" href="#pages">Pages</a>
 								<ul class="dropdown-menu">
 									<li class="dropdown-submenu"><a href="#">Post</a>
 										<ul class="dropdown-menu">
@@ -57,7 +57,7 @@
 											<li><a href="<?php echo $this->config->item('link_pages_nic'); ?>">NEZindaCLUB</a></li>
 										</ul>
 									</li>
-									<li><a href="<?php echo $this->config->item('link_team'); ?>">Team</a></li>
+									<li><a href="<?php echo $this->config->item('link_team'); ?>">Crew</a></li>
 									<li><a href="<?php echo $this->config->item('link_faq'); ?>">F.A.Q.</a></li>
 								</ul>
 							</li>
@@ -81,10 +81,9 @@
 							<li class="dropdown no-dropdown list-item">
 								<a class="" href="<?php echo $this->config->item('link_register'); ?>">Register</a>
 							</li>
-							<?php }
-							if ($this->session->userdata('is_login') == TRUE) { ?>
+							<?php } else { ?>
 							<li class="dropdown list-item">
-								<a class="dropdown-toggle" href="#">
+								<a class="dropdown-toggle" href="#member">
 									<i class="fa fa-user marginright5"></i> <?php echo ucwords($this->session->userdata('name')); ?>
 								</a>
 								<ul class="dropdown-menu">

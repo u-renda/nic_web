@@ -25,7 +25,9 @@
                             <img src="<?php echo $this->session->userdata('photo'); ?>" class="rounded img-responsive" alt="<?php echo ucwords($this->session->userdata('name')); ?>">
                         </div>
                         <hr class="dotted short">
-                        <h6 class="text-muted align-center"><?php echo ucwords($this->session->userdata('name')); ?></h6>
+                        <h6 class="text-muted align-center"><?php echo '<i class="fa fa-user" title="Nama"></i> '.ucwords($this->session->userdata('name')); ?></h6>
+                        <h6 class="text-muted align-center"><?php echo $member->gender; ?></h6>
+                        <h6 class="text-muted align-center"><?php echo '<i class="fa fa-credit-card" title="ID NIC"></i> '.$member->member_card; ?></h6>
                         <div class="clearfix"></div>
                     </div>
                 </section>
@@ -34,102 +36,25 @@
                 <div class="tabs">
                     <ul class="nav nav-tabs tabs-primary">
                         <li class="active">
-                            <a href="#overview" data-toggle="tab">Overview</a>
+                            <a href="#member_overview_page" data-toggle="tab">Overview</a>
                         </li>
                         <li>
-                            <a href="#edit" data-toggle="tab">Edit</a>
+                            <a href="#member_edit_page" data-toggle="tab">Edit</a>
                         </li>
                         <li>
-                            <a href="#member_shop" data-toggle="tab">Shop</a>
+                            <a href="#member_shop_page" data-toggle="tab">Shop</a>
                         </li>
                         <li>
-                            <a href="#member_event" data-toggle="tab">Event</a>
+                            <a href="#member_event_page" data-toggle="tab">Event</a>
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <div id="overview" class="tab-pane active">
-							
-                        </div>
-                        <div id="edit" class="tab-pane">
-                            <form class="form-horizontal" method="get">
-                                <h4 class="mb-xlg">Personal Information</h4>
-                                <fieldset>
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label" for="profileFirstName">First Name</label>
-                                        <div class="col-md-8">
-                                            <input type="text" class="form-control" id="profileFirstName">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label" for="profileLastName">Last Name</label>
-                                        <div class="col-md-8">
-                                            <input type="text" class="form-control" id="profileLastName">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label" for="profileAddress">Address</label>
-                                        <div class="col-md-8">
-                                            <input type="text" class="form-control" id="profileAddress">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label" for="profileCompany">Company</label>
-                                        <div class="col-md-8">
-                                            <input type="text" class="form-control" id="profileCompany">
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                <hr class="dotted tall">
-                                <h4 class="mb-xlg">About Yourself</h4>
-                                <fieldset>
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label" for="profileBio">Biographical Info</label>
-                                        <div class="col-md-8">
-                                            <textarea class="form-control" rows="3" id="profileBio"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-xs-3 control-label mt-xs pt-none">Public</label>
-                                        <div class="col-md-8">
-                                            <div class="checkbox-custom checkbox-default checkbox-inline mt-xs">
-                                                <input type="checkbox" checked="" id="profilePublic">
-                                                <label for="profilePublic"></label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                <hr class="dotted tall">
-                                <h4 class="mb-xlg">Change Password</h4>
-                                <fieldset class="mb-xl">
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label" for="profileNewPassword">New Password</label>
-                                        <div class="col-md-8">
-                                            <input type="text" class="form-control" id="profileNewPassword">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label" for="profileNewPasswordRepeat">Repeat New Password</label>
-                                        <div class="col-md-8">
-                                            <input type="text" class="form-control" id="profileNewPasswordRepeat">
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                <div class="panel-footer">
-                                    <div class="row">
-                                        <div class="col-md-9 col-md-offset-3">
-                                            <button type="submit" class="btn btn-primary">Submit</button>
-                                            <button type="reset" class="btn btn-default">Reset</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div id="member_shop" class="tab-pane">
-                        
-                        </div>
-                        <div id="member_event" class="tab-pane">
-                        
-                        </div>
+						<?php
+						$this->load->view('member/member_overview');
+						$this->load->view('member/member_edit');
+						$this->load->view('member/member_shop');
+						$this->load->view('member/member_event');
+						?>
                     </div>
                 </div>
             </div>

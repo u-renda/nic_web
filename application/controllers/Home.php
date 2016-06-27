@@ -9,6 +9,57 @@ class Home extends MY_Controller {
 		$this->load->model('member_model');
     }
 
+    function check_email()
+    {
+        $result = $this->member_model->info(array('email' => $this->input->post('email')));
+		
+        if ($result->code == 200)
+        {
+            return TRUE;
+        }
+        else
+        {
+            $this->form_validation->set_message('check_email', 'Email tidak terdaftar atau Anda belum resmi menjadi member.');
+            return FALSE;
+        }
+    }
+	
+    function check_idcard_photo()
+    {
+        if (isset($_FILES['idcard_photo']))
+        {
+            if ($_FILES["idcard_photo"]["error"] == 0)
+            {
+                $name = md5(basename($_FILES["idcard_photo"]["name"]) . date('Y-m-d H:i:s'));
+                $target_dir = UPLOAD_MEMBER_HOST;
+                $imageFileType = strtolower(pathinfo($_FILES["idcard_photo"]["name"],PATHINFO_EXTENSION));
+                
+				$param2 = array();
+                $param2['target_file'] = UPLOAD_FOLDER . $name . '.' . $imageFileType;
+                $param2['imageFileType'] = $imageFileType;
+                $param2['tmp_name'] = $_FILES["idcard_photo"]["tmp_name"];
+                $param2['tmp_file'] = $target_dir . $name . '.' . $imageFileType;
+                $param2['size'] = $_FILES["idcard_photo"]["size"];
+                $check_image = check_image($param2);
+				
+                if ($check_image == 'true')
+                {
+                    return TRUE;
+                }
+                else
+                {
+                    $this->form_validation->set_message('check_idcard_photo', $check_image);
+                    return FALSE;
+                }
+            }
+			else
+			{
+				$this->form_validation->set_message('check_idcard_photo', 'ID card foto error');
+                return FALSE;
+			}
+        }
+    }
+
     function check_password($password, $username)
     {
         $result = $this->member_model->valid(array('username' => $username, 'password' => $password));
@@ -21,6 +72,42 @@ class Home extends MY_Controller {
         {
             $this->form_validation->set_message('check_password', 'Wrong Username or Password');
             return FALSE;
+        }
+    }
+	
+    function check_photo()
+    {
+        if (isset($_FILES['photo']))
+        {
+			if ($_FILES["photo"]["error"] == 0)
+            {
+                $name = md5(basename($_FILES["photo"]["name"]) . date('Y-m-d H:i:s'));
+                $target_dir = UPLOAD_MEMBER_HOST;
+                $imageFileType = strtolower(pathinfo($_FILES["photo"]["name"],PATHINFO_EXTENSION));
+                
+				$param2 = array();
+                $param2['target_file'] = UPLOAD_FOLDER . $name . '.' . $imageFileType;
+                $param2['imageFileType'] = $imageFileType;
+                $param2['tmp_name'] = $_FILES["photo"]["tmp_name"];
+                $param2['tmp_file'] = $target_dir . $name . '.' . $imageFileType;
+                $param2['size'] = $_FILES["photo"]["size"];
+                $check_image = check_image($param2);
+				
+                if ($check_image == 'true')
+                {
+                    return TRUE;
+                }
+                else
+                {
+                    $this->form_validation->set_message('check_photo', $check_image);
+                    return FALSE;
+                }
+            }
+			else
+			{
+				$this->form_validation->set_message('check_photo', 'Foto error');
+                return FALSE;
+			}
         }
     }
 	
@@ -87,8 +174,6 @@ class Home extends MY_Controller {
 	
 	function login()
 	{
-		
-		if ($this->config->item('image_gallery_mode') == FALSE) { redirect($this->config->item('link_index')); }
 		if ($this->session->userdata('is_login') == TRUE) { redirect($this->config->item('link_index')); }
 		
         $data = array();
@@ -132,7 +217,10 @@ class Home extends MY_Controller {
 			}
 			else
 			{
-				$query = $this->member_model->info(array('username' => $this->input->post('username')));
+				$param = array();
+				$param['username'] = $this->input->post('username');
+				$param['password'] = $this->input->post('password');
+				$query = $this->member_model->valid($param);
 
 				if ($query->code == 200)
 				{
@@ -198,24 +286,171 @@ class Home extends MY_Controller {
 	
 	function recovery_password()
 	{
-        $this->display_view('home/recovery_password');
+		$data = array();
+		$success = FALSE;
+        if ($this->input->post('submit') == TRUE)
+		{
+			$this->load->library('form_validation');
+			$this->form_validation->set_rules('email', 'email', 'required|callback_check_email');
+			
+			if ($this->form_validation->run() == FALSE)
+			{
+				$data['error'] = validation_errors();
+			}
+			else
+			{
+				// Kirim email recovery password
+				
+				$success = TRUE;
+			}
+		}
+		
+		$data['success'] = $success;
+		$this->display_view('home/recovery_password', $data);
 	}
 	
 	function register()
 	{
+		if ($this->session->userdata('is_login') == TRUE) { redirect($this->config->item('link_index')); }
+		
 		if ($this->input->post('submit') == TRUE)
 		{
-			echo "ada";die();
-			//$this->load->library('form_validation');
-			//$this->form_validation->set_rules('username', 'Username', 'required');
+			$this->load->library('form_validation');
+			$this->form_validation->set_rules('idcard_type', 'tipe ID', 'required');
+			$this->form_validation->set_rules('idcard_number', 'nomor ID', 'required');
+			$this->form_validation->set_rules('marital_status', 'status perkawinan', 'required');
+			$this->form_validation->set_rules('religion', 'agama', 'required');
+			$this->form_validation->set_rules('occupation', 'pekerjaan', 'required');
+			$this->form_validation->set_rules('name', 'nama', 'required');
+			$this->form_validation->set_rules('gender', 'jenis kelamin', 'required');
+			$this->form_validation->set_rules('birth_place', 'tempat lahir', 'required');
+			$this->form_validation->set_rules('birth_date', 'tanggal lahir', 'required');
+			$this->form_validation->set_rules('phone_number', 'nomor telp', 'required');
+			$this->form_validation->set_rules('idcard_address', 'alamat sesuai ID', 'required');
+			$this->form_validation->set_rules('email', 'email', 'required');
+			$this->form_validation->set_rules('shirt_size', 'ukuran baju', 'required');
+			$this->form_validation->set_rules('shipment_address', 'alamat pengiriman', 'required');
+			$this->form_validation->set_rules('id_provinsi', 'provinsi', 'required');
+			$this->form_validation->set_rules('id_kota', 'kota', 'required');
+			$this->form_validation->set_rules('postal_code', 'kode pos', 'required');
+			$this->form_validation->set_rules('terms', 'terms', 'required');
+			
+			if ($this->form_validation->run() == FALSE)
+			{
+				$data['error'] = validation_errors();
+			}
+			else
+			{
+				$param = array();
+				$param['id_kota'] = $this->input->post('id_kota');
+				$param['name'] = $this->input->post('name');
+				$param['email'] = $this->input->post('email');
+				$param['idcard_type'] = $this->input->post('idcard_type');
+				$param['idcard_number'] = $this->input->post('idcard_number');
+				$param['idcard_address'] = $this->input->post('idcard_address');
+				$param['shipment_address'] = $this->input->post('shipment_address');
+				$param['postal_code'] = $this->input->post('postal_code');
+				$param['gender'] = $this->input->post('gender');
+				$param['phone_number'] = $this->input->post('phone_number');
+				$param['birth_place'] = $this->input->post('birth_place');
+				$param['birth_date'] = $this->input->post('birth_date');
+				$param['marital_status'] = $this->input->post('marital_status');
+				$param['occupation'] = $this->input->post('occupation');
+				$param['religion'] = $this->input->post('religion');
+				$param['shirt_size'] = $this->input->post('shirt_size');
+				$param['status'] = 1;
+				$query = $this->member_model->create($param);
+				
+				if ($query->code == 200)
+				{
+					// id_member dimasukin ke session
+					$this->session->set_userdata(array('id_member' => $query->result->id_member));
+					
+					$response =  array('msg' => 'Create data success', 'type' => 'success', 'location' => $this->config->item('link_register_upload'));
+				}
+				else
+				{
+					$response =  array('msg' => 'Create data failed', 'type' => 'error');
+				}
+				
+				echo json_encode($response);
+				exit();
+			}
 		}
-		
 		
 		$data = array();
 		$data['provinsi_lists'] = get_provinsi_lists(array('limit' => 40))->result;
-		$data['code_idcard_type'] = $this->config->item('code_idcard_type');
-		$data['code_marital_status'] = $this->config->item('code_marital_status');
-		$data['code_religion'] = $this->config->item('code_religion');
+		$data['code_member_idcard_type'] = $this->config->item('code_member_idcard_type');
+		$data['code_member_marital_status'] = $this->config->item('code_member_marital_status');
+		$data['code_member_religion'] = $this->config->item('code_member_religion');
         $this->display_view('home/register', $data);
+	}
+	
+	function register_success()
+	{
+		// destroy session id_member
+		$this->session->sess_destroy();
+		$this->session->unset_userdata('id_member');
+		
+		$data = array();
+		$data['view_content'] = 'home/register_success';
+		$this->display_view('templates/frame', $data);
+	}
+	
+	function register_upload()
+	{
+		$id = $this->session->userdata('id_member');
+		
+		if ($id == FALSE) { redirect($this->config->item('link_index')); }
+		
+		if ($this->input->post('submit_upload') == TRUE)
+		{
+			$this->load->library('form_validation');
+			$this->form_validation->set_rules('idcard_photo', 'foto ID', 'callback_check_idcard_photo');
+			$this->form_validation->set_rules('photo', 'foto', 'callback_check_photo');
+			
+			if ($this->form_validation->run() == FALSE)
+			{
+				$data['error'] = validation_errors();
+			}
+			else
+			{
+				$photo = '';
+				$idcard_photo = '';
+				if (isset($_FILES['photo']))
+                {
+                    if ($_FILES["photo"]["error"] == 0)
+                    {
+                        $name = md5(basename($_FILES["photo"]["name"]) . date('Y-m-d H:i:s'));
+                        $imageFileType = strtolower(pathinfo($_FILES["photo"]["name"],PATHINFO_EXTENSION));
+                        $photo = UPLOAD_MEMBER_HOST . $name . '.' . $imageFileType;
+                    }
+                }
+				if (isset($_FILES['idcard_photo']))
+                {
+                    if ($_FILES["idcard_photo"]["error"] == 0)
+                    {
+                        $name = md5(basename($_FILES["idcard_photo"]["name"]) . date('Y-m-d H:i:s'));
+                        $imageFileType = strtolower(pathinfo($_FILES["idcard_photo"]["name"],PATHINFO_EXTENSION));
+                        $idcard_photo = UPLOAD_MEMBER_HOST . $name . '.' . $imageFileType;
+                    }
+                }
+				
+				$param = array();
+				$param['id_member'] = $id;
+				$param['idcard_photo'] = $idcard_photo;
+				$param['photo'] = $photo;
+				$query = $this->member_model->update($param);
+				
+				if ($query->code == 200)
+				{
+					redirect($this->config->item('link_register_success'));
+				}
+			}
+		}
+		
+		$data = array();
+		$data['id'] = $id;
+		$this->display_view('home/register_upload', $data);
 	}
 }

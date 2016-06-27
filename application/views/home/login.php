@@ -74,7 +74,7 @@
 									<button type="submit" name="submit" value="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">Login</button>
 								</div>
 							</div>
-							<p class="text-center margintop20">Don't have an account yet? <a href="<?php $this->config->item('link_register'); ?>">Register!</a>
+							<p class="text-center margintop20">Don't have an account yet? <a href="<?php echo $this->config->item('link_register'); ?>">Register!</a>
 						</form>
 					</div>
 				</div>

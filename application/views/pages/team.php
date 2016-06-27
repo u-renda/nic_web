@@ -11,13 +11,13 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h1>Team</h1>
+                    <h1>Crew</h1>
                 </div>
             </div>
         </div>
     </section>
     <div class="container">
-		<h2>Meet the <strong>Team</strong></h2>
+		<h2>Meet the NEZindaCLUB official <strong>Crew</strong></h2>
 		<div class="row">
 			<div class="col-md-12">
 				<p class="lead">

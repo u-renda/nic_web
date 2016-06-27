@@ -15893,7 +15893,7 @@ html.dark .invoice table.table > tbody tr > td {
 	display: table;
 	height: 100vh;
 	margin: 0 auto;
-	max-width: 500px;
+	max-width: 600px;
 	padding: 0 15px;
 	width: 100%;
 }

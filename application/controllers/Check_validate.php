@@ -25,6 +25,24 @@ class Check_validate extends MY_Controller {
         }
 	}
 	
+	function check_kota_lists()
+	{
+		$id_provinsi = $this->input->post('id_provinsi');
+		
+		$result = get_kota_lists(array('id_provinsi' => $id_provinsi, 'limit' => 100));
+	
+		if ($result->code == 200)
+		{
+			$data = array();
+			$data['kota_lists'] = $result->result;
+			$this->load->view('select_options_kota', $data);
+		}
+		else
+		{
+            echo 'false';
+        }
+	}
+	
 	function check_member_email()
 	{
 		$email = $this->input->post('email');
@@ -46,22 +64,6 @@ class Check_validate extends MY_Controller {
 		$name = $this->input->post('name');
 		
 		$result = $this->member_model->info(array('name' => $name));
-	
-		if ($result->code == 200)
-		{
-			echo 'false';
-		}
-		else
-		{
-            echo 'true';
-        }
-	}
-	
-	function get_kota_lists()
-	{
-		$provinsi = $this->input->post('provinsi');
-		
-		$result = get_kota_lists(array('provinsi' => $provinsi));
 	
 		if ($result->code == 200)
 		{

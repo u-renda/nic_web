@@ -21,8 +21,13 @@ var newPathname = winOrigin + "/" + winPath[1] + "/";
             $(this).addClass('active');
         }
         
-        // Untuk halaman yang ada dropdown-nya
-        if (winPath[2] === "pages" && split[0] === "#") {
+        // Untuk halaman pages
+        if (winPath[2] === "pages" && split[0] === "#pages") {
+            $(this).addClass('active');
+        }
+        
+        // Untuk halaman member
+        if (winPath[2] === "member" && split[0] === "#member") {
             $(this).addClass('active');
         }
     });

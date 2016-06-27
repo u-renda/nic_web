@@ -4,10 +4,10 @@ if ( ! function_exists('check_image')) {
     function check_image($param)
     {
         $CI =& get_instance();
-
+		
         // Check if image file is a actual image or fake image
         $check = @getimagesize($param["tmp_name"]);
-
+		
         if($check === FALSE)
         {
             $msg = "File is not an image.";
@@ -24,10 +24,10 @@ if ( ! function_exists('check_image')) {
             else
             {
                 // Check file size
-                if ($param["size"] > 2097152) // 2MB
+                if ($param["size"] > '2097152')
                 {
                     $msg = "Sorry, your file is too large.";
-                    return $msg;
+					return $msg;
                 }
                 else
                 {
@@ -40,25 +40,87 @@ if ( ! function_exists('check_image')) {
                     else
                     {
                         $param['image_width'] = $check[0];
-
+						
                         // Save & resize image berdasarkan width-nya
                         $save_resize = save_resize($param, 500);
-
+						
                         if ($save_resize == TRUE)
                         {
-                            $msg = 'true';
-                            return $msg;
+							$msg = 'true';
+							return $msg;
                         }
                         else
                         {
                             $msg = "Sorry, there was an error uploading your file.";
-                            return $msg;
+							return $msg;
                         }
                     }
                 }
             }
         }
     }
+}
+
+/*
++-------------------------------------+
+    Name: color_member_point_status
+    Purpose: memberi label warna untuk member point status
+    @param return : label warna sesuai dengan status
++-------------------------------------+
+*/
+if ( ! function_exists('color_member_point_status')) {
+	function color_member_point_status($status)
+	{
+		$CI =& get_instance();
+		$code_member_point_status = $CI->config->item('code_member_point_status');
+		
+		if ($status == 1)
+		{
+			$label = '<span class="label label-danger">'.$code_member_point_status[$status].'</span>';
+		}
+		elseif ($status == 2)
+		{
+			$label = '<span class="label label-success">'.$code_member_point_status[$status].'</span>';
+		}
+		elseif ($status == 4)
+		{
+			$label = '<span class="label label-dark">'.$code_member_point_status[$status].'</span>';
+		}
+		else
+		{
+			$label = '<span class="label label-default">'.$code_member_point_status[$status].'</span>';
+		}
+		
+		return $label;
+	}
+}
+
+/*
++-------------------------------------+
+    Name: decode
+    Purpose: ungenerate value
+    @param return : ungenerated value
++-------------------------------------+
+*/
+if ( ! function_exists('decode')) {
+	function decode($value, $key)
+	{ 
+		return trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $key, base64_decode($value), MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND)));
+	}
+}
+
+/*
++-------------------------------------+
+    Name: encode
+    Purpose: generate value
+    @param return : generated value
++-------------------------------------+
+*/
+if ( ! function_exists('encode')) {
+	function encode($value, $key)
+	{ 
+		return trim(base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $value, MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND))));
+	}
 }
 
 /*
@@ -527,12 +589,12 @@ if ( ! function_exists('save_resize'))
                 $config['source_image']	= $param['target_file'];
                 $config['maintain_ratio'] = TRUE;
                 $config['width'] = $width;
-
+				
                 $CI->load->library('image_lib', $config);
 
-                if ( ! $CI->image_lib->resize())
+                if ($CI->image_lib->resize() == FALSE)
                 {
-                    return $CI->image_lib->display_errors();
+					return $CI->image_lib->display_errors();
                 }
                 else
                 {

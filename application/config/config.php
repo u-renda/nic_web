@@ -524,6 +524,8 @@ $config['proxy_ips'] = '';
 if(is_bool(LOCALHOST) || LOCALHOST == 'localhost')
 {
     define('API_HOST', 'http://localhost/nic_api/');
+    define('UPLOAD_MEMBER_HOST', 'http://localhost/upload_nic/member/');
+    define('UPLOAD_FOLDER', $_SERVER['DOCUMENT_ROOT'].'/upload_nic/member/');
 }
 else
 {
@@ -533,7 +535,7 @@ else
 $config['development_mode'] = FALSE;
 $config['image_gallery_mode'] = FALSE; // TRUE = show, FALSE = hidden
 $config['shop_mode'] = FALSE; // TRUE = show, FALSE = hidden
-$config['login_mode'] = FALSE; // TRUE = show, FALSE = hidden
+$config['login_mode'] = TRUE; // TRUE = show, FALSE = hidden
 $config['title'] = 'NEZindaCLUB';
 $config['nic_api'] = API_HOST;
 $config['nic_key'] = 'bd6fb882067e6896c1c193376cd411ee';
@@ -557,6 +559,8 @@ $config['link_pages_detail'] = $config['base_url'].'pages/detail/';
 $config['link_pages_nic'] = $config['base_url'].'pages/nic/';
 $config['link_recovery_password'] = $config['base_url'].'recovery_password';
 $config['link_register'] = $config['base_url'].'register';
+$config['link_register_upload'] = $config['base_url'].'register_upload';
+$config['link_register_success'] = $config['base_url'].'register_success';
 $config['link_shop'] = $config['base_url'].'shop';
 $config['link_shop_detail'] = $config['base_url'].'shop/detail';
 $config['link_team'] = $config['base_url'].'pages/team';
@@ -567,7 +571,7 @@ $config['code_admin_group'] = array(
     3 => 'event'
 );
 
-$config['code_idcard_type'] = array(
+$config['code_member_idcard_type'] = array(
     1 => 'KTP',
 	2 => 'SIM',
 	3 => 'Pasport',
@@ -575,12 +579,12 @@ $config['code_idcard_type'] = array(
 	5 => 'Lainnya'
 );
 
-$config['code_marital_status'] = array(
+$config['code_member_marital_status'] = array(
     0 => 'Single',
     1 => 'Married'
 );
 
-$config['code_religion'] = array(
+$config['code_member_religion'] = array(
     1 => 'Islam',
     2 => 'Kristen',
     3 => 'Katolik',
@@ -608,4 +612,16 @@ $config['code_month_name'] = array(
     10 => 'Oktober',
     11 => 'November',
     12 => 'Desember'
+);
+
+$config['code_member_gender'] = array(
+    0 => 'Laki-laki',
+    1 => 'Perempuan'
+);
+
+$config['code_member_point_status'] = array(
+    1 => 'Not Attended',
+    2 => 'Attended',
+    3 => 'Registered',
+    4 => 'Canceled'
 );

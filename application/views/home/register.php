@@ -19,6 +19,7 @@
 		<link rel="stylesheet" href="<?php echo base_url('assets/css').'/bootstrap.min.css'; ?>" />
 		<link rel="stylesheet" href="<?php echo base_url('assets/css').'/font-awesome.min.css'; ?>" />
 		<link rel="stylesheet" href="<?php echo base_url('assets/css').'/datepicker.css'; ?>" />
+		<link rel="stylesheet" href="<?php echo base_url('assets/css/theme').'/bootstrap-fileupload.min.css'; ?>" />
 
 		<!-- Theme Custom CSS -->
 		<link rel="stylesheet" href="<?php echo base_url('assets/css').'/login_style.css'; ?>">
@@ -65,7 +66,7 @@
 										<label>Tipe ID <span class="required">*</span></label>
 										<select class="form-control" title="Mohon pilih salah satu." name="idcard_type" id="idcard-type" required>
 											<option value="">-- Pilih --</option>
-											<?php foreach ($code_idcard_type as $key => $val) { ?>
+											<?php foreach ($code_member_idcard_type as $key => $val) { ?>
 											<option value="<?php echo $key; ?>"><?php echo $val; ?></option>
 											<?php } ?>
 										</select>
@@ -80,10 +81,10 @@
 										</div>
 									</div>
 									<div class="form-group mb-lg">
-										<label>Status <span class="required">*</span></label>
+										<label>Status Perkawinan<span class="required">*</span></label>
 										<select class="form-control" title="Mohon pilih salah satu." name="marital_status" id="marital-status" required>
 											<option value="">-- Pilih --</option>
-											<?php foreach ($code_marital_status as $key => $val) { ?>
+											<?php foreach ($code_member_marital_status as $key => $val) { ?>
 											<option value="<?php echo $key; ?>"><?php echo $val; ?></option>
 											<?php } ?>
 										</select>
@@ -92,7 +93,7 @@
 										<label>Agama <span class="required">*</span></label>
 										<select class="form-control" title="Mohon pilih salah satu." name="religion" id="religion" required>
 											<option value="">-- Pilih --</option>
-											<?php foreach ($code_religion as $key => $val) { ?>
+											<?php foreach ($code_member_religion as $key => $val) { ?>
 											<option value="<?php echo $key; ?>"><?php echo $val; ?></option>
 											<?php } ?>
 										</select>
@@ -115,11 +116,11 @@
 										<label class="col-md-12 paddingleft0">Jenis Kelamin <span class="required">*</span></label>
 										<div class="col-md-12 paddingleft0">
 											<div class="radio-custom">
-												<input name="gender" id="laki-laki" type="radio" class="form-control" title="Mohon pilih salah satu." required>
+												<input name="gender" id="laki-laki" value="0" type="radio" class="form-control" title="Mohon pilih salah satu." required>
 												<label>Laki-laki</label>
 											</div>
 											<div class="radio-custom">
-												<input name="gender" id="perempuan" type="radio" class="form-control">
+												<input name="gender" id="perempuan" value="1" type="radio" class="form-control">
 												<label>Perempuan</label>
 											</div>
 											<label class="error" for="gender"></label>
@@ -163,11 +164,11 @@
 										<label class="col-md-12 paddingleft0">Ukuran Baju <span class="required">*</span></label>
 										<div class="col-sm-12 paddingleft0">
 											<div class="radio-custom">
-												<input name="shirt_size" type="radio" class="form-control" required>
+												<input name="shirt_size" value="0" type="radio" class="form-control" required>
 												<label>M</label>
 											</div>
 											<div class="radio-custom">
-												<input name="shirt_size" type="radio" class="form-control" />
+												<input name="shirt_size" value="1" type="radio" class="form-control" />
 												<label>XL</label>
 											</div>
 											<label class="error" for="shirt_size"></label>
@@ -179,21 +180,16 @@
 									</div>
 									<div class="form-group mb-lg">
 										<label class="col-md-12 paddingleft0">Provinsi & Kota <span class="required">*</span></label>
-										<div class="col-md-6 paddingleft0">
-											<select class="form-control" title="Mohon pilih salah satu." name="provinsi" id="provinsi" required>
+										<div class="col-md-12 paddinglr0">
+											<select class="form-control" title="Mohon pilih salah satu." name="id_provinsi" id="id_provinsi" required>
 											<option value="">-- Provinsi --</option>
 											<?php foreach ($provinsi_lists as $key => $val) { ?>
 											<option value="<?php echo $val->id_provinsi; ?>" id="<?php echo $val->id_provinsi; ?>"><?php echo ucwords($val->provinsi); ?></option>
 											<?php } ?>
 										</select>
 										</div>
-										<div class="col-md-6 paddinglr0">
-											<select class="form-control" title="Mohon pilih salah satu." name="id_kota" id="id-kota" required>
-											<option value="">-- Kota --</option>
-											<?php foreach ($code_idcard_type as $key => $val) { ?>
-											<option value="<?php echo $key; ?>"><?php echo $val; ?></option>
-											<?php } ?>
-										</select>
+										<div class="col-md-12 paddinglr0 margintop10">
+											<div id="area"></div>
 										</div>
 									</div>
 									<div class="form-group mb-lg">
@@ -241,6 +237,7 @@
 		<script src="<?php echo base_url('assets/js/theme').'/autosize.js'; ?>"></script>
 		<script src="<?php echo base_url('assets/js').'/jquery.validate.js'; ?>"></script>
 		<script src="<?php echo base_url('assets/js/theme').'/jquery.bootstrap.wizard.js'; ?>"></script>
+		<script src="<?php echo base_url('assets/js/theme').'/bootstrap-fileupload.min.js'; ?>"></script>
 		<script src="<?php echo base_url('assets/js').'/login.js'; ?>"></script>
 	</body>
 </html>

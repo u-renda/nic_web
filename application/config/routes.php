@@ -58,3 +58,7 @@ $route['login'] = 'home/login';
 $route['logout'] = 'home/logout';
 $route['recovery_password'] = 'home/recovery_password';
 $route['register'] = 'home/register';
+$route['register_upload'] = 'home/register_upload';
+$route['register_success'] = 'home/register_success';
+
+$route['check_kota_lists'] = 'check_validate/check_kota_lists';
