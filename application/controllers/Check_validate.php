@@ -45,16 +45,16 @@ class Check_validate extends MY_Controller {
 	
 	function check_member_email()
 	{
+		$selfemail = $this->input->post('selfemail');
 		$email = $this->input->post('email');
+		$get = $this->member_model->info(array('email' => $email));
 		
-		$result = $this->member_model->info(array('email' => $email));
-	
-		if ($result->code == 200)
-		{
-			echo 'false';
-		}
-		else
-		{
+        if ($get->code == 200 && $selfemail != $email)
+        {
+            echo 'false';
+        }
+        else
+        {
             echo 'true';
         }
 	}
@@ -71,6 +71,22 @@ class Check_validate extends MY_Controller {
 		}
 		else
 		{
+            echo 'true';
+        }
+	}
+	
+	function check_member_phone_number()
+	{
+		$selfphone_number = $this->input->post('selfphone_number');
+		$phone_number = $this->input->post('phone_number');
+		$get = $this->member_model->info(array('phone_number' => $phone_number));
+		
+        if ($get->code == 200 && $selfphone_number != $phone_number)
+        {
+            echo 'false';
+        }
+        else
+        {
             echo 'true';
         }
 	}

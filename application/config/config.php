@@ -625,3 +625,14 @@ $config['code_member_point_status'] = array(
     3 => 'Registered',
     4 => 'Canceled'
 );
+
+$config['code_member_shirt_size'] = array(
+    0 => 'M',
+    1 => 'XL'
+);
+
+$config['code_member_transfer_status'] = array(
+    1 => 'Waiting Transfer',
+    2 => 'Paid',
+    3 => 'Sent'
+);

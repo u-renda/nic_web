@@ -12,6 +12,7 @@ window.theme = {};
 	};
 
 	PluginDatePicker.defaults = {
+		format: 'dd M yyyy'
 	};
 
 	PluginDatePicker.prototype = {

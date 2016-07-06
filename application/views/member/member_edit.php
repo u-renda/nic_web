@@ -1,16 +1,24 @@
 <div id="member_edit_page" class="tab-pane">
-    <form class="form-horizontal" method="post" action="<?php echo $this->config->item('link_member_edit'); ?>">
+    <form class="form-horizontal" method="post" action="<?php echo $this->config->item('link_member_profile'); ?>" id="form-member-edit">
         <h4 class="mb-xlg">Informasi Diri</h4>
         <fieldset>
+            <div class="alert alert-danger display-hide">
+                <button class="close" data-close="alert"></button> You have some form errors. Please check below.
+            </div>
+            <div class="alert alert-success display-hide">
+                <button class="close" data-close="alert"></button> Your profile update is successful!
+            </div>
             <div class="form-group">
                 <label class="col-md-3 control-label">Email</label>
                 <div class="col-md-8">
+                    <input type="hidden" name="selfemail" id="selfemail" value="<?php echo $member->email; ?>">
                     <input type="text" class="form-control" name="email" id="email" value="<?php echo $member->email; ?>">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-3 control-label">No Telp</label>
                 <div class="col-md-8">
+                    <input type="hidden" name="selfphone_number" id="selfphone_number" value="<?php echo $member->phone_number; ?>">
                     <input type="text" class="form-control" name="phone_number" id="phone_number" value="<?php echo $member->phone_number; ?>">
                 </div>
             </div>
@@ -38,7 +46,7 @@
             <div class="form-group">
                 <label class="col-md-3 control-label">Alamat</label>
                 <div class="col-md-8">
-                    <textarea class="form-control" rows="3" name="idcard_address" id="idcard_address"><?php echo ucwords($member->idcard_address); ?></textarea>
+                    <textarea class="form-control" rows="3" name="idcard_address" id="idcard_address"><?php echo stripcslashes($member->idcard_address); ?></textarea>
                 </div>
             </div>
         </fieldset>

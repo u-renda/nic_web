@@ -353,7 +353,7 @@ class Home extends MY_Controller {
 				$param['gender'] = $this->input->post('gender');
 				$param['phone_number'] = $this->input->post('phone_number');
 				$param['birth_place'] = $this->input->post('birth_place');
-				$param['birth_date'] = $this->input->post('birth_date');
+				$param['birth_date'] = date('Y-m-d', strtotime($this->input->post('birth_date')));
 				$param['marital_status'] = $this->input->post('marital_status');
 				$param['occupation'] = $this->input->post('occupation');
 				$param['religion'] = $this->input->post('religion');

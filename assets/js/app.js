@@ -81,4 +81,116 @@ var newPathname = winOrigin + "/" + winPath[1] + "/";
         }
     });
     
+    // Member - Edit
+    if (document.getElementById('member_edit_page') != null) {
+        var e=$("#form-member-edit"),
+            r=$(".alert-danger", e),
+            i=$(".alert-success", e);
+            
+        e.validate( {
+            errorElement:"span",
+            errorClass:"help-block help-block-error",
+            focusInvalid:!1,
+            ignore:"",
+            rules: {
+                marital_status: 'required',
+                occupation: 'required',
+                idcard_address: 'required',
+                email: {
+                    required: true,
+                    remote: {
+                        url: newPathname + "check_member_email",
+                        type: "post",
+                        data: {
+                            selfemail: function() {
+                                return $("#selfemail").val();
+                            },
+                            email: function() {
+                                return $("#email").val();
+                            }
+                        }
+                    }
+                },
+                phone_number: {
+                    required: true,
+                    remote: {
+                        url: newPathname + "check_member_phone_number",
+                        type: "post",
+                        data: {
+                            selfphone_number: function() {
+                                return $("#selfphone_number").val();
+                            },
+                            phone_number: function() {
+                                return $("#phone_number").val();
+                            }
+                        }
+                    }
+                },
+                password: {
+                    minlength: 5
+                },
+                confirm_password: {
+                    minlength: 5,
+                    equalTo: "#password"
+                }
+            },
+            messages: {
+                email: {
+                    required:"Please insert email.",
+                    remote: "Email already exist"
+                },
+                phone_number: {
+                    required:"Please insert phone number.",
+                    remote: "Phone number already exist"
+                },
+                password: {
+                    minlength: "Please enter at least 5 characters"
+                },
+                confirm_password: {
+                    minlength: "Please enter at least 5 characters",
+                    equalTo: "Please enter the same value as the new password"
+                }
+            },
+            invalidHandler:function(e, t) {
+                i.hide(), r.show(), App.scrollTo(r, -200)
+            },
+            errorPlacement:function(e, r) {
+                r.is(":checkbox")?e.insertAfter(r.closest(".md-checkbox-list, .md-checkbox-inline, .checkbox-list, .checkbox-inline")): r.is(":radio")?e.insertAfter(r.closest(".md-radio-list, .md-radio-inline, .radio-list,.radio-inline")): e.insertAfter(r)
+            },
+            highlight:function(e) {
+                $(e).closest(".form-group").addClass("has-error")
+            },
+            unhighlight:function(e) {
+                $(e).closest(".form-group").removeClass("has-error")
+            },
+            success:function(e) {
+                e.closest(".form-group").removeClass("has-error")
+            },
+            submitHandler:function(e) {
+                $.ajax(
+                {
+                    type: "POST",
+                    url: e.action,
+                    data: $(e).serialize(), 
+                    cache: false,
+                    success: function(data)
+                    {
+                        var response = $.parseJSON(data);
+                        
+                        if (response.type == 'success')
+                        {
+                            i.show(), r.hide();
+                        }
+                        else
+                        {
+                            r.show(), i.hide();
+                        }
+                    }
+                });
+            }
+        });
+        
+        return false;
+    }
+    
 }).apply(this, [jQuery]);

@@ -97,6 +97,36 @@ if ( ! function_exists('color_member_point_status')) {
 
 /*
 +-------------------------------------+
+    Name: color_member_transfer_status
+    Purpose: memberi label warna untuk member transfer status
+    @param return : label warna sesuai dengan status
++-------------------------------------+
+*/
+if ( ! function_exists('color_member_transfer_status')) {
+	function color_member_transfer_status($status)
+	{
+		$CI =& get_instance();
+		$code_member_transfer_status = $CI->config->item('code_member_transfer_status');
+		
+		if ($status == 1)
+		{
+			$label = '<span class="label label-danger">'.$code_member_transfer_status[$status].'</span>';
+		}
+		elseif ($status == 2)
+		{
+			$label = '<span class="label label-success">'.$code_member_transfer_status[$status].'</span>';
+		}
+		else
+		{
+			$label = '<span class="label label-default">'.$code_member_transfer_status[$status].'</span>';
+		}
+		
+		return $label;
+	}
+}
+
+/*
++-------------------------------------+
     Name: decode
     Purpose: ungenerate value
     @param return : ungenerated value
@@ -570,6 +600,22 @@ if ( ! function_exists('pages_pagination'))
 		$config['page_query_string'] = TRUE;
 		
 		$CI->pagination->initialize($config);
+	}
+}
+
+/*
++-------------------------------------+
+    Name: replace_new_line
+    Purpose: replace \r\n into HTML tag
+    @param return : HTML tag
++-------------------------------------+
+*/
+if ( ! function_exists('replace_new_line'))
+{
+    function replace_new_line($param)
+    {
+        $CI =& get_instance();
+		return str_replace(array("\\r\\n", "\\r", "\\n"), "<br />", $param);
 	}
 }
 

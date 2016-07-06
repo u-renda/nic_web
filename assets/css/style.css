@@ -158,6 +158,9 @@
 .border-top-none {
     border-top: none;
 }
+.display-hide {
+  display: none;
+}
 
 /**
  * HEADER
