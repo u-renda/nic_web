@@ -545,6 +545,7 @@ $config['registration_fee'] = 150000;
 $config['twitter'] = 'https://twitter.com/nicofficial';
 $config['facebook'] = 'https://www.facebook.com/NICoffc';
 $config['instagram'] = 'https://www.instagram.com/nic.official';
+$config['youtube'] = 'https://www.youtube.com/user/TheNICcrew';
 
 $config['link_faq'] = $config['base_url'].'pages/faq';
 $config['link_image_gallery'] = $config['base_url'].'image_gallery';

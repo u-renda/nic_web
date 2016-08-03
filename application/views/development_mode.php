@@ -23,9 +23,6 @@
 				<div class="header-body">
 					<div class="header-top">
 						<div class="container">
-							<p>
-								Get in touch! <span class="ml-xs"><?php echo 'Line@ : @'.strtolower($this->config->item('title')); ?></span><span class="hidden-xs"> | <a href="#"><?php echo strtolower($this->config->item('email_gmail')); ?></a></span>
-							</p>
 							<ul class="header-social-icons social-icons hidden-xs">
 								<li class="social-icons-facebook"><a href="<?php echo $this->config->item('facebook'); ?>" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a></li>
 								<li class="social-icons-twitter"><a href="<?php echo $this->config->item('twitter'); ?>" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></li>
@@ -62,6 +59,13 @@
 							<hr class="tall">
 						</div>
 					</div>
+					<div class="row">
+						<div class="col-md-12 center">
+							Get in touch with us!
+							<?php echo 'Line@ : @'.strtolower($this->config->item('title')).' | '; ?>
+							<a href="<?php echo 'mailto:'.$this->config->item('email_gmail'); ?>"><?php echo strtolower($this->config->item('email_gmail')); ?></a>
+						</div>
+					</div>
 				</div>
 			</div>
 			<footer class="short" id="footer">
@@ -74,7 +78,7 @@
                         <div class="col-md-3">
                             <h4>Latest Tweets</h4>
                             <div id="tweet" class="twitter" data-plugin-tweets data-plugin-options='{"username": "nicofficial", "count": 2}'>
-                                <p>Please wait...</p>
+                                <p>Coming soon.</p>
                             </div>
                         </div>
                         <div class="col-md-4">
