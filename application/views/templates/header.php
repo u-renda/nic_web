@@ -15,6 +15,7 @@
     <!-- Datepicker -->
     <link href="<?php echo base_url('assets/css').'/datepicker.css'; ?>" rel="stylesheet">
     <!-- Custom styles for this template -->
+    <link href="<?php echo base_url('assets/css/theme').'/bootstrap-fileupload.min.css'; ?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/css/theme').'/owl.carousel.min.css'; ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/theme').'/owl.theme.default.min.css'; ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/theme').'/theme.css'; ?>" rel="stylesheet">

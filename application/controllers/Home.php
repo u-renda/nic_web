@@ -453,4 +453,12 @@ class Home extends MY_Controller {
 		$data['id'] = $id;
 		$this->display_view('home/register_upload', $data);
 	}
+	
+	function transfer_confirmation()
+	{
+		$data = array();
+		
+		$data['view_content'] = 'home/transfer_confirmation';
+        $this->display_view('templates/frame', $data);
+	}
 }

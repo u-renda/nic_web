@@ -532,7 +532,7 @@ else
 	define('API_HOST', 'http://api.nezindaclub.com/');
 }
 
-$config['development_mode'] = FALSE;
+$config['development_mode'] = TRUE;
 $config['image_gallery_mode'] = FALSE; // TRUE = show, FALSE = hidden
 $config['shop_mode'] = FALSE; // TRUE = show, FALSE = hidden
 $config['login_mode'] = TRUE; // TRUE = show, FALSE = hidden
@@ -565,6 +565,7 @@ $config['link_register_success'] = $config['base_url'].'register_success';
 $config['link_shop'] = $config['base_url'].'shop';
 $config['link_shop_detail'] = $config['base_url'].'shop/detail';
 $config['link_team'] = $config['base_url'].'pages/team';
+$config['link_transfer_confirmation'] = $config['base_url'].'transfer_confirmation';
 
 $config['code_admin_group'] = array(
     1 => 'leadership',

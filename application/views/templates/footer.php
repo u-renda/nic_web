@@ -55,6 +55,7 @@
 <!-- Datepicker -->
 <script src="<?php echo base_url('assets/js').'/bootstrap-datepicker.js'; ?>" type="text/javascript"></script>
 <!-- Custom styles for this template -->
+<script src="<?php echo base_url('assets/js/theme').'/bootstrap-fileupload.min.js'; ?>"></script>
 <script src="<?php echo base_url('assets/js/theme').'/jquery.isotope.min.js'; ?>"></script>
 <script src="<?php echo base_url('assets/js/theme').'/owl.carousel.min.js'; ?>"></script>
 <script src="<?php echo base_url('assets/js/theme').'/theme.js'; ?>"></script>

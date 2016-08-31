@@ -161,6 +161,9 @@
 .display-hide {
   display: none;
 }
+.required {
+  color: #d2322d;
+}
 
 /**
  * HEADER
@@ -333,6 +336,18 @@ html .panel-group.panel-group-quaternary .panel-heading {
 }
 html .panel-group.panel-group-quaternary .panel-heading a {
     color: #ffffff;
+}
+.fileupload .uneditable-input .fileupload-preview {
+    display: inline-block;
+    float: left;
+    overflow: hidden;
+    padding: 0 0 0 17px;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+.fileupload .uneditable-input .fa {
+    position: absolute;
+    top: 12px;
 }
 
 /**

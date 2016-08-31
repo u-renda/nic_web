@@ -60,10 +60,10 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-12 center">
+						<div class="col-md-12 center" style="color: #D4AF37;">
 							Get in touch with us!
 							<?php echo 'Line@ : @'.strtolower($this->config->item('title')).' | '; ?>
-							<a href="<?php echo 'mailto:'.$this->config->item('email_gmail'); ?>"><?php echo strtolower($this->config->item('email_gmail')); ?></a>
+							<a style="color: #D4AF37;" href="<?php echo 'mailto:'.$this->config->item('email_gmail'); ?>"><?php echo strtolower($this->config->item('email_gmail')); ?></a>
 						</div>
 					</div>
 				</div>
@@ -71,7 +71,7 @@
 			<footer class="short" id="footer">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-3">
+                        <!--<div class="col-md-3">
                             <h4>About Us</h4>
                             <p><?php echo $about_us.'... '; ?><a href="<?php echo $this->config->item('link_about_us'); ?>" class="btn-flat btn-xs">View More <i class="fa fa-arrow-right"></i></a></p>
                         </div>
@@ -80,7 +80,7 @@
                             <div id="tweet" class="twitter" data-plugin-tweets data-plugin-options='{"username": "nicofficial", "count": 2}'>
                                 <p>Coming soon.</p>
                             </div>
-                        </div>
+                        </div>-->
                         <div class="col-md-4">
                             <div class="contact-details">
                                 <h4>Contact Us</h4>
