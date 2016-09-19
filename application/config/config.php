@@ -532,9 +532,9 @@ else
 	define('API_HOST', 'http://api.nezindaclub.com/');
 }
 
-$config['development_mode'] = TRUE;
-$config['image_gallery_mode'] = FALSE; // TRUE = show, FALSE = hidden
-$config['shop_mode'] = FALSE; // TRUE = show, FALSE = hidden
+$config['development_mode'] = FALSE;
+$config['image_gallery_mode'] = TRUE; // TRUE = show, FALSE = hidden
+$config['shop_mode'] = TRUE; // TRUE = show, FALSE = hidden
 $config['login_mode'] = TRUE; // TRUE = show, FALSE = hidden
 $config['title'] = 'NEZindaCLUB';
 $config['nic_api'] = API_HOST;
