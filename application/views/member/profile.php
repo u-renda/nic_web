@@ -22,11 +22,15 @@
                 <section class="panel">
                     <div class="panel-body">
                         <div class="img-thumbnail mb-md">
-                            <img src="<?php echo $this->session->userdata('photo'); ?>" class="rounded img-responsive" alt="<?php echo ucwords($this->session->userdata('name')); ?>">
+							<?php if ($member->photo == '') { ?>
+							<img src="<?php echo base_url('assets/images').'/user_default.png'; ?>" class="rounded img-responsive" alt="<?php echo ucwords($member->name); ?>">
+							<?php } else { ?>
+                            <img src="<?php echo $member->photo; ?>" class="rounded img-responsive" alt="<?php echo ucwords($member->name); ?>">
+							<?php } ?>
                         </div>
                         <hr class="dotted short">
-                        <h6 class="text-muted align-center"><?php echo '<i class="fa fa-user" title="Nama"></i> '.ucwords($this->session->userdata('name')); ?></h6>
-                        <h6 class="text-muted align-center"><?php echo $member->gender; ?></h6>
+                        <h6 class="text-muted align-center"><?php echo '<i class="fa fa-user" title="Nama"></i> '.ucwords($member->name); ?></h6>
+                        <h6 class="text-muted align-center"><?php echo $member->icon_gender.$member->gender; ?></h6>
                         <h6 class="text-muted align-center"><?php echo '<i class="fa fa-credit-card" title="ID NIC"></i> '.$member->member_card; ?></h6>
                         <div class="clearfix"></div>
                     </div>

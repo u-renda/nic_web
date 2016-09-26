@@ -360,5 +360,9 @@ $(document).ready(function() {
 				}
 			});
 		});
+		
+		$('#submit_register').click(function () {
+			$(this).html('<i class="fa fa-spinner fa-spin font26"></i>');
+		});
 	}
 });

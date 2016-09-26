@@ -18,14 +18,18 @@ class Member extends MY_Controller {
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('email', 'email', 'required');
 		$this->form_validation->set_rules('phone_number', 'phone_number', 'required');
-		$this->form_validation->set_rules('marital_status', 'marital_status', 'required');
 		$this->form_validation->set_rules('occupation', 'occupation', 'required');
 		$this->form_validation->set_rules('idcard_address', 'idcard_address', 'required');
 		
 		if ($this->input->post('password') == TRUE)
 		{
 			$this->form_validation->set_rules('password', 'password', 'required');
-			$this->form_validation->set_rules('confirm_password', 'confirm_password', 'required');
+			$this->form_validation->set_rules('confirm_password', 'confirm_password', 'required|matches[password]');
+		}
+		
+		if ($this->input->post('photo') == TRUE)
+		{
+			$this->form_validation->set_rules('photo', 'photo', 'required');
 		}
 		
 		if ($this->form_validation->run() == FALSE)
@@ -47,11 +51,16 @@ class Member extends MY_Controller {
 				$param['password'] = $this->input->post('password');
 			}
 			
+			if ($this->input->post('photo') == TRUE)
+			{
+				$param['photo'] = $this->input->post('photo');
+			}
+			
 			$query = $this->member_model->update($param);
 			
 			if ($query->code == 200)
 			{
-				$response =  array('type' => 'success');
+				$response =  array('type' => 'success', 'location' => $this->config->item('link_member_profile'));
 			}
 			else
 			{
@@ -63,7 +72,7 @@ class Member extends MY_Controller {
 		}
 	}
 	
-	function member_event()
+	function member_event_lists()
 	{
 		$param = array();
 		$param['id_member'] = $this->session->userdata('id_member');
@@ -105,10 +114,30 @@ class Member extends MY_Controller {
 			$code_member_shirt_size = $this->config->item('code_member_shirt_size');
 			$result = $query->result;
 			
+			$resi = $result->resi;
+			if ($result->resi == '')
+			{
+				$resi = '-';
+			}
+			
+			if ($result->gender == 1)
+			{
+				$icon_gender = '<i class="fa fa-female"></i> ';
+			}
+			else
+			{
+				$icon_gender = '<i class="fa fa-male"></i> ';
+			}
+			
+			$code_350x350 = $this->config->item('code_350x350');
+			$explode = explode('.', $result->photo);
+			$photo = $explode[0].$code_350x350['extra'].'.'.$explode[1];
+			
 			$temp = array();
 			$temp['name'] = $result->name;
 			$temp['email'] = $result->email;
 			$temp['username'] = $result->username;
+			$temp['photo'] = $photo;
 			$temp['replace_idcard_address'] = replace_new_line($result->idcard_address);
 			$temp['idcard_address'] = $result->idcard_address;
 			$temp['birth_place'] = $result->birth_place;
@@ -118,12 +147,13 @@ class Member extends MY_Controller {
 			$temp['marital_status'] = $result->marital_status;
 			$temp['religion'] = $code_member_religion[$result->religion];
 			$temp['phone_number'] = $result->phone_number;
-			$temp['resi'] = $result->resi;
 			$temp['member_card'] = $result->member_card;
+			$temp['resi'] = $resi;
 			$temp['shirt_size'] = $code_member_shirt_size[$result->shirt_size];
 			$temp['gender'] = $code_member_gender[$result->gender];
+			$temp['icon_gender'] = $icon_gender;
 			$data['member'] = (object) $temp;
-			$data['member_event'] = (object) $this->member_event();
+			$data['member_event'] = (object) $this->member_event_lists();
 		}
 		
 		$data['code_member_marital_status'] = $this->config->item('code_member_marital_status');

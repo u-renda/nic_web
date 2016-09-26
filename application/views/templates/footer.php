@@ -63,6 +63,7 @@
 <script src="<?php echo base_url('assets/js/theme').'/jquery.themepunch.revolution.min.js'; ?>"></script>
 <script src="<?php echo base_url('assets/js/theme').'/theme.init.js'; ?>"></script>
 <script src="<?php echo base_url('assets/js/theme').'/gallery.js'; ?>"></script>
+<script src="<?php echo base_url('assets/js/upload').'/fileinput.min.js'; ?>"></script>
 <script src="<?php echo base_url('assets/js').'/app.js'; ?>"></script>
 </body>
 </html>

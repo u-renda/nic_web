@@ -524,8 +524,8 @@ $config['proxy_ips'] = '';
 if(is_bool(LOCALHOST) || LOCALHOST == 'localhost')
 {
     define('API_HOST', 'http://localhost/nic_api/');
-    define('UPLOAD_MEMBER_HOST', 'http://localhost/upload_nic/member/');
-    define('UPLOAD_FOLDER', $_SERVER['DOCUMENT_ROOT'].'/upload_nic/member/');
+    define('UPLOAD_HOST', 'http://localhost/nic_web/upload_nic/');
+    define('UPLOAD_FOLDER', $_SERVER['DOCUMENT_ROOT'].'/nic_web/upload_nic/');
 }
 else
 {
@@ -566,6 +566,7 @@ $config['link_shop'] = $config['base_url'].'shop';
 $config['link_shop_detail'] = $config['base_url'].'shop/detail';
 $config['link_team'] = $config['base_url'].'pages/team';
 $config['link_transfer_confirmation'] = $config['base_url'].'transfer_confirmation';
+$config['link_upload_image'] = $config['base_url'].'upload_image';
 
 $config['code_admin_group'] = array(
     1 => 'leadership',
@@ -637,4 +638,22 @@ $config['code_member_transfer_status'] = array(
     1 => 'Waiting Transfer',
     2 => 'Paid',
     3 => 'Sent'
+);
+
+$config['code_1024x600'] = array(
+    'width' => '1024',
+    'height' => '600',
+    'extra' => '_1024x600'
+);
+
+$config['code_640x640'] = array(
+    'width' => '640',
+    'height' => '640',
+    'extra' => '_640x640'
+);
+
+$config['code_350x350'] = array(
+    'width' => '350',
+    'height' => '350',
+    'extra' => '_350x350'
 );

@@ -180,6 +180,7 @@ var newPathname = winOrigin + "/" + winPath[1] + "/";
                         if (response.type == 'success')
                         {
                             i.show(), r.hide();
+                            setTimeout("location.href = '"+response.location+"'",2000);
                         }
                         else
                         {
@@ -188,6 +189,30 @@ var newPathname = winOrigin + "/" + winPath[1] + "/";
                     }
                 });
             }
+        });
+        
+        $("#photo").fileinput({
+            'showUpload':false,
+            'uploadUrl': newPathname + 'upload_image',
+            'previewZoomSettings': {
+                image: { width: "auto", height: "auto" }
+            },
+            'previewZoomButtonIcons': {
+                prev: '',
+                next: '',
+            },
+            'uploadExtraData': {
+                watermark: 'false',
+                type: 'member'
+            },
+            'allowedFileTypes': ['image'],
+            'dropZoneEnabled': false,
+            'uploadAsync': true
+        }).on('fileuploaded', function(event, data, previewId, index) {
+            var form = data.form, files = data.files, extra = data.extra,
+                response = data.response, reader = data.reader;
+            var div = $('#div_photo');
+            div.append('<input type="hidden" name="photo" value="'+response.image+'">');
         });
         
         return false;

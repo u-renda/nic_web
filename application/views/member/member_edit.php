@@ -1,6 +1,6 @@
 <div id="member_edit_page" class="tab-pane">
     <form class="form-horizontal" method="post" action="<?php echo $this->config->item('link_member_profile'); ?>" id="form-member-edit">
-        <h4 class="mb-xlg">Informasi Diri</h4>
+        <h4 class="mb-xlg">Ubah Foto</h4>
         <fieldset>
             <div class="alert alert-danger display-hide">
                 <button class="close" data-close="alert"></button> You have some form errors. Please check below.
@@ -8,6 +8,16 @@
             <div class="alert alert-success display-hide">
                 <button class="close" data-close="alert"></button> Your profile update is successful!
             </div>
+            <div class="form-group" id="div_photo">
+                <label class="col-md-3 control-label">Upload Foto Diri</label>
+                <div class="col-md-8">
+                    <input name="image" id="photo" class="file" type="file">
+                </div>
+            </div>
+        </fieldset>
+        <hr class="dotted tall">
+        <h4 class="mb-xlg">Informasi Diri</h4>
+        <fieldset>
             <div class="form-group">
                 <label class="col-md-3 control-label">Email</label>
                 <div class="col-md-8">
@@ -20,21 +30,6 @@
                 <div class="col-md-8">
                     <input type="hidden" name="selfphone_number" id="selfphone_number" value="<?php echo $member->phone_number; ?>">
                     <input type="text" class="form-control" name="phone_number" id="phone_number" value="<?php echo $member->phone_number; ?>">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-3 control-label">Status Perkawinan</label>
-                <div class="col-md-8">
-                    <select class="form-control" name="marital_status" id="marital-status">
-                        <?php
-                        foreach ($code_member_marital_status as $key => $val)
-                        {
-                            echo '<option value="'.$key.'"';
-                            if ($key == $member->marital_status) { echo 'selected'; }
-                            echo '>'.$val.'</option>';
-                        }
-                        ?>
-                    </select>
                 </div>
             </div>
             <div class="form-group">

@@ -39,7 +39,7 @@
                                     <span class="product-thumb-info-act-left"><em>View</em></span>
                                     <span class="product-thumb-info-act-right"><em><i class="fa fa-plus"></i> Details</em></span>
                                 </span>
-                                <img alt="" class="img-responsive" src="../upload_nic/anye1.jpg">
+                                <img alt="" class="img-responsive" src="<?php echo base_url('upload_nic/shop').'/anye1.jpg'; ?>">
                             </span>
                         </a>
                         <span class="product-thumb-info-content">

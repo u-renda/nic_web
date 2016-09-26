@@ -62,6 +62,8 @@ $route['register_upload'] = 'home/register_upload';
 $route['register_success'] = 'home/register_success';
 $route['transfer_confirmation'] = 'home/transfer_confirmation';
 
+$route['upload_image'] = 'extra/upload_image';
+
 $route['check_kota_lists'] = 'check_validate/check_kota_lists';
 $route['check_member_email'] = 'check_validate/check_member_email';
 $route['check_member_phone_number'] = 'check_validate/check_member_phone_number';

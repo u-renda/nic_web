@@ -7,6 +7,7 @@ class Home extends MY_Controller {
     {
         parent::__construct();
 		$this->load->model('member_model');
+		$this->load->model('post_model');
     }
 
     function check_email()
@@ -113,16 +114,36 @@ class Home extends MY_Controller {
 	
 	function index()
 	{
-		// Get 4 last post with image exist
+		// Get 4 last post with image exist -> slider
 		$param = array();
 		$param['limit'] = 4;
 		$param['sort'] = 'desc';
 		$param['media_not'] = TRUE;
 		$param['status'] = 1;
-		$query = get_post_lists($param);
+		$query = $this->post_model->lists($param);
+		
+		if ($query->code == 200)
+		{
+			foreach ($query->result as $row)
+			{
+				$media = $row->media;
+				if ($row->media_type == 2)
+				{
+					// Pilih media dengan dimensi 1024x600
+					$code_1024x600 = $this->config->item('code_1024x600');
+					$explode = explode('.', $media);
+					$media = $explode[0].$code_1024x600['extra'].'.'.$explode[1];
+				}
+				
+				$temp = array();
+				$temp['title'] = $row->title;
+				$temp['media'] = $media;
+				$slider[] = (object) $temp;
+			}
+		}
 		
 		$data = array();
-		$data['slider'] = $query->result;
+		$data['slider'] = (object) $slider;
 		$data['latest'] = $this->get_latest();
 		$data['view_content'] = 'home/home';
         $this->display_view('templates/frame', $data);
@@ -159,12 +180,21 @@ class Home extends MY_Controller {
 				$link = $this->config->item('link_pages_agnezmo');
 			}
 			
+			// Pilih media dengan dimensi 350x350
+			$media = $row->media;
+			if ($row->media_type == 2)
+			{
+				$code_350x350 = $this->config->item('code_350x350');
+				$explode = explode('.', $row->media);
+				$media = $explode[0].$code_350x350['extra'].'.'.$explode[1];
+			}
+			
 			$temp = array();
 			$temp['title'] = wordwrap($row->title, 33);
 			$temp['slug'] = $row->slug;
 			$temp['content'] = $content;
 			$temp['created_date'] = date('j F Y', strtotime($row->created_date));
-			$temp['media'] = $row->media;
+			$temp['media'] = $media;
 			$temp['link'] = $link;
 			$query2[] = (object) $temp;
 		}
@@ -318,9 +348,6 @@ class Home extends MY_Controller {
 			$this->load->library('form_validation');
 			$this->form_validation->set_rules('idcard_type', 'tipe ID', 'required');
 			$this->form_validation->set_rules('idcard_number', 'nomor ID', 'required');
-			$this->form_validation->set_rules('marital_status', 'status perkawinan', 'required');
-			$this->form_validation->set_rules('religion', 'agama', 'required');
-			$this->form_validation->set_rules('occupation', 'pekerjaan', 'required');
 			$this->form_validation->set_rules('name', 'nama', 'required');
 			$this->form_validation->set_rules('gender', 'jenis kelamin', 'required');
 			$this->form_validation->set_rules('birth_place', 'tempat lahir', 'required');
@@ -334,6 +361,8 @@ class Home extends MY_Controller {
 			$this->form_validation->set_rules('id_kota', 'kota', 'required');
 			$this->form_validation->set_rules('postal_code', 'kode pos', 'required');
 			$this->form_validation->set_rules('terms', 'terms', 'required');
+			$this->form_validation->set_rules('idcard_photo', 'ID card foto', 'required');
+			$this->form_validation->set_rules('photo', 'foto diri', 'required');
 			
 			if ($this->form_validation->run() == FALSE)
 			{
@@ -354,19 +383,15 @@ class Home extends MY_Controller {
 				$param['phone_number'] = $this->input->post('phone_number');
 				$param['birth_place'] = $this->input->post('birth_place');
 				$param['birth_date'] = date('Y-m-d', strtotime($this->input->post('birth_date')));
-				$param['marital_status'] = $this->input->post('marital_status');
-				$param['occupation'] = $this->input->post('occupation');
-				$param['religion'] = $this->input->post('religion');
 				$param['shirt_size'] = $this->input->post('shirt_size');
 				$param['status'] = 1;
+				$param['idcard_photo'] = $this->input->post('idcard_photo');
+				$param['photo'] = $this->input->post('photo');
 				$query = $this->member_model->create($param);
 				
 				if ($query->code == 200)
 				{
-					// id_member dimasukin ke session
-					$this->session->set_userdata(array('id_member' => $query->result->id_member));
-					
-					$response =  array('msg' => 'Create data success', 'type' => 'success', 'location' => $this->config->item('link_register_upload'));
+					$response =  array('msg' => 'Create data success', 'type' => 'success', 'location' => $this->config->item('link_register_success'));
 				}
 				else
 				{
@@ -395,63 +420,6 @@ class Home extends MY_Controller {
 		$data = array();
 		$data['view_content'] = 'home/register_success';
 		$this->display_view('templates/frame', $data);
-	}
-	
-	function register_upload()
-	{
-		$id = $this->session->userdata('id_member');
-		
-		if ($id == FALSE) { redirect($this->config->item('link_index')); }
-		
-		if ($this->input->post('submit_upload') == TRUE)
-		{
-			$this->load->library('form_validation');
-			$this->form_validation->set_rules('idcard_photo', 'foto ID', 'callback_check_idcard_photo');
-			$this->form_validation->set_rules('photo', 'foto', 'callback_check_photo');
-			
-			if ($this->form_validation->run() == FALSE)
-			{
-				$data['error'] = validation_errors();
-			}
-			else
-			{
-				$photo = '';
-				$idcard_photo = '';
-				if (isset($_FILES['photo']))
-                {
-                    if ($_FILES["photo"]["error"] == 0)
-                    {
-                        $name = md5(basename($_FILES["photo"]["name"]) . date('Y-m-d H:i:s'));
-                        $imageFileType = strtolower(pathinfo($_FILES["photo"]["name"],PATHINFO_EXTENSION));
-                        $photo = UPLOAD_MEMBER_HOST . $name . '.' . $imageFileType;
-                    }
-                }
-				if (isset($_FILES['idcard_photo']))
-                {
-                    if ($_FILES["idcard_photo"]["error"] == 0)
-                    {
-                        $name = md5(basename($_FILES["idcard_photo"]["name"]) . date('Y-m-d H:i:s'));
-                        $imageFileType = strtolower(pathinfo($_FILES["idcard_photo"]["name"],PATHINFO_EXTENSION));
-                        $idcard_photo = UPLOAD_MEMBER_HOST . $name . '.' . $imageFileType;
-                    }
-                }
-				
-				$param = array();
-				$param['id_member'] = $id;
-				$param['idcard_photo'] = $idcard_photo;
-				$param['photo'] = $photo;
-				$query = $this->member_model->update($param);
-				
-				if ($query->code == 200)
-				{
-					redirect($this->config->item('link_register_success'));
-				}
-			}
-		}
-		
-		$data = array();
-		$data['id'] = $id;
-		$this->display_view('home/register_upload', $data);
 	}
 	
 	function transfer_confirmation()

@@ -13,7 +13,7 @@
         <link rel="shortcut icon" href="<?php echo base_url('assets/images').'/icon.png'; ?>">
         <title><?php echo $this->config->item('title'); ?></title>
 		<!-- Web Fonts  -->
-		<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
+		<!--<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">-->
 
 		<!-- Vendor CSS -->
 		<link rel="stylesheet" href="<?php echo base_url('assets/css').'/bootstrap.min.css'; ?>" />
@@ -22,6 +22,7 @@
 		<link rel="stylesheet" href="<?php echo base_url('assets/css/theme').'/bootstrap-fileupload.min.css'; ?>" />
 
 		<!-- Theme Custom CSS -->
+		<link rel="stylesheet" href="<?php echo base_url('assets/css/upload').'/fileinput.min.css'; ?>">
 		<link rel="stylesheet" href="<?php echo base_url('assets/css').'/login_style.css'; ?>">
 		<link rel="stylesheet" href="<?php echo base_url('assets/css').'/register_style.css'; ?>">
 	</head>
@@ -80,29 +81,9 @@
 											</span>
 										</div>
 									</div>
-									<div class="form-group mb-lg">
-										<label>Status Perkawinan<span class="required">*</span></label>
-										<select class="form-control" title="Mohon pilih salah satu." name="marital_status" id="marital-status" required>
-											<option value="">-- Pilih --</option>
-											<?php foreach ($code_member_marital_status as $key => $val) { ?>
-											<option value="<?php echo $key; ?>"><?php echo $val; ?></option>
-											<?php } ?>
-										</select>
-									</div>
-									<div class="form-group mb-lg">
-										<label>Agama <span class="required">*</span></label>
-										<select class="form-control" title="Mohon pilih salah satu." name="religion" id="religion" required>
-											<option value="">-- Pilih --</option>
-											<?php foreach ($code_member_religion as $key => $val) { ?>
-											<option value="<?php echo $key; ?>"><?php echo $val; ?></option>
-											<?php } ?>
-										</select>
-									</div>
-									<div class="form-group mb-lg">
-										<label>Pekerjaan <span class="required">*</span></label>
-										<div class="input-group input-group-icon">
-											<input name="occupation" type="text" class="form-control" id="occupation" title="Harus diisi." value="<?php echo set_value('occupation'); ?>" required>
-										</div>
+									<div class="form-group mb-lg" id="div_idcard">
+										<label class="control-label">Upload ID Card Foto</label>
+										<input name="image" id="idcard_photo" class="file" type="file">
 									</div>
 								</div>
 								<div id="w1-profile" class="tab-pane">
@@ -151,6 +132,10 @@
 									<div class="form-group mb-lg">
 										<label>Alamat Sesuai ID <span class="required">*</span></label>
 										<textarea name="idcard_address" class="form-control" rows="3" id="textareaAutosize" data-plugin-textarea-autosize title="Harus diisi." required></textarea>
+									</div>
+									<div class="form-group mb-lg" id="div_photo">
+										<label class="control-label">Upload Foto Diri</label>
+										<input name="image" id="photo" class="file" type="file">
 									</div>
 								</div>
 								<div id="w1-confirm" class="tab-pane">
@@ -216,7 +201,7 @@
 									<a><i class="fa fa-angle-left"></i> Previous</a>
 								</li>
 								<li class="finish hidden pull-right">
-									<button type="submit" value="submit" name="submit" class="btn-finish">Finish</button>
+									<button type="submit" value="submit" name="submit" class="btn-finish" id="submit_register">Finish</button>
 								</li>
 								<li class="next">
 									<a class="pointer">Next <i class="fa fa-angle-right"></i></a>
@@ -238,6 +223,56 @@
 		<script src="<?php echo base_url('assets/js').'/jquery.validate.js'; ?>"></script>
 		<script src="<?php echo base_url('assets/js/theme').'/jquery.bootstrap.wizard.js'; ?>"></script>
 		<script src="<?php echo base_url('assets/js/theme').'/bootstrap-fileupload.min.js'; ?>"></script>
+		<script src="<?php echo base_url('assets/js/upload').'/fileinput.min.js'; ?>"></script>
 		<script src="<?php echo base_url('assets/js').'/login.js'; ?>"></script>
+		<script>
+			$("#idcard_photo").fileinput({
+				'showUpload':false,
+				'uploadUrl':'<?php echo $this->config->item('link_upload_image'); ?>',
+				'previewZoomSettings': {
+					image: { width: "auto", height: "auto" }
+				},
+				'previewZoomButtonIcons': {
+					prev: '',
+					next: '',
+				},
+				'uploadExtraData': {
+					watermark: 'false',
+					type: 'member'
+				},
+				'allowedFileTypes': ['image'],
+				'dropZoneEnabled': false,
+				'uploadAsync': true
+			}).on('fileuploaded', function(event, data, previewId, index) {
+				var form = data.form, files = data.files, extra = data.extra,
+					response = data.response, reader = data.reader;
+				var div = $('#div_idcard');
+				div.append('<input type="hidden" name="idcard_photo" value="'+response.image+'">');
+			});
+			
+			$("#photo").fileinput({
+				'showUpload':false,
+				'uploadUrl':'<?php echo $this->config->item('link_upload_image'); ?>',
+				'previewZoomSettings': {
+					image: { width: "auto", height: "auto" }
+				},
+				'previewZoomButtonIcons': {
+					prev: '',
+					next: '',
+				},
+				'uploadExtraData': {
+					watermark: 'false',
+					type: 'member'
+				},
+				'allowedFileTypes': ['image'],
+				'dropZoneEnabled': false,
+				'uploadAsync': true
+			}).on('fileuploaded', function(event, data, previewId, index) {
+				var form = data.form, files = data.files, extra = data.extra,
+					response = data.response, reader = data.reader;
+				var div = $('#div_photo');
+				div.append('<input type="hidden" name="photo" value="'+response.image+'">');
+			});
+		</script>
 	</body>
 </html>
