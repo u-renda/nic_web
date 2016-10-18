@@ -530,6 +530,8 @@ if(is_bool(LOCALHOST) || LOCALHOST == 'localhost')
 else
 {
 	define('API_HOST', 'http://api.nezindaclub.com/');
+    define('UPLOAD_HOST', 'http://upload.nezindaclub.com/');
+    define('UPLOAD_FOLDER', $_SERVER['DOCUMENT_ROOT'].'/upload_nic/');
 }
 
 $config['development_mode'] = FALSE;
@@ -548,6 +550,7 @@ $config['instagram'] = 'https://www.instagram.com/nic.official';
 $config['youtube'] = 'https://www.youtube.com/user/TheNICcrew';
 
 $config['link_faq'] = $config['base_url'].'pages/faq';
+$config['link_help'] = $config['base_url'].'pages/help';
 $config['link_image_gallery'] = $config['base_url'].'image_gallery';
 $config['link_image_gallery_detail'] = $config['base_url'].'image_gallery/detail';
 $config['link_index'] = $config['base_url'].'index';

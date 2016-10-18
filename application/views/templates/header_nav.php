@@ -58,7 +58,7 @@
 										</ul>
 									</li>
 									<li><a href="<?php echo $this->config->item('link_team'); ?>">Crew</a></li>
-									<li><a href="<?php echo $this->config->item('link_faq'); ?>">F.A.Q.</a></li>
+									<li><a href="<?php echo $this->config->item('link_help'); ?>">Help</a></li>
 								</ul>
 							</li>
 							<?php if ($this->config->item('image_gallery_mode') == TRUE) { ?>

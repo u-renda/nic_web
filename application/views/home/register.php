@@ -82,7 +82,9 @@
 										</div>
 									</div>
 									<div class="form-group mb-lg" id="div_idcard">
-										<label class="control-label">Upload ID Card Foto</label>
+										<label class="control-label">Upload ID Card Foto <span class="required">*</span>&nbsp&nbsp
+											<a href="<?php echo $this->config->item('link_help').'/upload_photo'; ?>" data-plugin-tooltip data-original-title="Mohon lihat terlebih dahulu cara upload foto" target="_blank"><i class="fa fa-question-circle"></i></a>
+										</label>
 										<input name="image" id="idcard_photo" class="file" type="file">
 									</div>
 								</div>
@@ -119,7 +121,7 @@
 												<span class="input-group-addon">
 													<i class="fa fa-calendar"></i>
 												</span>
-												<input name="birth_date" type="text" data-plugin-datepicker class="form-control" id="birth-date" title="Harus diisi." required>
+												<input name="birth_date" type="text" readonly="readonly" data-plugin-datepicker class="form-control" id="birth-date" title="Harus diisi." required>
 											</div>
 										</div>
 									</div>
@@ -134,7 +136,7 @@
 										<textarea name="idcard_address" class="form-control" rows="3" id="textareaAutosize" data-plugin-textarea-autosize title="Harus diisi." required></textarea>
 									</div>
 									<div class="form-group mb-lg" id="div_photo">
-										<label class="control-label">Upload Foto Diri</label>
+										<label class="control-label">Upload Foto Diri <span class="required">*</span></label>
 										<input name="image" id="photo" class="file" type="file">
 									</div>
 								</div>
@@ -225,54 +227,5 @@
 		<script src="<?php echo base_url('assets/js/theme').'/bootstrap-fileupload.min.js'; ?>"></script>
 		<script src="<?php echo base_url('assets/js/upload').'/fileinput.min.js'; ?>"></script>
 		<script src="<?php echo base_url('assets/js').'/login.js'; ?>"></script>
-		<script>
-			$("#idcard_photo").fileinput({
-				'showUpload':false,
-				'uploadUrl':'<?php echo $this->config->item('link_upload_image'); ?>',
-				'previewZoomSettings': {
-					image: { width: "auto", height: "auto" }
-				},
-				'previewZoomButtonIcons': {
-					prev: '',
-					next: '',
-				},
-				'uploadExtraData': {
-					watermark: 'false',
-					type: 'member'
-				},
-				'allowedFileTypes': ['image'],
-				'dropZoneEnabled': false,
-				'uploadAsync': true
-			}).on('fileuploaded', function(event, data, previewId, index) {
-				var form = data.form, files = data.files, extra = data.extra,
-					response = data.response, reader = data.reader;
-				var div = $('#div_idcard');
-				div.append('<input type="hidden" name="idcard_photo" value="'+response.image+'">');
-			});
-			
-			$("#photo").fileinput({
-				'showUpload':false,
-				'uploadUrl':'<?php echo $this->config->item('link_upload_image'); ?>',
-				'previewZoomSettings': {
-					image: { width: "auto", height: "auto" }
-				},
-				'previewZoomButtonIcons': {
-					prev: '',
-					next: '',
-				},
-				'uploadExtraData': {
-					watermark: 'false',
-					type: 'member'
-				},
-				'allowedFileTypes': ['image'],
-				'dropZoneEnabled': false,
-				'uploadAsync': true
-			}).on('fileuploaded', function(event, data, previewId, index) {
-				var form = data.form, files = data.files, extra = data.extra,
-					response = data.response, reader = data.reader;
-				var div = $('#div_photo');
-				div.append('<input type="hidden" name="photo" value="'+response.image+'">');
-			});
-		</script>
 	</body>
 </html>

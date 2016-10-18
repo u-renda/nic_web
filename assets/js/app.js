@@ -193,6 +193,7 @@ var newPathname = winOrigin + "/" + winPath[1] + "/";
         
         $("#photo").fileinput({
             'showUpload':false,
+			'showRemove': false,
             'uploadUrl': newPathname + 'upload_image',
             'previewZoomSettings': {
                 image: { width: "auto", height: "auto" }
@@ -207,13 +208,16 @@ var newPathname = winOrigin + "/" + winPath[1] + "/";
             },
             'allowedFileTypes': ['image'],
             'dropZoneEnabled': false,
-            'uploadAsync': true
+            'uploadAsync': true,
+			'maxFileCount': 1,
         }).on('fileuploaded', function(event, data, previewId, index) {
             var form = data.form, files = data.files, extra = data.extra,
                 response = data.response, reader = data.reader;
             var div = $('#div_photo');
-            div.append('<input type="hidden" name="photo" value="'+response.image+'">');
-        });
+            div.append('<input type="hidden" name="photo" id="input_photo" value="'+response.image+'">');
+        }).on('fileclear', function(event) {
+			$("#input_photo").remove();
+		});
         
         return false;
     }

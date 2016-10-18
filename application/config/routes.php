@@ -67,3 +67,5 @@ $route['upload_image'] = 'extra/upload_image';
 $route['check_kota_lists'] = 'check_validate/check_kota_lists';
 $route['check_member_email'] = 'check_validate/check_member_email';
 $route['check_member_phone_number'] = 'check_validate/check_member_phone_number';
+
+$route['pages/help/(:any)'] = 'pages/help/$1';

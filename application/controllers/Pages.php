@@ -116,6 +116,27 @@ class Pages extends MY_Controller {
         $this->display_view('templates/frame', $data);
 	}
 	
+	function help()
+	{
+		$query = get_faq_lists(array());
+		
+		$data = array();
+		$data['section'] = 'pages/faq';
+		$data['faq'] = $query->result;
+		$section = $this->uri->segment(3);
+		
+		if ($section == TRUE)
+		{
+			if ($section == 'upload_photo')
+			{
+				$data['section'] = 'pages/help/upload_photo';
+			}
+		}
+		
+		$data['view_content'] = 'pages/help';
+        $this->display_view('templates/frame', $data);
+	}
+	
 	function history($param2)
 	{
 		$param = array();

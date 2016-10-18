@@ -1,4 +1,7 @@
 window.theme = {};
+var winOrigin = window.location.origin;
+var winPath = window.location.pathname.split('/');
+var newPathname = winOrigin + "/" + winPath[1] + "/";
 
 // Datepicker
 (function(theme, $) {
@@ -82,13 +85,13 @@ window.theme = {};
 
 }).apply(this, [window.theme, jQuery]);
 
-// Datepicker
+
 (function($) {
 
 	'use strict';
-
+	
+	// Datepicker
 	if ( $.isFunction($.fn[ 'datepicker' ]) ) {
-
 		$(function() {
 			$('[data-plugin-datepicker]').each(function() {
 				var $this = $( this ),
@@ -101,7 +104,11 @@ window.theme = {};
 				$this.themePluginDatePicker(opts);
 			});
 		});
-
+	}
+	
+	// Tooltips
+	if ($.isFunction($.fn['tooltip'])) {
+		$('[data-tooltip]:not(.manual), [data-plugin-tooltip]:not(.manual)').tooltip();
 	}
 
 }).apply(this, [jQuery]);
@@ -202,12 +209,7 @@ window.theme = {};
 
 }).apply(this, [jQuery]);
 
-/*
-Name: 			Forms / Wizard - Examples
-Written by: 	Okler Themes - (http://www.okler.net)
-Theme Version: 	1.5.1
-*/
-
+//Forms / Wizard - Examples
 (function($) {
 
 	'use strict';
@@ -366,3 +368,63 @@ $(document).ready(function() {
 		});
 	}
 });
+
+(function($) {
+	if (document.getElementById('register-page') != null) {
+		$("#idcard_photo").fileinput({
+			'showUpload': false,
+			'showRemove': false,
+			'uploadUrl': newPathname + 'upload_image',
+			'previewZoomSettings': {
+				image: { width: "auto", height: "auto" }
+			},
+			'previewZoomButtonIcons': {
+				prev: '',
+				next: '',
+			},
+			'uploadExtraData': {
+				watermark: 'false',
+				type: 'member'
+			},
+			'allowedFileTypes': ['image'],
+			'dropZoneEnabled': false,
+			'uploadAsync': true,
+			'maxFileCount': 1,
+		}).on('fileuploaded', function(event, data, previewId, index) {
+			var form = data.form, files = data.files, extra = data.extra,
+				response = data.response, reader = data.reader;
+			var div = $('#div_idcard');
+			div.append('<input type="hidden" name="idcard_photo" id="input_idcard" value="'+response.image+'">');
+		}).on('fileclear', function(event) {
+			$("#input_idcard").remove();
+		});
+		
+		$("#photo").fileinput({
+			'showUpload':false,
+			'showRemove': false,
+			'uploadUrl': newPathname + 'upload_image',
+			'previewZoomSettings': {
+				image: { width: "auto", height: "auto" }
+			},
+			'previewZoomButtonIcons': {
+				prev: '',
+				next: '',
+			},
+			'uploadExtraData': {
+				watermark: 'false',
+				type: 'member'
+			},
+			'allowedFileTypes': ['image'],
+			'dropZoneEnabled': false,
+			'uploadAsync': true,
+			'maxFileCount': 1,
+		}).on('fileuploaded', function(event, data, previewId, index) {
+			var form = data.form, files = data.files, extra = data.extra,
+				response = data.response, reader = data.reader;
+			var div = $('#div_photo');
+			div.append('<input type="hidden" name="photo" id="input_photo" value="'+response.image+'">');
+		}).on('fileclear', function(event) {
+			$("#input_photo").remove();
+		});
+	}
+}).apply(this, [jQuery]);
