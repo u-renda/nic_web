@@ -12,8 +12,6 @@
         
         <link rel="shortcut icon" href="<?php echo base_url('assets/images').'/icon.png'; ?>">
         <title><?php echo $this->config->item('title'); ?></title>
-		<!-- Web Fonts  -->
-		<!--<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">-->
 
 		<!-- Vendor CSS -->
 		<link rel="stylesheet" href="<?php echo base_url('assets/css').'/bootstrap.min.css'; ?>" />

@@ -5,6 +5,12 @@
   font-family: 'Open Sans';
   src: url('../fonts/OpenSans.woff2') format('woff2');
 }
+a {
+    color: #0088cc;
+}
+a:hover {
+    color: #0099e6;
+}
 .right {
     text-align: right;
 }

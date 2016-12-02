@@ -567,6 +567,7 @@ $config['link_register_upload'] = $config['base_url'].'register_upload';
 $config['link_register_success'] = $config['base_url'].'register_success';
 $config['link_shop'] = $config['base_url'].'shop';
 $config['link_shop_detail'] = $config['base_url'].'shop/detail';
+$config['link_shopping_cart'] = $config['base_url'].'shop/shopping_cart';
 $config['link_team'] = $config['base_url'].'pages/team';
 $config['link_transfer_confirmation'] = $config['base_url'].'transfer_confirmation';
 $config['link_upload_image'] = $config['base_url'].'upload_image';
@@ -659,4 +660,12 @@ $config['code_350x350'] = array(
     'width' => '350',
     'height' => '350',
     'extra' => '_350x350'
+);
+
+$config['code_product_status'] = array(
+    0 => 'Normal',
+    1 => 'Sale',
+    2 => 'Limited',
+    3 => 'Pre Order',
+    4 => 'Sold'
 );
