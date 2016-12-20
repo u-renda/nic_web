@@ -1,16 +1,16 @@
 <footer class="short" id="footer">
     <div class="container">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <h4>About Us</h4>
                 <p><?php echo $about_us.'... '; ?><a href="<?php echo $this->config->item('link_team'); ?>" class="btn-flat btn-xs">View More <i class="fa fa-arrow-right"></i></a></p>
             </div>
-            <div class="col-md-3">
+            <!--<div class="col-md-3">
                 <h4>Latest Tweets</h4>
                 <div id="tweet" class="twitter" data-plugin-tweets data-plugin-options='{"username": "nicofficial", "count": 2}'>
                     <p>Please wait...</p>
                 </div>
-            </div>
+            </div>-->
             <div class="col-md-4">
                 <div class="contact-details">
                     <h4>Contact Us</h4>

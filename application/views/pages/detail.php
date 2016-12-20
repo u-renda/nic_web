@@ -31,9 +31,9 @@
                         <div class="post-content">
                             <h2><a class="a-default"><?php echo ucwords($post->title); ?></a></h2>
                             <?php echo $post->content; ?>
-                            <div class="post-block post-share">
+                            <!--<div class="post-block post-share">
 								<h3 class="heading-primary"><i class="fa fa-share"></i>Share this post</h3>
-							</div>
+							</div>-->
                         </div>
                     </article>
                 </div>

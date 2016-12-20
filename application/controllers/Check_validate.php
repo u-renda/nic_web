@@ -9,18 +9,18 @@ class Check_validate extends MY_Controller {
 		$this->load->model('member_model');
     }
 	
-	function check_idcard_number()
+	function check_member_idcard_number()
 	{
-		$idcard_number = $this->input->post('idcard_number');
+		$self = $this->input->post('selfidcard_number');
+		$input = $this->input->post('idcard_number');
+		$get = $this->member_model->info(array('idcard_number' => $input));
 		
-		$result = $this->member_model->info(array('idcard_number' => $idcard_number));
-	
-		if ($result->code == 200)
-		{
-			echo 'false';
-		}
-		else
-		{
+        if ($get->code == 200 && $self != $input)
+        {
+            echo 'false';
+        }
+        else
+        {
             echo 'true';
         }
 	}
@@ -45,11 +45,11 @@ class Check_validate extends MY_Controller {
 	
 	function check_member_email()
 	{
-		$selfemail = $this->input->post('selfemail');
-		$email = $this->input->post('email');
-		$get = $this->member_model->info(array('email' => $email));
+		$self = $this->input->post('selfemail');
+		$input = $this->input->post('email');
+		$get = $this->member_model->info(array('email' => $input, 'status' => 4));
 		
-        if ($get->code == 200 && $selfemail != $email)
+        if ($get->code == 200 && $self != $input)
         {
             echo 'false';
         }
@@ -61,27 +61,27 @@ class Check_validate extends MY_Controller {
 	
 	function check_member_name()
 	{
-		$name = $this->input->post('name');
+		$self = $this->input->post('selfname');
+		$input = $this->input->post('name');
+		$get = $this->member_model->info(array('name' => $input, 'status' => 4));
 		
-		$result = $this->member_model->info(array('name' => $name));
-	
-		if ($result->code == 200)
-		{
-			echo 'false';
-		}
-		else
-		{
+        if ($get->code == 200 && $self != $input)
+        {
+            echo 'false';
+        }
+        else
+        {
             echo 'true';
         }
 	}
 	
 	function check_member_phone_number()
 	{
-		$selfphone_number = $this->input->post('selfphone_number');
-		$phone_number = $this->input->post('phone_number');
-		$get = $this->member_model->info(array('phone_number' => $phone_number));
+		$self = $this->input->post('selfphone_number');
+		$input = $this->input->post('phone_number');
+		$get = $this->member_model->info(array('phone_number' => $input));
 		
-        if ($get->code == 200 && $selfphone_number != $phone_number)
+        if ($get->code == 200 && $self != $input)
         {
             echo 'false';
         }

@@ -12,16 +12,31 @@ class Home extends MY_Controller {
 
     function check_email()
     {
-        $result = $this->member_model->info(array('email' => $this->input->post('email')));
+        $result = $this->member_model->info(array('email' => $this->input->post('email'), 'status' => 4));
 		
         if ($result->code == 200)
         {
-            return TRUE;
+            $this->form_validation->set_message('check_email', 'Email tidak terdaftar atau Anda belum resmi menjadi member.');
+            return FALSE;
         }
         else
         {
-            $this->form_validation->set_message('check_email', 'Email tidak terdaftar atau Anda belum resmi menjadi member.');
+            return TRUE;
+        }
+    }
+
+    function check_idcard_number()
+    {
+        $result = $this->member_model->info(array('idcard_number' => $this->input->post('idcard_number')));
+		
+        if ($result->code == 200)
+        {
+            $this->form_validation->set_message('check_idcard_number', 'Nomor ID card sudah terdaftar');
             return FALSE;
+        }
+        else
+        {
+            return TRUE;
         }
     }
 	
@@ -61,6 +76,21 @@ class Home extends MY_Controller {
         }
     }
 
+    function check_name()
+    {
+        $result = $this->member_model->info(array('name' => $this->input->post('name'), 'status' => 4));
+		
+        if ($result->code == 200)
+        {
+            $this->form_validation->set_message('check_name', 'Nama sudah terdaftar');
+            return FALSE;
+        }
+        else
+        {
+            return TRUE;
+        }
+    }
+
     function check_password($password, $username)
     {
         $result = $this->member_model->valid(array('username' => $username, 'password' => $password));
@@ -73,6 +103,21 @@ class Home extends MY_Controller {
         {
             $this->form_validation->set_message('check_password', 'Wrong Username or Password');
             return FALSE;
+        }
+    }
+
+    function check_phone_number()
+    {
+        $result = $this->member_model->info(array('phone_number' => $this->input->post('phone_number')));
+		
+        if ($result->code == 200)
+        {
+            $this->form_validation->set_message('check_phone_number', 'Nomor telp sudah terdaftar');
+            return FALSE;
+        }
+        else
+        {
+            return TRUE;
         }
     }
 	
@@ -127,13 +172,13 @@ class Home extends MY_Controller {
 			foreach ($query->result as $row)
 			{
 				$media = $row->media;
-				if ($row->media_type == 2)
-				{
-					// Pilih media dengan dimensi 1024x600
-					$code_1024x600 = $this->config->item('code_1024x600');
-					$explode = explode('.', $media);
-					$media = $explode[0].$code_1024x600['extra'].'.'.$explode[1];
-				}
+				//if ($row->media_type == 2)
+				//{
+				//	// Pilih media dengan dimensi 1024x600
+				//	$code_1024x600 = $this->config->item('code_1024x600');
+				//	$explode = explode('.', $media);
+				//	$media = $explode[0].$code_1024x600['extra'].'.'.$explode[1];
+				//}
 				
 				$temp = array();
 				$temp['title'] = $row->title;
@@ -182,12 +227,12 @@ class Home extends MY_Controller {
 			
 			// Pilih media dengan dimensi 350x350
 			$media = $row->media;
-			if ($row->media_type == 2)
-			{
-				$code_350x350 = $this->config->item('code_350x350');
-				$explode = explode('.', $row->media);
-				$media = $explode[0].$code_350x350['extra'].'.'.$explode[1];
-			}
+			//if ($row->media_type == 2)
+			//{
+			//	$code_350x350 = $this->config->item('code_350x350');
+			//	$explode = explode('.', $row->media);
+			//	$media = $explode[0].$code_350x350['extra'].'.'.$explode[1];
+			//}
 			
 			$temp = array();
 			$temp['title'] = wordwrap($row->title, 33);
@@ -347,14 +392,14 @@ class Home extends MY_Controller {
 		{
 			$this->load->library('form_validation');
 			$this->form_validation->set_rules('idcard_type', 'tipe ID', 'required');
-			$this->form_validation->set_rules('idcard_number', 'nomor ID', 'required');
-			$this->form_validation->set_rules('name', 'nama', 'required');
+			$this->form_validation->set_rules('idcard_number', 'nomor ID', 'required|numeric|callback_check_idcard_number');
+			$this->form_validation->set_rules('name', 'nama', 'required|callback_check_name');
 			$this->form_validation->set_rules('gender', 'jenis kelamin', 'required');
 			$this->form_validation->set_rules('birth_place', 'tempat lahir', 'required');
 			$this->form_validation->set_rules('birth_date', 'tanggal lahir', 'required');
-			$this->form_validation->set_rules('phone_number', 'nomor telp', 'required');
+			$this->form_validation->set_rules('phone_number', 'nomor telp', 'required|numeric|callback_check_phone_number');
 			$this->form_validation->set_rules('idcard_address', 'alamat sesuai ID', 'required');
-			$this->form_validation->set_rules('email', 'email', 'required');
+			$this->form_validation->set_rules('email', 'email', 'required|valid_email|callback_check_email');
 			$this->form_validation->set_rules('shirt_size', 'ukuran baju', 'required');
 			$this->form_validation->set_rules('shipment_address', 'alamat pengiriman', 'required');
 			$this->form_validation->set_rules('id_provinsi', 'provinsi', 'required');

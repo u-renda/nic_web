@@ -218,15 +218,26 @@ var newPathname = winOrigin + "/" + winPath[1] + "/";
 	
 	$w1validator = $("#w1 form").validate({
 		rules: {
-            phone_number: "digits",
             postal_code: "digits",
 			name: {
 				remote: {
 					url: "check_validate/check_member_name",
 					type: "post",
 					data: {
-						email: function() {
+						name: function() {
 							return $("#name").val();
+						}
+					}
+				}
+			},
+			phone_number: {
+				digits: true,
+				remote: {
+					url: "check_validate/check_member_phone_number",
+					type: "post",
+					data: {
+						phone_number: function() {
+							return $("#phone-number").val();
 						}
 					}
 				}
@@ -234,10 +245,10 @@ var newPathname = winOrigin + "/" + winPath[1] + "/";
 			idcard_number: {
 				digits: true,
 				remote: {
-					url: "check_validate/check_idcard_number",
+					url: "check_validate/check_member_idcard_number",
 					type: "post",
 					data: {
-						email: function() {
+						idcard_number: function() {
 							return $("#idcard-number").val();
 						}
 					}
@@ -261,7 +272,8 @@ var newPathname = winOrigin + "/" + winPath[1] + "/";
 				digits: "Mohon masukkan hanya angka."
 			},
             phone_number: {
-				digits: "Mohon masukkan hanya angka."
+				digits: "Mohon masukkan hanya angka.",
+				remote: "No. telp sudah terdaftar."
 			},
 			name: {
 				remote: "Nama sudah terdaftar."

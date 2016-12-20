@@ -26,13 +26,6 @@
 			</div>
 		</div>
 		<hr>
-		<ul class="nav nav-pills sort-source" data-sort-id="team" data-option-key="filter">
-			<li data-option-value="*" class="active"><a href="#" class="a-blue">Show All</a></li>
-			<li data-option-value=".leadership"><a href="#" class="a-blue">Leadership</a></li>
-			<li data-option-value=".relation"><a href="#" class="a-blue">Relation & Media</a></li>
-			<li data-option-value=".event"><a href="#" class="a-blue">Event</a></li>
-		</ul>
-		<hr>
 		<div class="row">
 			<ul class="team-list sort-destination" data-sort-id="team">
 				<?php foreach ($admin as $row) { ?>
