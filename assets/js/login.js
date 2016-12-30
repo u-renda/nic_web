@@ -316,7 +316,14 @@ var newPathname = winOrigin + "/" + winPath[1] + "/";
 					
 					if (response.type == 'success')
 					{
+						$('#error_msg').empty();
+						$('#error_msg').addClass('hidden');
 						setTimeout("location.href = '"+response.location+"'",2000);
+					}
+					else
+					{
+						$('#error_msg').removeClass('hidden');
+						$('#error_msg').append(response.msg);
 					}
                 }
             });
@@ -373,10 +380,6 @@ $(document).ready(function() {
 				error: function(data){
 				}
 			});
-		});
-		
-		$('#submit_register').click(function () {
-			$(this).html('<i class="fa fa-spinner fa-spin font26"></i>');
 		});
 	}
 });

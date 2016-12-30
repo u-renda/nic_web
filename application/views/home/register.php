@@ -194,6 +194,8 @@
 									</div>
 								</div>
 							</div>
+							<div class="alert alert-danger hidden" id="error_msg">
+							</div>
 						</div>
 						<div class="panel-footer">
 							<ul class="pager">

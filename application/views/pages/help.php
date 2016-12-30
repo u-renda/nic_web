@@ -30,9 +30,6 @@
 								</li>
                             </ul>
                         </li>
-						<li class="nav-parent">
-							<a class="hand-pointer parent">Login</a>
-						</li>
                     </ul>
                 </aside>
 			</div>

@@ -167,18 +167,20 @@ class Home extends MY_Controller {
 		$param['status'] = 1;
 		$query = $this->post_model->lists($param);
 		
+		$slider = array();
 		if ($query->code == 200)
 		{
 			foreach ($query->result as $row)
 			{
 				$media = $row->media;
-				//if ($row->media_type == 2)
-				//{
-				//	// Pilih media dengan dimensi 1024x600
-				//	$code_1024x600 = $this->config->item('code_1024x600');
-				//	$explode = explode('.', $media);
-				//	$media = $explode[0].$code_1024x600['extra'].'.'.$explode[1];
-				//}
+				
+				if ($row->media_type == 2)
+				{
+					// Pilih media dengan dimensi 1349x600
+					$code_1349x600 = $this->config->item('code_1349x600');
+					$explode = explode('.', $media);
+					$media = $explode[0].$code_1349x600['extra'].'.'.$explode[1];
+				}
 				
 				$temp = array();
 				$temp['title'] = $row->title;
@@ -227,12 +229,12 @@ class Home extends MY_Controller {
 			
 			// Pilih media dengan dimensi 350x350
 			$media = $row->media;
-			//if ($row->media_type == 2)
-			//{
-			//	$code_350x350 = $this->config->item('code_350x350');
-			//	$explode = explode('.', $row->media);
-			//	$media = $explode[0].$code_350x350['extra'].'.'.$explode[1];
-			//}
+			if ($row->media_type == 2)
+			{
+				$code_350x350 = $this->config->item('code_350x350');
+				$explode = explode('.', $row->media);
+				$media = $explode[0].$code_350x350['extra'].'.'.$explode[1];
+			}
 			
 			$temp = array();
 			$temp['title'] = wordwrap($row->title, 33);
@@ -406,12 +408,14 @@ class Home extends MY_Controller {
 			$this->form_validation->set_rules('id_kota', 'kota', 'required');
 			$this->form_validation->set_rules('postal_code', 'kode pos', 'required');
 			$this->form_validation->set_rules('terms', 'terms', 'required');
-			$this->form_validation->set_rules('idcard_photo', 'ID card foto', 'required');
-			$this->form_validation->set_rules('photo', 'foto diri', 'required');
+			$this->form_validation->set_rules('idcard_photo', 'ID card foto', 'required', array('required' => '%s harus diisi. Pastikan Anda sudah membaca cara upload foto.'));
+			$this->form_validation->set_rules('photo', 'foto diri', 'required', array('required' => '%s harus diisi. Pastikan Anda sudah membaca cara upload foto.'));
 			
 			if ($this->form_validation->run() == FALSE)
 			{
-				$data['error'] = validation_errors();
+				$response =  array('msg' => validation_errors(), 'type' => 'error');
+				echo json_encode($response);
+				exit();
 			}
 			else
 			{

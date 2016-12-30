@@ -117,8 +117,8 @@ class Extra extends MY_Controller {
 					// resize foto
 					if ($type == 'post')
 					{
-						$param['resize'] = $this->config->item('code_1024x600');
-						$resize_1024x600 = $this->imagemanipulation->resize($param, $image, $watermark);
+						$param['resize'] = $this->config->item('code_1349x600');
+						$resize_1349x600 = $this->imagemanipulation->resize($param, $image, $watermark);
 					}
 					
 					$param['resize'] = $this->config->item('code_640x640');
@@ -155,7 +155,7 @@ class Extra extends MY_Controller {
 			}
 			else
 			{
-				return $check_all;
+				echo $check_all['result']['checking'];
 			}
 		}
 		else

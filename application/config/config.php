@@ -644,10 +644,10 @@ $config['code_member_transfer_status'] = array(
     3 => 'Sent'
 );
 
-$config['code_1024x600'] = array(
-    'width' => '1024',
+$config['code_1349x600'] = array(
+    'width' => '1349',
     'height' => '600',
-    'extra' => '_1024x600'
+    'extra' => '_1349x600'
 );
 
 $config['code_640x640'] = array(
