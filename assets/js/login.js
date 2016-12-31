@@ -304,6 +304,11 @@ var newPathname = winOrigin + "/" + winPath[1] + "/";
 		var validated = $('#w1 form').valid();		
 		if ( validated ) {
 			var dataString = '&submit=submit'
+			$('.modal-title').text('Please wait...');
+			$('.modal-body').html('<i class="fa fa-spinner fa-spin" style="font-size: 34px;"></i>');
+			$('.modal-dialog').addClass('modal-sm');
+			$('#myModal').modal('show');
+			
 			$.ajax(
             {
                 type: "POST",
@@ -312,6 +317,7 @@ var newPathname = winOrigin + "/" + winPath[1] + "/";
                 cache: false,
                 success: function(data)
                 {
+					$('#myModal').modal('hide');
                     var response = $.parseJSON(data);
 					
 					if (response.type == 'success')

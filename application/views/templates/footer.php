@@ -5,12 +5,6 @@
                 <h4>About Us</h4>
                 <p><?php echo $about_us.'... '; ?><a href="<?php echo $this->config->item('link_team'); ?>" class="btn-flat btn-xs">View More <i class="fa fa-arrow-right"></i></a></p>
             </div>
-            <!--<div class="col-md-3">
-                <h4>Latest Tweets</h4>
-                <div id="tweet" class="twitter" data-plugin-tweets data-plugin-options='{"username": "nicofficial", "count": 2}'>
-                    <p>Please wait...</p>
-                </div>
-            </div>-->
             <div class="col-md-4">
                 <div class="contact-details">
                     <h4>Contact Us</h4>
@@ -46,6 +40,17 @@
         </div>
     </div>
 </footer>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span></button>
+                <h4 class="modal-title" id="myModalLabel"></h4>
+            </div>
+            <div class="modal-body"></div>
+        </div>
+    </div>
 </div>
 
 <!-- Bootstrap -->
