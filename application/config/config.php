@@ -536,17 +536,19 @@ else
 
 $config['development_mode'] = FALSE;
 $config['image_gallery_mode'] = FALSE; // TRUE = show, FALSE = hidden
-$config['shop_mode'] = FALSE; // TRUE = show, FALSE = hidden
 $config['login_mode'] = FALSE; // TRUE = show, FALSE = hidden
-$config['title'] = 'NEZindaCLUB';
-$config['nic_api'] = API_HOST;
-$config['nic_key'] = 'bd6fb882067e6896c1c193376cd411ee';
+$config['shop_mode'] = FALSE; // TRUE = show, FALSE = hidden
+
 $config['email_admin'] = 'admin@nezindaclub.com';
 $config['email_gmail'] = 'nezindaclub.official@gmail.com';
+$config['nic_api'] = API_HOST;
+$config['nic_key'] = 'bd6fb882067e6896c1c193376cd411ee';
 $config['registration_fee'] = 150000;
-$config['twitter'] = 'https://twitter.com/nicofficial';
+$config['title'] = 'NEZindaCLUB';
+
 $config['facebook'] = 'https://www.facebook.com/NICoffc';
 $config['instagram'] = 'https://www.instagram.com/nic.official';
+$config['twitter'] = 'https://twitter.com/nicofficial';
 $config['youtube'] = 'https://www.youtube.com/user/TheNICcrew';
 
 $config['link_faq'] = $config['base_url'].'pages/faq';

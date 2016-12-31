@@ -13,7 +13,7 @@ class Pages extends MY_Controller {
 	
 	function agnezmo()
 	{
-		if (empty($this->uri->segment(3)))
+		if ($this->uri->segment(3) == '')
 		{
 			$offset = $this->input->get('per_page') ? $this->input->get('per_page') : 0;
 			
@@ -166,7 +166,7 @@ class Pages extends MY_Controller {
 	
 	function nic()
 	{
-		if (empty($this->uri->segment(3)))
+		if ($this->uri->segment(3) == '')
 		{
 			$offset = $this->input->get('per_page') ? $this->input->get('per_page') : 0;
 			
