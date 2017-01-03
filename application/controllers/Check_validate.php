@@ -29,7 +29,7 @@ class Check_validate extends MY_Controller {
 	{
 		$id_provinsi = $this->input->post('id_provinsi');
 		
-		$result = get_kota_lists(array('id_provinsi' => $id_provinsi, 'limit' => 100));
+		$result = get_kota_lists(array('id_provinsi' => $id_provinsi, 'limit' => 400));
 	
 		if ($result->code == 200)
 		{
