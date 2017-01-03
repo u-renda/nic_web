@@ -81,8 +81,11 @@
 									</div>
 									<div class="form-group mb-lg" id="div_idcard">
 										<label class="control-label">Upload ID Card Foto <span class="required">*</span>&nbsp&nbsp
-											<a href="<?php echo $this->config->item('link_help').'/upload_photo'; ?>" data-plugin-tooltip data-original-title="Mohon lihat terlebih dahulu cara upload foto" target="_blank"><i class="fa fa-question-circle"></i></a>
+											<a href="<?php echo $this->config->item('link_help').'/upload_photo'; ?>" data-plugin-tooltip data-original-title="Klik untuk melihat cara upload foto" target="_blank"><i class="fa fa-question-circle"></i></a>
 										</label>
+										<span class="help-block marginbottom0">
+											* Max size 2MB
+										</span>
 										<input name="image" id="idcard_photo" class="file" type="file">
 									</div>
 								</div>
@@ -135,6 +138,9 @@
 									</div>
 									<div class="form-group mb-lg" id="div_photo">
 										<label class="control-label">Upload Foto Diri <span class="required">*</span></label>
+										<span class="help-block marginbottom0">
+											* Max size 2MB
+										</span>
 										<input name="image" id="photo" class="file" type="file">
 									</div>
 								</div>

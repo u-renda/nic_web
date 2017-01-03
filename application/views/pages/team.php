@@ -25,30 +25,5 @@
 				</p>
 			</div>
 		</div>
-		<hr>
-		<div class="row">
-			<ul class="team-list sort-destination" data-sort-id="team">
-				<?php foreach ($admin as $row) { ?>
-				<li class="col-md-3 col-sm-6 col-xs-12 isotope-item <?php echo $row->admin_group; ?>">
-					<span class="thumb-info thumb-info-hide-wrapper-bg mb-xlg">
-						<span class="thumb-info-wrapper">
-							<a href="#">
-								<img src="<?php echo $row->photo; ?>" class="img-responsive" alt="<?php echo ucwords($row->name); ?>">
-								<span class="thumb-info-title">
-									<span class="thumb-info-inner"><?php echo ucwords($row->name); ?></span>
-									<span class="thumb-info-type"><?php echo ucwords($row->position); ?></span>
-								</span>
-							</a>
-						</span>
-						<span class="thumb-info-caption">
-							<span class="thumb-info-social-icons">
-								<a href="<?php echo 'https://twitter.com/'.$row->twitter; ?>" title="<?php echo '@'.$row->twitter; ?>"><i class="fa fa-twitter"></i><span>Twitter</span></a>
-							</span>
-						</span>
-					</span>
-				</li>
-				<?php } ?>
-			</ul>
-		</div>
 	</div>
 </div>
