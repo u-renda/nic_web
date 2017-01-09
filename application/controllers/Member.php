@@ -169,7 +169,7 @@ class Member extends MY_Controller {
 				}
 				else
 				{
-					$photo = $explode[0].'.'.$explode[1].$code_350x350['extra'].'.'.$explode[2];
+					$photo = $explode[0].'.'.$explode[1].'.'.$explode[2].$code_350x350['extra'].'.'.$explode[2];
 				}
 			}
 			
