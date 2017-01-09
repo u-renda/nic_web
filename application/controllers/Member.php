@@ -41,8 +41,6 @@ class Member extends MY_Controller {
 			$param['id_member'] = $this->session->userdata('id_member');
 			$param['email'] = $this->input->post('email');
 			$param['phone_number'] = $this->input->post('phone_number');
-			$param['marital_status'] = $this->input->post('marital_status');
-			$param['occupation'] = $this->input->post('occupation');
 			$param['idcard_address'] = replace_new_line($this->input->post('idcard_address'));
 			
 			if ($this->input->post('password') == TRUE)
