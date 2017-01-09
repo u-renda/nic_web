@@ -162,7 +162,15 @@ class Member extends MY_Controller {
 			{
 				$code_350x350 = $this->config->item('code_350x350');
 				$explode = explode('.', $result->photo);
-				$photo = $explode[0].$code_350x350['extra'].'.'.$explode[1];
+				
+				if(is_bool(LOCALHOST) || LOCALHOST == 'localhost')
+				{
+					$photo = $explode[0].$code_350x350['extra'].'.'.$explode[1];
+				}
+				else
+				{
+					$photo = $explode[0].'.'.$explode[1].$code_350x350['extra'].'.'.$explode[2];
+				}
 			}
 			
 			$temp = array();
