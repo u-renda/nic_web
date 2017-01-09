@@ -38,19 +38,19 @@
 						<form action="<?php echo $this->config->item('link_login'); ?>" method="post">
 							<div class="text-danger"><?php echo validation_errors(); ?></div>
 							<div class="form-group mb-lg">
-								<label>Username</label>
+								<label>No. Member (tanpa spasi) <span class="required">*</span></label>
 								<div class="input-group input-group-icon">
-									<input name="username" type="text" class="form-control input-lg" value="<?php echo set_value('username'); ?>" />
+									<input name="member_card" type="text" class="form-control input-lg" value="<?php echo set_value('member_card'); ?>" />
 									<span class="input-group-addon">
 										<span class="icon icon-lg">
-											<i class="fa fa-user"></i>
+											<i class="fa fa-credit-card"></i>
 										</span>
 									</span>
 								</div>
 							</div>
 							<div class="form-group mb-lg">
 								<div class="clearfix">
-									<label class="pull-left">Password</label>
+									<label class="pull-left">Password <span class="required">*</span></label>
 									<a href="<?php echo $this->config->item('link_recovery_password'); ?>" class="pull-right">Lupa Password?</a>
 								</div>
 								<div class="input-group input-group-icon">
@@ -63,18 +63,12 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-sm-8">
-									<div class="checkbox-custom checkbox-default">
-										<input id="RememberMe" name="logged" type="checkbox"/>
-										<label for="RememberMe">Remember Me</label>
-									</div>
-								</div>
-								<div class="col-sm-4 text-right">
+								<div class="col-sm-8 col-sm-offset-4 text-right">
 									<button type="submit" name="submit" value="submit" class="btn btn-primary hidden-xs">Login</button>
 									<button type="submit" name="submit" value="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">Login</button>
 								</div>
 							</div>
-							<p class="text-center margintop20">Don't have an account yet? <a href="<?php echo $this->config->item('link_register'); ?>">Register!</a>
+							<p class="text-center margintop20">Belum punya akun? <a href="<?php echo $this->config->item('link_register'); ?>">Register</a>
 						</form>
 					</div>
 				</div>

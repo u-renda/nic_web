@@ -23,6 +23,7 @@
     <link href="<?php echo base_url('assets/css/theme').'/theme-blog.css'; ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/theme').'/theme-shop.css'; ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/theme').'/settings.css'; ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/css/theme').'/default.css'; ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/upload').'/fileinput.min.css'; ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css').'/style.css'; ?>" rel="stylesheet">
     <!-- jQuery -->

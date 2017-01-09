@@ -60,6 +60,7 @@ $route['recovery_password'] = 'home/recovery_password';
 $route['register'] = 'home/register';
 $route['register_upload'] = 'home/register_upload';
 $route['register_success'] = 'home/register_success';
+$route['reset_password'] = 'home/reset_password';
 $route['transfer_confirmation'] = 'home/transfer_confirmation';
 
 $route['upload_image'] = 'extra/upload_image';

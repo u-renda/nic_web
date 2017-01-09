@@ -37,6 +37,15 @@ class Member_model extends CI_Model {
 		return $result;
     }
 
+    function send_recovery_password($params)
+    {
+        $result = null;
+        $url = $this->config->item('nic_api'). $this->page . '/send_recovery_password';
+        $params = array_merge($params, $this->key);
+        $result = $this->rest->post($url, $params);
+		return $result;
+    }
+
     function update($params)
     {
         $result = null;
@@ -50,6 +59,15 @@ class Member_model extends CI_Model {
     {
         $result = null;
         $url = $this->config->item('nic_api'). $this->page . '/valid';
+        $params = array_merge($params, $this->key);
+        $result = $this->rest->post($url, $params);
+		return $result;
+    }
+
+    function valid_recovery_password($params)
+    {
+        $result = null;
+        $url = $this->config->item('nic_api'). $this->page . '/valid_recovery_password';
         $params = array_merge($params, $this->key);
         $result = $this->rest->post($url, $params);
 		return $result;

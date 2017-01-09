@@ -1,5 +1,5 @@
 <div id="member_event_page" class="tab-pane">
-    <h4 class="mb-xlg">Daftar Event</h4>
+    <h4 class="mb-xlg">Daftar event yang diikuti</h4>
     <div class="panel-group panel-group-quaternary" id="accordionMemberEvent">
         <?php
         $i = 1;

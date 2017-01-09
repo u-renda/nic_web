@@ -11,6 +11,9 @@
             <div class="form-group" id="div_photo">
                 <label class="col-md-3 control-label">Upload Foto Diri</label>
                 <div class="col-md-8">
+                    <span class="help-block marginbottom0">
+                        * Max size 2MB
+                    </span>
                     <input name="image" id="photo" class="file" type="file">
                 </div>
             </div>
@@ -30,12 +33,6 @@
                 <div class="col-md-8">
                     <input type="hidden" name="selfphone_number" id="selfphone_number" value="<?php echo $member->phone_number; ?>">
                     <input type="text" class="form-control" name="phone_number" id="phone_number" value="<?php echo $member->phone_number; ?>">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-3 control-label">Pekerjaan</label>
-                <div class="col-md-8">
-                    <input type="text" class="form-control" name="occupation" id="occupation" value="<?php echo ucwords($member->occupation); ?>">
                 </div>
             </div>
             <div class="form-group">

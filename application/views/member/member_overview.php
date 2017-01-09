@@ -26,39 +26,17 @@
             </div>
         </div>
         <div class="form-group marginbottom0">
-            <label class="col-md-3 control-label fontbold">Username</label>
-            <div class="col-md-9">
-                <p class="form-control-static"><?php echo $member->username; ?></p>
-            </div>
-        </div>
-        <div class="form-group marginbottom0">
             <label class="col-md-3 control-label fontbold">Alamat</label>
             <div class="col-md-9">
-                <p class="form-control-static"><?php echo ucwords($member->replace_idcard_address); ?></p>
-            </div>
-        </div>
-        <div class="form-group marginbottom0">
-            <label class="col-md-3 control-label fontbold">Pekerjaan</label>
-            <div class="col-md-9">
-                <p class="form-control-static"><?php echo ucwords($member->occupation); ?></p>
-            </div>
-        </div>
-        <div class="form-group marginbottom0">
-            <label class="col-md-3 control-label fontbold">Agama</label>
-            <div class="col-md-9">
-                <p class="form-control-static"><?php echo ucwords($member->religion); ?></p>
+                <p class="form-control-static">
+                <?php echo ucwords($member->replace_idcard_address); ?>
+                </p>
             </div>
         </div>
     </form>
     <hr class="dotted tall">
     <h4 class="mb-xlg">NIC Membership</h4>
     <form class="form-horizontal">
-        <div class="form-group marginbottom0">
-            <label class="col-md-3 control-label fontbold">No resi</label>
-            <div class="col-md-9">
-                <p class="form-control-static"><?php echo $member->resi; ?></p>
-            </div>
-        </div>
         <div class="form-group marginbottom0">
             <label class="col-md-3 control-label fontbold">No ID NIC</label>
             <div class="col-md-9">
@@ -69,12 +47,6 @@
             <label class="col-md-3 control-label fontbold">Ukuran baju</label>
             <div class="col-md-9">
                 <p class="form-control-static"><?php echo $member->shirt_size; ?></p>
-            </div>
-        </div>
-        <div class="form-group marginbottom0">
-            <label class="col-md-3 control-label fontbold">Poin</label>
-            <div class="col-md-9">
-                <p class="form-control-static"><?php echo $member->point; ?></p>
             </div>
         </div>
     </form>

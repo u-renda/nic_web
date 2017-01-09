@@ -23,12 +23,10 @@
                     <h4 class="heading-primary">Kategori</h4>
                     <ul class="nav nav-list mb-xlg nav-grand-children">
                         <li class="nav-parent">
-                            <a class="hand-pointer parent">Register</a>
-                            <ul class="nav nav-children">
-                                <li>
-									<a href="<?php echo $this->config->item('link_help').'/upload_photo'; ?>">Cara Upload Foto</a>
-								</li>
-                            </ul>
+							<a href="<?php echo $this->config->item('link_help').'/upload_photo'; ?>">Upload Foto</a>
+                        </li>
+                        <li class="nav-parent">
+                            <a href="<?php echo $this->config->item('link_help').'/change_email'; ?>">Ubah Email</a>
                         </li>
                     </ul>
                 </aside>

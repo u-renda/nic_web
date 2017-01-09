@@ -536,7 +536,7 @@ else
 
 $config['development_mode'] = FALSE;
 $config['image_gallery_mode'] = FALSE; // TRUE = show, FALSE = hidden
-$config['login_mode'] = FALSE; // TRUE = show, FALSE = hidden
+$config['login_mode'] = TRUE; // TRUE = show, FALSE = hidden
 $config['shop_mode'] = FALSE; // TRUE = show, FALSE = hidden
 
 $config['email_admin'] = 'admin@nezindaclub.com';
@@ -564,6 +564,7 @@ $config['link_pages_agnezmo'] = $config['base_url'].'pages/agnezmo/';
 $config['link_pages_detail'] = $config['base_url'].'pages/detail/';
 $config['link_pages_nic'] = $config['base_url'].'pages/nic/';
 $config['link_recovery_password'] = $config['base_url'].'recovery_password';
+$config['link_reset_password'] = $config['base_url'].'reset_password';
 $config['link_register'] = $config['base_url'].'register';
 $config['link_register_upload'] = $config['base_url'].'register_upload';
 $config['link_register_success'] = $config['base_url'].'register_success';

@@ -12,16 +12,35 @@ class Home extends MY_Controller {
 
     function check_email()
     {
-        $result = $this->member_model->info(array('email' => $this->input->post('email'), 'status' => 4));
+        $result = $this->member_model->info(array('email' => $this->input->post('email')));
 		
         if ($result->code == 200)
         {
-            $this->form_validation->set_message('check_email', 'Email tidak terdaftar atau Anda belum resmi menjadi member.');
+            $this->form_validation->set_message('check_email', 'Email sudah terdaftar.');
             return FALSE;
         }
         else
         {
             return TRUE;
+        }
+    }
+
+    function check_email_recovery($email, $member_card)
+    {
+		$param = array();
+		$param['email'] = $email;
+		$param['member_card'] = $member_card;
+		$param['status'] = 4;
+        $result = $this->member_model->valid_recovery_password($param);
+		
+        if ($result->code == 200)
+        {
+            return TRUE;
+        }
+        else
+        {
+            $this->form_validation->set_message('check_email_recovery', 'Email atau no. member salah');
+            return FALSE;
         }
     }
 
@@ -91,9 +110,9 @@ class Home extends MY_Controller {
         }
     }
 
-    function check_password($password, $username)
+    function check_password($password, $member_card)
     {
-        $result = $this->member_model->valid(array('username' => $username, 'password' => $password));
+        $result = $this->member_model->valid(array('member_card' => $member_card, 'password' => $password));
 		
         if ($result->code == 200)
         {
@@ -270,39 +289,11 @@ class Home extends MY_Controller {
 		if ($this->session->userdata('is_login') == TRUE) { redirect($this->config->item('link_index')); }
 		
         $data = array();
-		if ($this->input->cookie('username') != '' && $this->input->cookie('password') != '')
-		{
-			$username = decode($this->input->cookie('username'), $this->config->item('cookie_key'));
-			$getdata = $this->member_model->info(array('username' => $username));
-			
-			if ($getdata->code == 200)
-			{
-				$member = $getdata->result;
-				$check_pass = sha1($member->password);
-				
-				if ($check_pass == $this->input->cookie('password'))
-				{
-					$cached = array(
-						'id_member'=> $member->id_member,
-						'username'=> $member->username,
-						'name'=> $member->name,
-						'email'=> $member->email,
-						'photo'=> $member->photo,
-						'is_login' => TRUE
-					);
-					
-					// Set session
-					$this->session->set_userdata($cached);
-					
-					redirect($this->config->item('link_index'));
-				}
-			}
-		}
-		elseif ($this->input->post('submit'))
+		if ($this->input->post('submit') == TRUE)
 		{
 			$this->load->library('form_validation');
-			$this->form_validation->set_rules('username', 'Username', 'required');
-			$this->form_validation->set_rules('password', 'Password', 'required|callback_check_password['.$this->input->post('username').']');
+			$this->form_validation->set_rules('member_card', 'No. Member', 'required');
+			$this->form_validation->set_rules('password', 'Password', 'required|callback_check_password['.$this->input->post('member_card').']');
 			
 			if ($this->form_validation->run() == FALSE)
 			{
@@ -310,19 +301,14 @@ class Home extends MY_Controller {
 			}
 			else
 			{
-				$param = array();
-				$param['username'] = $this->input->post('username');
-				$param['password'] = $this->input->post('password');
-				$query = $this->member_model->valid($param);
+				$query = $this->member_model->info(array('member_card' => $this->input->post('member_card')));
 
 				if ($query->code == 200)
 				{
 					$member = $query->result;
-					$code_admin_role = $this->config->item('code_admin_role');
 					
 					$cached = array(
 						'id_member'=> $member->id_member,
-						'username'=> $member->username,
 						'name'=> $member->name,
 						'email'=> $member->email,
 						'photo'=> $member->photo,
@@ -332,27 +318,6 @@ class Home extends MY_Controller {
 					// Set session
 					$this->session->set_userdata($cached);
 
-					// Set cookie
-					if ($this->input->post('logged'))
-					{
-						$cookie_user = encode($username, $this->config->item('cookie_key'));
-						$cookie_pass = sha1($admin->password);
-						
-						$cookie_username = array(
-							'name' => 'username',
-							'value' => ''.$cookie_user.'',
-							'expire' => '1728000'
-						);
-						$cookie_password = array(
-							'name' => 'password',
-							'value' => ''.$cookie_pass.'',
-							'expire' => '1728000'
-						);
-						
-						$this->input->set_cookie($cookie_username);
-						$this->input->set_cookie($cookie_password);
-					}
-					
 					redirect($this->config->item('link_index'));
 				}
 			}
@@ -384,7 +349,9 @@ class Home extends MY_Controller {
         if ($this->input->post('submit') == TRUE)
 		{
 			$this->load->library('form_validation');
-			$this->form_validation->set_rules('email', 'email', 'required|callback_check_email');
+			$this->form_validation->set_message('required', '%s harus diisi');
+			$this->form_validation->set_rules('member_card', 'no member', 'required');
+			$this->form_validation->set_rules('email', 'email', 'required|callback_check_email_recovery['.$this->input->post('member_card').']');
 			
 			if ($this->form_validation->run() == FALSE)
 			{
@@ -393,8 +360,19 @@ class Home extends MY_Controller {
 			else
 			{
 				// Kirim email recovery password
+				$param = array();
+				$param['email'] = $this->input->post('email');
+				$param['member_card'] = $this->input->post('member_card');
+				$query = $this->member_model->send_recovery_password($param);
 				
-				$success = TRUE;
+				if ($query->code == 200)
+				{
+					$success = TRUE;
+				}
+				else
+				{
+					$this->form_validation->set_message('send_email', 'Maaf email tidak berhasil dikirim. Mohon dicoba lagi.');
+				}
 			}
 		}
 		
@@ -485,6 +463,64 @@ class Home extends MY_Controller {
 		$data = array();
 		$data['view_content'] = 'home/register_success';
 		$this->display_view('templates/frame', $data);
+	}
+	
+	function reset_password()
+	{
+		$data = array();
+		$data['code'] = $this->input->get('c');
+		
+		$success = FALSE;
+		
+		if ($data['code'] == TRUE)
+		{
+			$query2 = $this->member_model->info(array('short_code' => $data['code']));
+			
+			if ($query2->code == 200)
+			{
+				if ($this->input->post('submit') == TRUE)
+				{
+					$this->load->library('form_validation');
+					$this->form_validation->set_message('required', '%s harus diisi');
+					$this->form_validation->set_message('min_length', '%s minimum 6 karakter');
+					$this->form_validation->set_message('matches', '%s tidak sama dengan Password');
+					$this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
+					$this->form_validation->set_rules('passconf', 'Ulangi password', 'required|min_length[6]|matches[password]');
+					
+					if ($this->form_validation->run() == FALSE)
+					{
+						$data['error'] = validation_errors();
+					}
+					else
+					{
+						$param = array();
+						$param['id_member'] = $query2->result->id_member;
+						$param['password'] = $this->input->post('password');
+						$query = $this->member_model->update($param);
+						
+						if ($query->code == 200)
+						{
+							$success = TRUE;
+						}
+						else
+						{
+							$data['error'] = 'Reset password failed.';
+						}
+					}
+				}
+				
+				$data['success'] = $success;
+				$this->display_view('home/reset_password', $data);
+			}
+			else
+			{
+				$this->display_view('not_found', $data);
+			}
+		}
+		else
+		{
+			$this->display_view('not_found', $data);
+		}
 	}
 	
 	function transfer_confirmation()

@@ -12,14 +12,11 @@
         
         <link rel="shortcut icon" href="<?php echo base_url('assets/images').'/icon.png'; ?>">
         <title><?php echo $this->config->item('title'); ?></title>
-		<!-- Web Fonts  -->
-		<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
 
 		<!-- Vendor CSS -->
 		<link rel="stylesheet" href="<?php echo base_url('assets/css').'/bootstrap.min.css'; ?>" />
 		<link rel="stylesheet" href="<?php echo base_url('assets/css').'/font-awesome.min.css'; ?>" />
-		<link rel="stylesheet" href="<?php echo base_url('assets/css').'/datepicker.css'; ?>" />
-		<link rel="stylesheet" href="<?php echo base_url('assets/css/theme').'/bootstrap-fileupload.min.css'; ?>" />
+		<link rel="stylesheet" href="<?php echo base_url('assets/css/theme').'/theme-elements.css'; ?>" />
 
 		<!-- Theme Custom CSS -->
 		<link rel="stylesheet" href="<?php echo base_url('assets/css').'/login_style.css'; ?>">
@@ -40,23 +37,32 @@
 						<div class="panel-body">
 							<?php if ($success == FALSE) { ?>
 							<div class="alert alert-info">
-								<p class="m-none text-weight-semibold h6">Enter your e-mail below and we will send you reset instructions!</p>
+								<p class="m-none text-weight-semibold h6">Masukkan email dan no member. Kami akan mengirimkan instruksinya!</p>
 							</div>
+							<?php echo validation_errors('<div class="alert alert-danger alert-sm">', '</div>'); ?>
 							<div class="form-group mb-none">
+								<span class="help-block marginbottom0">
+									<span class="required">*</span> Masukkan no member tanpa spasi
+								</span>
+								<input name="member_card" type="text" placeholder="No Member" class="form-control input-lg" value="<?php echo set_value('member_card'); ?>" />
+							</div>
+							<div class="form-group mt-lg">
+								<span class="help-block marginbottom0">
+									<span class="required">*</span> Email harus sama dengan email yang terdaftar di kami
+								</span>
 								<div class="input-group">
-									<input name="email" type="email" placeholder="E-mail" class="form-control input-lg" />
+									<input name="email" type="email" placeholder="E-mail" class="form-control input-lg" value="<?php echo set_value('email'); ?>" />
 									<span class="input-group-btn">
-										<button class="btn btn-primary btn-lg" type="submit" name="submit" value="submit">Reset!</button>
+										<button class="btn btn-primary btn-lg" type="submit" name="submit" value="submit">Send!</button>
 									</span>
 								</div>
 							</div>
-							<?php echo form_error('email', '<div class="text-danger">', '</div>');
-							} else { ?>
+							<?php } else { ?>
 							<div class="alert alert-success">
-								<p class="m-none text-weight-semibold h6">Recovery password has already been send to your email.</p>
+								<p class="m-none text-weight-semibold h6">Instruksi perbaikan password sudah dikirimkan ke email Anda.</p>
 							</div>
 							<?php } ?>
-							<p class="text-center mt-lg">Remembered? <a href="<?php echo $this->config->item('link_login'); ?>">Login!</a>
+							<p class="text-center mt-lg">Ingat password? <a href="<?php echo $this->config->item('link_login'); ?>">Login</a>
 						</div>
 					</form>
 				</section>
@@ -64,15 +70,5 @@
 			</div>
 		</section>
         <!-- end: page -->
-
-		<!-- Vendor -->
-		<script src="<?php echo base_url('assets/js').'/jquery.js'; ?>"></script>
-		<script src="<?php echo base_url('assets/js').'/bootstrap.min.js'; ?>"></script>
-		<script src="<?php echo base_url('assets/js').'/bootstrap-datepicker.js'; ?>"></script>
-		<script src="<?php echo base_url('assets/js/theme').'/autosize.js'; ?>"></script>
-		<script src="<?php echo base_url('assets/js').'/jquery.validate.js'; ?>"></script>
-		<script src="<?php echo base_url('assets/js/theme').'/jquery.bootstrap.wizard.js'; ?>"></script>
-		<script src="<?php echo base_url('assets/js/theme').'/bootstrap-fileupload.min.js'; ?>"></script>
-		<script src="<?php echo base_url('assets/js').'/login.js'; ?>"></script>
 	</body>
 </html>

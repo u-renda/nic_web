@@ -37,6 +37,7 @@
 							<h2 class="title text-uppercase text-weight-bold m-none"><i class="fa fa-user mr-xs"></i> REGISTER</h2>
 						</div>
 						<div class="panel-body">
+							<p class="text-center pb-lg">Sudah punya akun? <a href="<?php echo $this->config->item('link_login'); ?>">Login</a>
 							<div class="wizard-tabs">
 								<ul class="wizard-steps">
 									<li class="active">

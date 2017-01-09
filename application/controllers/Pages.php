@@ -131,6 +131,10 @@ class Pages extends MY_Controller {
 			{
 				$data['section'] = 'pages/help/upload_photo';
 			}
+			if ($section == 'change_email')
+			{
+				$data['section'] = 'pages/help/change_email';
+			}
 		}
 		
 		$data['view_content'] = 'pages/help';

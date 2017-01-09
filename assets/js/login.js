@@ -387,6 +387,12 @@ $(document).ready(function() {
 				}
 			});
 		});
+
+        $('.date-picker').datepicker({
+            orientation: "auto left",
+            format: "dd M yyyy",
+            autoclose: true
+        });
 	}
 });
 

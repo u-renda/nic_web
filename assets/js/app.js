@@ -192,30 +192,30 @@ var newPathname = winOrigin + "/" + winPath[1] + "/";
         });
         
         $("#photo").fileinput({
-            'showUpload':false,
+			'showUpload':false,
 			'showRemove': false,
-            'uploadUrl': newPathname + 'upload_image',
-            'previewZoomSettings': {
-                image: { width: "auto", height: "auto" }
-            },
-            'previewZoomButtonIcons': {
-                prev: '',
-                next: '',
-            },
-            'uploadExtraData': {
-                watermark: 'false',
-                type: 'member'
-            },
-            'allowedFileTypes': ['image'],
-            'dropZoneEnabled': false,
-            'uploadAsync': true,
+			'uploadUrl': newPathname + 'upload_image',
+			'previewZoomSettings': {
+				image: { width: "auto", height: "auto" }
+			},
+			'previewZoomButtonIcons': {
+				prev: '',
+				next: '',
+			},
+			'uploadExtraData': {
+				watermark: 'false',
+				type: 'member'
+			},
+			'allowedFileTypes': ['image'],
+			'dropZoneEnabled': false,
+			'uploadAsync': true,
 			'maxFileCount': 1,
-        }).on('fileuploaded', function(event, data, previewId, index) {
-            var form = data.form, files = data.files, extra = data.extra,
-                response = data.response, reader = data.reader;
-            var div = $('#div_photo');
-            div.append('<input type="hidden" name="photo" id="input_photo" value="'+response.image+'">');
-        }).on('fileclear', function(event) {
+		}).on('fileuploaded', function(event, data, previewId, index) {
+			var form = data.form, files = data.files, extra = data.extra,
+				response = data.response, reader = data.reader;
+			var div = $('#div_photo');
+			div.append('<input type="hidden" name="photo" id="input_photo" value="'+response.image+'">');
+		}).on('fileclear', function(event) {
 			$("#input_photo").remove();
 		});
         
