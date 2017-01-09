@@ -48,13 +48,13 @@
             <div class="form-group">
                 <label class="col-md-3 control-label">Password baru</label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control" name="password" id="password">
+                    <input type="password" class="form-control" name="password" id="password">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-3 control-label">Ulangi password baru</label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control" name="confirm_password" id="confirm_password">
+                    <input type="password" class="form-control" name="confirm_password" id="confirm_password">
                 </div>
             </div>
         </fieldset>
