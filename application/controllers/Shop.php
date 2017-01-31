@@ -59,6 +59,7 @@ class Shop extends MY_Controller {
 				$temp['name'] = $row->name;
 				$temp['slug'] = $row->slug;
 				$temp['image'] = $image;
+				$temp['type'] = $row->type;
 				$temp['price_public'] = number_format($row->price_public, 0, ',', '.');
 				$temp['price_member'] = number_format($row->price_member, 0, ',', '.');
 				$temp['status'] = $code_product_status[$row->status];
@@ -85,7 +86,7 @@ class Shop extends MY_Controller {
 		
 		$data['pagination'] = $this->pagination->create_links();
 		$data['product'] = $product;
-		$data['view_content'] = 'shop/lists';
+		$data['view_content'] = 'shop/shop_lists';
         $this->display_view('templates/frame', $data);
 	}
 	

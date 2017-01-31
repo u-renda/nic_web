@@ -286,7 +286,7 @@ class Home extends MY_Controller {
 	
 	function login()
 	{
-		if ($this->session->userdata('is_login') == TRUE) { redirect($this->config->item('link_index')); }
+		if ($this->session->userdata('is_login') == TRUE || $this->config->item('login_mode') == FALSE) { redirect($this->config->item('link_index')); }
 		
         $data = array();
 		if ($this->input->post('submit') == TRUE)
@@ -382,7 +382,7 @@ class Home extends MY_Controller {
 	
 	function register()
 	{
-		if ($this->session->userdata('is_login') == TRUE) { redirect($this->config->item('link_index')); }
+		if ($this->session->userdata('is_login') == TRUE || $this->config->item('register_mode') == FALSE) { redirect($this->config->item('link_index')); }
 		
 		if ($this->input->post('submit') == TRUE)
 		{

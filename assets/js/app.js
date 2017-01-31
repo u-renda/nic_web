@@ -81,7 +81,7 @@ var newPathname = winOrigin + "/" + winPath[1] + "/";
         }
     });
     
-    // Member - Edit
+    // Member Edit
     if (document.getElementById('member_edit_page') != null) {
         var e=$("#form-member-edit"),
             r=$(".alert-danger", e),

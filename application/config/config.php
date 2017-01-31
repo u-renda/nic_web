@@ -531,12 +531,13 @@ else
 {
 	define('API_HOST', 'http://api.nezindaclub.com/');
     define('UPLOAD_HOST', 'http://upload.nezindaclub.com/');
-    define('UPLOAD_FOLDER', $_SERVER['DOCUMENT_ROOT'].'/upload_nic/');
+    define('UPLOAD_FOLDER', '/home/nezind45/public_html/upload_nic/');
 }
 
 $config['development_mode'] = FALSE;
 $config['image_gallery_mode'] = FALSE; // TRUE = show, FALSE = hidden
-$config['login_mode'] = TRUE; // TRUE = show, FALSE = hidden
+$config['login_mode'] = FALSE; // TRUE = show, FALSE = hidden
+$config['register_mode'] = FALSE; // TRUE = show, FALSE = hidden
 $config['shop_mode'] = FALSE; // TRUE = show, FALSE = hidden
 
 $config['email_admin'] = 'admin@nezindaclub.com';

@@ -69,7 +69,7 @@
 							if ($this->config->item('shop_mode') == TRUE) {
 							?>
 							<li class="dropdown no-dropdown list-item">
-								<a class="" href="<?php echo $this->config->item('link_shop'); ?>">Shop</a>
+								<a class="" href="<?php echo $this->config->item('link_shop'); ?>">Merchandise</a>
 							</li>
 							<?php }
 							if ($this->session->userdata('is_login') == FALSE) {
@@ -77,11 +77,13 @@
 							<li class="dropdown no-dropdown list-item">
 								<a class="" href="<?php echo $this->config->item('link_login'); ?>">Login</a>
 							</li>
-							<?php } ?>
+							<?php }
+							if ($this->config->item('register_mode') == TRUE) {
+							?>
 							<li class="dropdown no-dropdown list-item">
 								<a class="" href="<?php echo $this->config->item('link_register'); ?>">Register</a>
 							</li>
-							<?php } else { ?>
+							<?php } } else { ?>
 							<li class="dropdown list-item">
 								<a class="dropdown-toggle" href="#member">
 									<i class="fa fa-user marginright5"></i> <?php echo ucwords($this->session->userdata('name')); ?>
