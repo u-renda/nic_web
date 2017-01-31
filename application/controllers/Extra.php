@@ -98,7 +98,7 @@ class Extra extends MY_Controller {
 		$param['order'] = 'name';
 		$param['sort'] = 'asc';
 		$param['limit'] = 185;
-		$param['new_member'] = 0;
+		$param['new_member'] = 1;
 		$query = $this->member_model->lists($param);
 		
 		if ($query->code == 200)
