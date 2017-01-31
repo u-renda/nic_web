@@ -7,6 +7,7 @@ class Extra extends MY_Controller {
     {
         parent::__construct();
 		$this->load->library('imagemanipulation');
+		$this->load->model('member_model');
     }
     
 	function check_all($image)
@@ -85,6 +86,29 @@ class Extra extends MY_Controller {
 	{
         $data = array();
         $data['view_content'] = 'extra/not_found';
+        $this->display_view('templates/frame', $data);
+	}
+	
+	function status_membership()
+	{
+		$data = array();
+		$result = array();
+		
+		$param = array();
+		$param['order'] = 'name';
+		$param['sort'] = 'asc';
+		$param['limit'] = 185;
+		$param['new_member'] = 0;
+		$query = $this->member_model->lists($param);
+		
+		if ($query->code == 200)
+		{
+			$result = $query->result;
+		}
+		
+        $data['code_member_status'] = $this->config->item('code_member_status');
+        $data['result'] = $result;
+        $data['view_content'] = 'extra/status_membership';
         $this->display_view('templates/frame', $data);
 	}
 	

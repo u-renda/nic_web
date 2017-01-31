@@ -605,6 +605,14 @@ $config['code_member_religion'] = array(
     7 => 'Lainnya'
 );
 
+$config['code_member_status'] = array(
+    1 => 'Awaiting Review',
+    2 => 'Awaiting Transfer',
+    3 => 'Awaiting Approval',
+    4 => 'Approved',
+    5 => 'Invalid'
+);
+
 $config['code_post_type'] = array(
     1 => 'NEZindaCLUB',
     2 => 'Agnez Mo'
