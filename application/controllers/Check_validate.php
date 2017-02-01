@@ -46,7 +46,7 @@ class Check_validate extends MY_Controller {
 	function check_member_email()
 	{
 		$self = $this->input->post('selfemail');
-		$input = $this->input->post('email');
+		$input = strtolower($this->input->post('email'));
 		$get = $this->member_model->info(array('email' => $input, 'status' => 4));
 		
         if ($get->code == 200 && $self != $input)
@@ -62,7 +62,7 @@ class Check_validate extends MY_Controller {
 	function check_member_name()
 	{
 		$self = $this->input->post('selfname');
-		$input = $this->input->post('name');
+		$input = strtolower($this->input->post('name'));
 		$get = $this->member_model->info(array('name' => $input, 'status' => 4));
 		
         if ($get->code == 200 && $self != $input)
