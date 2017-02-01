@@ -559,6 +559,7 @@ $config['link_image_gallery_detail'] = $config['base_url'].'image_gallery/detail
 $config['link_index'] = $config['base_url'].'index';
 $config['link_login'] = $config['base_url'].'login';
 $config['link_logout'] = $config['base_url'].'logout';
+$config['link_member_invalid'] = $config['base_url'].'member_invalid';
 $config['link_member_profile'] = $config['base_url'].'member/profile';
 $config['link_pages'] = $config['base_url'].'pages/';
 $config['link_pages_agnezmo'] = $config['base_url'].'pages/agnezmo/';

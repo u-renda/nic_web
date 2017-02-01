@@ -12,9 +12,11 @@ class Home extends MY_Controller {
 
     function check_email()
     {
-        $result = $this->member_model->info(array('email' => $this->input->post('email')));
+        $self = $this->input->post('selfemail');
+		$input = $this->input->post('email');
+		$get = $this->member_model->info(array('email' => $input));
 		
-        if ($result->code == 200)
+        if ($get->code == 200 && $self != $input)
         {
             $this->form_validation->set_message('check_email', 'Email sudah terdaftar.');
             return FALSE;
@@ -46,9 +48,11 @@ class Home extends MY_Controller {
 
     function check_idcard_number()
     {
-        $result = $this->member_model->info(array('idcard_number' => $this->input->post('idcard_number')));
+		$self = $this->input->post('selfidcard_number');
+		$input = $this->input->post('idcard_number');
+		$get = $this->member_model->info(array('idcard_number' => $input));
 		
-        if ($result->code == 200)
+        if ($get->code == 200 && $self != $input)
         {
             $this->form_validation->set_message('check_idcard_number', 'Nomor ID card sudah terdaftar');
             return FALSE;
@@ -97,9 +101,11 @@ class Home extends MY_Controller {
 
     function check_name()
     {
-        $result = $this->member_model->info(array('name' => $this->input->post('name'), 'status' => 4));
+        $self = $this->input->post('selfname');
+		$input = $this->input->post('name');
+		$get = $this->member_model->info(array('name' => $input, 'status' => 4));
 		
-        if ($result->code == 200)
+        if ($get->code == 200 && $self != $input)
         {
             $this->form_validation->set_message('check_name', 'Nama sudah terdaftar');
             return FALSE;
@@ -127,9 +133,11 @@ class Home extends MY_Controller {
 
     function check_phone_number()
     {
-        $result = $this->member_model->info(array('phone_number' => $this->input->post('phone_number')));
+        $self = $this->input->post('selfphone_number');
+		$input = $this->input->post('phone_number');
+		$get = $this->member_model->info(array('phone_number' => $input));
 		
-        if ($result->code == 200)
+        if ($get->code == 200 && $self != $input)
         {
             $this->form_validation->set_message('check_phone_number', 'Nomor telp sudah terdaftar');
             return FALSE;
@@ -340,6 +348,96 @@ class Home extends MY_Controller {
 		delete_cookie('password');
 		
         redirect($this->config->item('link_index'));
+	}
+	
+	function member_invalid()
+	{
+		$data = array();
+		$query = $this->member_model->info(array('short_code' => $this->input->get_post('c')));
+		
+		if ($query->code == 200)
+		{
+			if ($query->result->status == 5)
+			{
+				if ($this->input->post('submit') == TRUE)
+				{
+					$this->load->library('form_validation');
+					$this->form_validation->set_rules('idcard_type', 'tipe ID', 'required');
+					$this->form_validation->set_rules('idcard_number', 'nomor ID', 'required|numeric|callback_check_idcard_number');
+					$this->form_validation->set_rules('name', 'nama', 'required|callback_check_name');
+					$this->form_validation->set_rules('gender', 'jenis kelamin', 'required');
+					$this->form_validation->set_rules('birth_place', 'tempat lahir', 'required');
+					$this->form_validation->set_rules('birth_date', 'tanggal lahir', 'required');
+					$this->form_validation->set_rules('phone_number', 'nomor telp', 'required|numeric|callback_check_phone_number');
+					$this->form_validation->set_rules('idcard_address', 'alamat sesuai ID', 'required');
+					$this->form_validation->set_rules('email', 'email', 'required|valid_email|callback_check_email');
+					$this->form_validation->set_rules('shirt_size', 'ukuran baju', 'required');
+					$this->form_validation->set_rules('shipment_address', 'alamat pengiriman', 'required');
+					$this->form_validation->set_rules('id_provinsi', 'provinsi', 'required');
+					$this->form_validation->set_rules('id_kota', 'kota', 'required');
+					$this->form_validation->set_rules('postal_code', 'kode pos', 'required');
+					$this->form_validation->set_rules('terms', 'terms', 'required');
+					$this->form_validation->set_rules('idcard_photo', 'ID card foto', 'required', array('required' => '%s harus diisi. Pastikan Anda sudah membaca cara upload foto.'));
+					$this->form_validation->set_rules('photo', 'foto diri', 'required', array('required' => '%s harus diisi. Pastikan Anda sudah membaca cara upload foto.'));
+					
+					if ($this->form_validation->run() == FALSE)
+					{
+						$response =  array('msg' => validation_errors(), 'type' => 'error');
+						echo json_encode($response);
+						exit();
+					}
+					else
+					{
+						$param = array();
+						$param['id_member'] = $query->result->id_member;
+						$param['id_kota'] = $this->input->post('id_kota');
+						$param['name'] = $this->input->post('name');
+						$param['email'] = $this->input->post('email');
+						$param['idcard_type'] = $this->input->post('idcard_type');
+						$param['idcard_number'] = $this->input->post('idcard_number');
+						$param['idcard_address'] = $this->input->post('idcard_address');
+						$param['shipment_address'] = $this->input->post('shipment_address');
+						$param['postal_code'] = $this->input->post('postal_code');
+						$param['gender'] = $this->input->post('gender');
+						$param['phone_number'] = $this->input->post('phone_number');
+						$param['birth_place'] = $this->input->post('birth_place');
+						$param['birth_date'] = date('Y-m-d', strtotime($this->input->post('birth_date')));
+						$param['shirt_size'] = $this->input->post('shirt_size');
+						$param['status'] = 1;
+						$param['idcard_photo'] = $this->input->post('idcard_photo');
+						$param['photo'] = $this->input->post('photo');
+						$query2 = $this->member_model->update($param);
+						
+						if ($query2->code == 200)
+						{
+							$response =  array('msg' => 'Create data success', 'type' => 'success', 'location' => $this->config->item('link_register_success'));
+						}
+						else
+						{
+							$response =  array('msg' => 'Create data failed', 'type' => 'error');
+						}
+						
+						echo json_encode($response);
+						exit();
+					}
+				}
+		
+				$data['result'] = $query->result;
+				$data['provinsi_lists'] = get_provinsi_lists(array('limit' => 40))->result;
+				$data['code_member_idcard_type'] = $this->config->item('code_member_idcard_type');
+				$data['code_member_marital_status'] = $this->config->item('code_member_marital_status');
+				$data['code_member_religion'] = $this->config->item('code_member_religion');
+				$this->display_view('member/member_invalid', $data);
+			}
+			else
+			{
+				$this->display_view('not_found', $data);
+			}
+		}
+		else
+		{
+			$this->display_view('not_found', $data);
+		}
 	}
 	
 	function recovery_password()

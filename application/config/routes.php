@@ -56,14 +56,15 @@ $route['translate_uri_dashes'] = FALSE;
 $route['index'] = 'home/index';
 $route['login'] = 'home/login';
 $route['logout'] = 'home/logout';
+$route['member_invalid'] = 'home/member_invalid';
 $route['recovery_password'] = 'home/recovery_password';
 $route['register'] = 'home/register';
 $route['register_upload'] = 'home/register_upload';
 $route['register_success'] = 'home/register_success';
 $route['reset_password'] = 'home/reset_password';
-$route['status_membership'] = 'extra/status_membership';
 $route['transfer_confirmation'] = 'home/transfer_confirmation';
 
+$route['status_membership'] = 'extra/status_membership';
 $route['upload_image'] = 'extra/upload_image';
 
 $route['check_kota_lists'] = 'check_validate/check_kota_lists';
@@ -73,3 +74,4 @@ $route['check_member_name'] = 'check_validate/check_member_name';
 $route['check_member_phone_number'] = 'check_validate/check_member_phone_number';
 
 $route['pages/help/(:any)'] = 'pages/help/$1';
+

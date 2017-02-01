@@ -226,6 +226,9 @@ var newPathname = winOrigin + "/" + winPath[1] + "/";
 					data: {
 						name: function() {
 							return $("#name").val();
+						},
+						selfname: function() {
+							return $("#selfname").val();
 						}
 					}
 				}
@@ -238,6 +241,9 @@ var newPathname = winOrigin + "/" + winPath[1] + "/";
 					data: {
 						phone_number: function() {
 							return $("#phone-number").val();
+						},
+						selfphone_number: function() {
+							return $("#selfphone_number").val();
 						}
 					}
 				}
@@ -250,6 +256,9 @@ var newPathname = winOrigin + "/" + winPath[1] + "/";
 					data: {
 						idcard_number: function() {
 							return $("#idcard-number").val();
+						},
+						selfidcard_number: function() {
+							return $("#selfidcard_number").val();
 						}
 					}
 				}
@@ -262,6 +271,9 @@ var newPathname = winOrigin + "/" + winPath[1] + "/";
 					data: {
 						email: function() {
 							return $("#email").val();
+						},
+						selfemail: function() {
+							return $("#selfemail").val();
 						}
 					}
 				}
