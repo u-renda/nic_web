@@ -667,13 +667,13 @@ class Home extends MY_Controller {
 							$param2['status'] = 2;
 							$query3 = $this->member_transfer_model->update($param2);
 							
-							$param3 = array();
-							$param3['id_member'] = $query->result->id_member;
-							$param3['status'] = 3;
-							$query4 = $this->member_model->update($param3);
-							
 							if ($query3->code == 200)
 							{
+								$param3 = array();
+								$param3['id_member'] = $query->result->id_member;
+								$param3['status'] = 3;
+								$query4 = $this->member_model->update($param3);
+							
 								$response =  array('msg' => 'Confirmation data success', 'type' => 'success', 'location' => $this->config->item('link_transfer_confirmation_success'));
 							}
 							else
