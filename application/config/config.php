@@ -573,8 +573,10 @@ $config['link_register_success'] = $config['base_url'].'register_success';
 $config['link_shop'] = $config['base_url'].'shop';
 $config['link_shop_detail'] = $config['base_url'].'shop/detail';
 $config['link_shopping_cart'] = $config['base_url'].'shop/shopping_cart';
+$config['link_status_membership'] = $config['base_url'].'status_membership';
 $config['link_team'] = $config['base_url'].'pages/team';
 $config['link_transfer_confirmation'] = $config['base_url'].'transfer_confirmation';
+$config['link_transfer_confirmation_success'] = $config['base_url'].'transfer_confirmation_success';
 $config['link_upload_image'] = $config['base_url'].'upload_image';
 
 $config['code_admin_group'] = array(

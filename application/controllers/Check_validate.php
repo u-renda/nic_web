@@ -7,6 +7,7 @@ class Check_validate extends MY_Controller {
     {
         parent::__construct();
 		$this->load->model('member_model');
+		$this->load->model('member_transfer_model');
     }
 	
 	function check_member_idcard_number()
@@ -82,6 +83,21 @@ class Check_validate extends MY_Controller {
 		$get = $this->member_model->info(array('phone_number' => $input));
 		
         if ($get->code == 200 && $self != $input)
+        {
+            echo 'false';
+        }
+        else
+        {
+            echo 'true';
+        }
+	}
+	
+	function check_member_transfer_total()
+	{
+		$self = $this->input->post('selftotal');
+		$input = $this->input->post('total');
+		
+        if ($self != $input)
         {
             echo 'false';
         }

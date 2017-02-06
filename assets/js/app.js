@@ -3,7 +3,108 @@ var winPath = window.location.pathname.split('/');
 var winHref = window.location.href;
 var newPathname = winOrigin + "/" + winPath[1] + "/";
 
+// Datepicker
+(function(theme, $) {
+
+	theme = theme || {};
+
+	var instanceName = '__datepicker';
+
+	var PluginDatePicker = function($el, opts) {
+		return this.initialize($el, opts);
+	};
+
+	PluginDatePicker.defaults = {
+		format: 'dd M yyyy'
+	};
+
+	PluginDatePicker.prototype = {
+		initialize: function($el, opts) {
+			if ( $el.data( instanceName ) ) {
+				return this;
+			}
+
+			this.$el = $el;
+
+			this
+				.setVars()
+				.setData()
+				.setOptions(opts)
+				.build();
+
+			return this;
+		},
+
+		setVars: function() {
+			this.skin = this.$el.data( 'plugin-skin' );
+
+			return this;
+		},
+
+		setData: function() {
+			this.$el.data(instanceName, this);
+
+			return this;
+		},
+
+		setOptions: function(opts) {
+			this.options = $.extend( true, {}, PluginDatePicker.defaults, opts );
+
+			return this;
+		},
+
+		build: function() {
+			this.$el.datepicker( this.options );
+
+			if ( !!this.skin ) {
+				this.$el.data('datepicker').picker.addClass( 'datepicker-' + this.skin );
+			}
+
+			return this;
+		}
+	};
+
+	// expose to scope
+	$.extend(theme, {
+		PluginDatePicker: PluginDatePicker
+	});
+
+	// jquery plugin
+	$.fn.themePluginDatePicker = function(opts) {
+		return this.each(function() {
+			var $this = $(this);
+
+			if ($this.data(instanceName)) {
+				return $this.data(instanceName);
+			} else {
+				return new PluginDatePicker($this, opts);
+			}
+
+		});
+	}
+
+}).apply(this, [window.theme, jQuery]);
+
 (function($) {
+    
+    'use strict';
+	
+	// Datepicker
+	if ( $.isFunction($.fn[ 'datepicker' ]) ) {
+		$(function() {
+			$('[data-plugin-datepicker]').each(function() {
+				var $this = $( this ),
+					opts = {};
+
+				var pluginOptions = $this.data('plugin-options');
+				if (pluginOptions)
+					opts = pluginOptions;
+
+				$this.themePluginDatePicker(opts);
+			});
+		});
+	}
+    
     // Navigation highlight
     var group_item = $('li.list-item');
     
@@ -188,6 +289,104 @@ var newPathname = winOrigin + "/" + winPath[1] + "/";
                         }
                     }
                 });
+            }
+        });
+        
+        $("#photo").fileinput({
+			'showUpload':false,
+			'showRemove': false,
+			'uploadUrl': newPathname + 'upload_image',
+			'previewZoomSettings': {
+				image: { width: "auto", height: "auto" }
+			},
+			'previewZoomButtonIcons': {
+				prev: '',
+				next: '',
+			},
+			'uploadExtraData': {
+				watermark: 'false',
+				type: 'member'
+			},
+			'allowedFileTypes': ['image'],
+			'dropZoneEnabled': false,
+			'uploadAsync': true,
+			'maxFileCount': 1,
+		}).on('fileuploaded', function(event, data, previewId, index) {
+			var form = data.form, files = data.files, extra = data.extra,
+				response = data.response, reader = data.reader;
+			var div = $('#div_photo');
+			div.append('<input type="hidden" name="photo" id="input_photo" value="'+response.image+'">');
+		}).on('fileclear', function(event) {
+			$("#input_photo").remove();
+		});
+        
+        return false;
+    }
+    
+    // Konfirmasi Transfer
+    if (document.getElementById('transfer_confirmation_page') != null) {
+        $("#the_form").validate({
+            rules: {
+                date: "required",
+                account_name: "required",
+                total: {
+                    required: true,
+                    digits: true,
+                    remote: {
+                        url: newPathname + "check_member_transfer_total",
+                        type: "post",
+                        data: {
+                            total: function() {
+                                return $("#total").val();
+                            },
+                            selftotal: function() {
+                                return $("#selftotal").val();
+                            }
+                        }
+                    }
+                }
+            },
+            messages: {
+                total: {
+                    required:"Total transfer harus diisi.",
+                    digits:"Harus diisi dengan angka.",
+                    remote:"Total transfer tidak sesuai dengan di email."
+                },
+                date: {
+                    required: "Harus diisi."
+                },
+                account_name: {
+                    required: "Nama pemilik rekening harus diisi."
+                },
+            },
+            errorElement: "div",
+            errorPlacement: function(error, element) {
+				var id = element.attr('id');
+                error.appendTo($('#errorbox_'+id));
+            },
+            submitHandler: function(form) {
+                $('.modal-title').text('Please wait...');
+                $('.modal-body').html('<i class="fa fa-spinner fa-spin" style="font-size: 34px;"></i>');
+                $('.modal-dialog').addClass('modal-sm');
+                $('#myModal').modal('show');
+                $.ajax(
+                {
+                    type: "POST",
+                    url: form.action,
+                    data: $(form).serialize(), 
+                    cache: false,
+                    success: function(data)
+                    {
+                        $('#myModal').modal('hide');
+                        var response = $.parseJSON(data);
+                        
+                        if (response.type == 'success')
+                        {
+                            setTimeout("location.href = '"+response.location+"'",2000);
+                        }
+                    }
+                });
+                return false;
             }
         });
         

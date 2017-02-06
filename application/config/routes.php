@@ -63,6 +63,7 @@ $route['register_upload'] = 'home/register_upload';
 $route['register_success'] = 'home/register_success';
 $route['reset_password'] = 'home/reset_password';
 $route['transfer_confirmation'] = 'home/transfer_confirmation';
+$route['transfer_confirmation_success'] = 'home/transfer_confirmation_success';
 
 $route['status_membership'] = 'extra/status_membership';
 $route['upload_image'] = 'extra/upload_image';
@@ -72,6 +73,7 @@ $route['check_member_email'] = 'check_validate/check_member_email';
 $route['check_member_idcard_number'] = 'check_validate/check_member_idcard_number';
 $route['check_member_name'] = 'check_validate/check_member_name';
 $route['check_member_phone_number'] = 'check_validate/check_member_phone_number';
+$route['check_member_transfer_total'] = 'check_validate/check_member_transfer_total';
 
 $route['pages/help/(:any)'] = 'pages/help/$1';
 

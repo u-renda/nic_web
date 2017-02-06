@@ -29,6 +29,7 @@
 					<li><strong>Awaiting Review</strong>: Data kalian belum di validasi oleh crew. Mohon kesabarannya dalam menunggu email dari crew.<br></li>
 					<li><strong>Awaiting Transfer</strong>: Data kalian sudah valid. Silahkan cek email kalian untuk melihat informasi selanjutnya.<br></li>
 					<li><strong>Invalid</strong>: Data kalian invalid atau terdapat kesalahan dalam mendaftar. Silahkan cek email kalian untuk melihat informasi selanjutnya.<br></li>
+					<li><strong>Awaiting Approval</strong>: Data konfirmasi pembayaran kalian sudah diterima. Mohon kesabarannya dalam menunggu konfirmasinya dari crew.<br></li>
 				</ul>
 			</div>
 		</div>
