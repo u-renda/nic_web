@@ -149,42 +149,6 @@ class Home extends MY_Controller {
         }
     }
 	
-    function check_photo()
-    {
-        if (isset($_FILES['photo']))
-        {
-			if ($_FILES["photo"]["error"] == 0)
-            {
-                $name = md5(basename($_FILES["photo"]["name"]) . date('Y-m-d H:i:s'));
-                $target_dir = UPLOAD_MEMBER_HOST;
-                $imageFileType = strtolower(pathinfo($_FILES["photo"]["name"],PATHINFO_EXTENSION));
-                
-				$param2 = array();
-                $param2['target_file'] = UPLOAD_FOLDER . $name . '.' . $imageFileType;
-                $param2['imageFileType'] = $imageFileType;
-                $param2['tmp_name'] = $_FILES["photo"]["tmp_name"];
-                $param2['tmp_file'] = $target_dir . $name . '.' . $imageFileType;
-                $param2['size'] = $_FILES["photo"]["size"];
-                $check_image = check_image($param2);
-				
-                if ($check_image == 'true')
-                {
-                    return TRUE;
-                }
-                else
-                {
-                    $this->form_validation->set_message('check_photo', $check_image);
-                    return FALSE;
-                }
-            }
-			else
-			{
-				$this->form_validation->set_message('check_photo', 'Foto error');
-                return FALSE;
-			}
-        }
-    }
-	
 	function index()
 	{
 		// Get 4 last post with image exist -> slider
