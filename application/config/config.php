@@ -536,7 +536,7 @@ else
 
 $config['development_mode'] = FALSE;
 $config['image_gallery_mode'] = FALSE; // TRUE = show, FALSE = hidden
-$config['login_mode'] = FALSE; // TRUE = show, FALSE = hidden
+$config['login_mode'] = TRUE; // TRUE = show, FALSE = hidden
 $config['register_mode'] = FALSE; // TRUE = show, FALSE = hidden
 $config['shop_mode'] = FALSE; // TRUE = show, FALSE = hidden
 
