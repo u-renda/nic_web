@@ -1,13 +1,12 @@
 <div id="member_transfer_page" class="tab-pane">
     <div class="alert alert-info">Daftar transaksi selain dari pembelian merchandise.</div>
-    <h4 class="mb-xlg">Membership</h4>
     <div class="panel-group panel-group-sm" id="accordion3">
         <?php foreach ($member_transfer as $row) { ?>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapse3<?php echo $row->no; ?>">
-                        <?php echo '#'.$row->id_member_transfer.' - '.$row->name; ?>
+                        <?php echo '#'.$row->id_member_transfer.' - '.$row->type; ?>
                     </a>
                 </h4>
             </div>

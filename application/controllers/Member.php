@@ -104,6 +104,7 @@ class Member extends MY_Controller {
 		{
 			$data = array();
 			$code_member_transfer_status = $this->config->item('code_member_transfer_status');
+			$code_member_transfer_type = $this->config->item('code_member_transfer_type');
 			$i = 1;
 			
 			foreach ($query->result as $row)
@@ -122,6 +123,7 @@ class Member extends MY_Controller {
 				$temp['resi'] = $row->resi;
 				$temp['status'] = $code_member_transfer_status[$row->status];
 				$temp['date'] = $date;
+				$temp['type'] = $code_member_transfer_type[$row->type];
 				$data[] = (object) $temp;
 				$i++;
 			}

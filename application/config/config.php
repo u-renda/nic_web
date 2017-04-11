@@ -659,6 +659,12 @@ $config['code_member_transfer_status'] = array(
     3 => 'Sent'
 );
 
+$config['code_member_transfer_type'] = array(
+    1 => 'Membership',
+    2 => 'Event',
+    3 => 'Charity'
+);
+
 $config['code_1349x600'] = array(
     'width' => '1349',
     'height' => '600',
