@@ -68,8 +68,12 @@
 							<?php }
 							if ($this->config->item('shop_mode') == TRUE) {
 							?>
-							<li class="dropdown no-dropdown list-item">
-								<a class="" href="<?php echo $this->config->item('link_shop'); ?>">Merchandise</a>
+							<li class="dropdown list-item">
+								<a class="dropdown-toggle" href="#shop">Merchandise</a>
+								<ul class="dropdown-menu">
+									<li><a href="<?php echo $this->config->item('link_shop_lists'); ?>">Lists Merchandise</a></li>
+									<li><a href="<?php echo $this->config->item('link_shopping_cart'); ?>"><i class="fa fa-shopping-cart"></i> Shopping Cart</a></li>
+								</ul>
 							</li>
 							<?php }
 							if ($this->session->userdata('is_login') == FALSE) {

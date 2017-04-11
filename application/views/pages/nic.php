@@ -24,7 +24,7 @@
 					<article class="post post-large">
 						<?php if ($row->media != "") { ?>
                         <div class="post-image single align-center">
-							<a href="<?php echo $this->config->item('link_pages_nic').$row->slug; ?>">
+							<a href="<?php echo $this->config->item('link_pages_nic').'/'.$row->slug; ?>">
 								<img class="img-thumbnail" src="<?php echo $row->media; ?>" alt="<?php echo ucwords($row->title); ?>">
 							</a>
                         </div>
@@ -34,10 +34,10 @@
                             <span class="month"><?php echo date('M', strtotime($row->created_date)); ?></span>
                         </div>
                         <div class="post-content-short">
-                            <h2><a href="<?php echo $this->config->item('link_pages_nic').$row->slug; ?>" class="a-default"><?php echo ucwords($row->title); ?></a></h2>
+                            <h2><a href="<?php echo $this->config->item('link_pages_nic').'/'.$row->slug; ?>" class="a-default"><?php echo ucwords($row->title); ?></a></h2>
                             <?php echo $row->content; ?>
                             <div class="post-meta">
-                                <a href="<?php echo $this->config->item('link_pages_nic').$row->slug; ?>" class="btn btn-xs btn-primary pull-right btn-read">Read more...</a>
+                                <a href="<?php echo $this->config->item('link_pages_nic').'/'.$row->slug; ?>" class="btn btn-xs btn-primary pull-right btn-read">Read more...</a>
                             </div>
                         </div>
                     </article>

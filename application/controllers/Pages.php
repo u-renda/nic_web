@@ -175,7 +175,7 @@ class Pages extends MY_Controller {
 			$offset = $this->input->get('per_page') ? $this->input->get('per_page') : 0;
 			
 			$param = array();
-			$param['limit'] = 5;
+			$param['limit'] = 1;
 			$param['offset'] = $offset;
 			$param['sort'] = 'desc';
 			$param['type'] = 1;
@@ -207,7 +207,11 @@ class Pages extends MY_Controller {
 				}
 				
 				// Pagination
-				pages_pagination($query);
+				$param3 = array();
+				$param3['base_url'] = $this->config->item('link_pages_nic');
+				$param3['total'] = $query->total;
+				$param3['limit'] = $query->limit;
+				pages_pagination($param3);
 				
 				$data['pagination'] = $this->pagination->create_links();
 			}

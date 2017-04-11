@@ -11,7 +11,7 @@
                 echo '<ul class="nav nav-children">';
                 foreach ($val as $slug => $title)
                 {
-                    echo '<li><a href="'.$link_pages.$slug.'">'.$title.'</a></li>';
+                    echo '<li><a href="'.$link_pages.'/'.$slug.'">'.$title.'</a></li>';
                 }
                 echo '</ul></li>';
             }

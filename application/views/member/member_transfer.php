@@ -1,5 +1,6 @@
 <div id="member_transfer_page" class="tab-pane">
-    <h4 class="mb-xlg">Member</h4>
+    <div class="alert alert-info">Daftar transaksi selain dari pembelian merchandise.</div>
+    <h4 class="mb-xlg">Membership</h4>
     <div class="panel-group panel-group-sm" id="accordion3">
         <?php foreach ($member_transfer as $row) { ?>
         <div class="panel panel-default">

@@ -19,7 +19,6 @@
     <div class="container">
 		<div class="row">
             <div class="col-md-6">
-                <h1 class="mb-none"><strong>Shop</strong></h1>
                 <p><?php echo 'Showing 1–'.$count.' of '.$total.' results.'; ?></p>
             </div>
         </div>

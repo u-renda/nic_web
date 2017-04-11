@@ -11,6 +11,7 @@ class Member extends MY_Controller {
 		$this->load->model('member_model');
 		$this->load->model('member_point_model');
 		$this->load->model('member_transfer_model');
+		$this->load->model('order_model');
     }
 	
 	function member_edit()
@@ -129,6 +130,42 @@ class Member extends MY_Controller {
 		}
 	}
 	
+	function order()
+	{
+		$param = array();
+		$param['id_member'] = $this->session->userdata('id_member');
+		$query = $this->order_model->lists($param);
+		
+		if ($query->code == 200)
+		{
+			$data = array();
+			$code_member_transfer_status = $this->config->item('code_member_transfer_status');
+			$i = 1;
+			
+			foreach ($query->result as $row)
+			{
+				$date = date('d M Y', strtotime($row->date));
+				if ($row->date == '0000-00-00')
+				{
+					$date = '-';
+				}
+				
+				$temp = array();
+				$temp['no'] = $i;
+				$temp['id_order'] = $row->id_member_transfer;
+				$temp['name'] = $row->name;
+				$temp['total'] = number_format($row->total);
+				$temp['resi'] = $row->resi;
+				$temp['status'] = $code_member_transfer_status[$row->status];
+				$temp['date'] = $date;
+				$data[] = (object) $temp;
+				$i++;
+			}
+			
+			return $data;
+		}
+	}
+	
 	function profile()
 	{
 		$data = array();
@@ -189,6 +226,7 @@ class Member extends MY_Controller {
 			$data['member'] = (object) $temp;
 			$data['member_event'] = (object) $this->member_event_lists();
 			$data['member_transfer'] = (object) $this->member_transfer_lists();
+			$data['order'] = (object) $this->order();
 			
 			$data['code_member_marital_status'] = $this->config->item('code_member_marital_status');
 			$data['view_content'] = 'member/profile';

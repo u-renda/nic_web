@@ -131,6 +131,11 @@ var newPathname = winOrigin + "/" + winPath[1] + "/";
         if (winPath[2] === "member" && split[0] === "#member") {
             $(this).addClass('active');
         }
+        
+        // Untuk halaman shop
+        if (winPath[2] === "shop" && split[0] === "#shop") {
+            $(this).addClass('active');
+        }
     });
     
     // Posts - History

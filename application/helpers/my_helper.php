@@ -582,9 +582,9 @@ if ( ! function_exists('pages_pagination'))
 		$CI =& get_instance();
 		$CI->load->library('pagination');
 		
-		$config['base_url'] = $CI->config->item('link_pages_agnezmo');
-		$config['total_rows'] = $param->total;
-		$config['per_page'] = $param->limit;
+		$config['base_url'] = $param['base_url'];
+		$config['total_rows'] = $param['total'];
+		$config['per_page'] = $param['limit'];
 		$config['first_link'] = FALSE;
 		$config['last_link'] = FALSE;
 		$config['full_tag_open'] = '<ul class="pagination pull-right">';
