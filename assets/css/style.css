@@ -292,12 +292,14 @@ html .btn-quaternary:hover {
     background-color: #434c56;
     color: #fff;
 }
-.shop ul.products li.product .onsale {
-    background-color: #0088CC;
-    border-bottom-color: #006da3;
-}
 .shop .star-rating span, .shop .cart-totals tr.total .amount {
     color: #0088CC;
+}
+.shop ul.products .product .onsale {
+    border-radius: 20%;
+    width: auto;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 html body .tabs .nav-tabs li.active a, html.dark body .tabs .nav-tabs li.active a {
     border-top-color: #0088CC;
@@ -359,6 +361,9 @@ html .panel-group.panel-group-quaternary .panel-heading a {
 .fileupload .uneditable-input .fa {
     position: absolute;
     top: 12px;
+}
+.product-thumb-info h4 {
+    height: 42px;
 }
 
 /**

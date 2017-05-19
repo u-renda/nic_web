@@ -20,31 +20,23 @@
 		<div class="row">
             <div class="col-md-6">
                 <div class="owl-carousel owl-theme" data-plugin-options='{"items": 1}'>
-                    <div>
+                    <?php foreach ($product->image as $row) { ?>
+					<div>
                         <div class="thumbnail">
-                            <img alt="" class="img-responsive img-rounded" src="../../upload_nic/anye1.jpg">
+                            <img alt="<?php echo $product->name; ?>" class="img-responsive img-rounded" src="<?php echo $row; ?>">
                         </div>
                     </div>
-                    <div>
-                        <div class="thumbnail">
-                            <img alt="" class="img-responsive img-rounded" src="../../upload_nic/anye6.jpg">
-                        </div>
-                    </div>
+					<?php } ?>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="summary entry-summary">
-                    <h1 class="mb-none"><strong>Blue Ladies Handbag</strong></h1>
+                    <h1 class="mb-none"><strong><?php echo $product->name; ?></strong></h1>
                     <p class="price">
-                        <span class="amount">$22</span>
+                        <span class="amount"><?php echo 'Rp '.number_format($product->price_public,0,',','.'); ?></span>
                     </p>
-                    <p class="taller">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus nibh sed elimttis adipiscing. Fusce in hendrerit purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus nibh sed elimttis adipiscing. Fusce in hendrerit purus. </p>
+                    <p class="taller"><?php echo $product->description; ?></p>
                     <form enctype="multipart/form-data" method="post" class="cart">
-                        <div class="quantity">
-                            <input type="button" class="minus" value="-">
-                            <input type="text" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
-                            <input type="button" class="plus" value="+">
-                        </div>
                         <button href="#" class="btn btn-primary btn-read btn-icon">Add to cart</button>
                     </form>
                 </div>
