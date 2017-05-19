@@ -229,6 +229,7 @@ class Home extends MY_Controller {
 			
 			// Pilih media dengan dimensi 350x350
 			$media = $row->media;
+
 			if ($row->media_type == 2)
 			{
 				$code_350x350 = $this->config->item('code_350x350');
@@ -236,12 +237,13 @@ class Home extends MY_Controller {
 				
 				if(is_bool(LOCALHOST) || LOCALHOST == 'localhost')
 				{
-					$media = $explode[0].$code_350x350['extra'].'.'.$explode[1];
+					@$media = $explode[0].$code_350x350['extra'].'.'.$explode[1];
 				}
 				else
 				{
-					$media = $explode[0].'.'.$explode[1].$code_350x350['extra'].'.'.$explode[2];
+					@$media = $explode[0].'.'.$explode[1].$code_350x350['extra'].'.'.$explode[2];
 				}
+				
 			}
 			
 			$temp = array();
