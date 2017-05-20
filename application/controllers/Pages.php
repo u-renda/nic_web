@@ -79,16 +79,32 @@ class Pages extends MY_Controller {
 		if ($query->code == 200)
 		{
 			$result = $query->result;
+			$media = $result->media;
 			$code_post_type = $this->config->item('code_post_type');
 			
 			// Decode special character into HTML tag
 			$content = html_entity_decode($result->content);
 			
+			// ambil foto watermark
+			if ($result->media_type == 2)
+			{
+				$explode = explode('.', $result->media);
+				
+				if(is_bool(LOCALHOST) || LOCALHOST == 'localhost')
+				{
+					@$media = $explode[0].'_watermark.'.$explode[1];
+				}
+				else
+				{
+					@$media = $explode[0].'.'.$explode[1].'_watermark.'.$explode[2];
+				}
+			}
+			
 			$temp = array();
 			$temp['title'] = $result->title;
 			$temp['content'] = $content;
 			$temp['created_date'] = $result->created_date;
-			$temp['media'] = $result->media;
+			$temp['media'] = $media;
 			$temp['type'] = $code_post_type[$result->type];
 			$query2 = (object) $temp;
 			
