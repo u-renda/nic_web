@@ -243,7 +243,6 @@ class Home extends MY_Controller {
 				{
 					@$media = $explode[0].'.'.$explode[1].$code_350x350['extra'].'.'.$explode[2];
 				}
-				
 			}
 			
 			$temp = array();

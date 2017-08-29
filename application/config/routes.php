@@ -77,3 +77,4 @@ $route['check_member_transfer_total'] = 'check_validate/check_member_transfer_to
 
 $route['pages/help/(:any)'] = 'pages/help/$1';
 
+$route['image_gallery'] = 'image_gallery/album_lists';

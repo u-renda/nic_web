@@ -21,51 +21,22 @@
 			<div class="col-md-12">
 			<div class="row">
 				<div class="col-md-12">
-					<h4>Judul albumnya</h4>
+					<h2><?php echo $album->name; ?></h2>
 					<div class="row">
+						<?php foreach ($result as $row) { ?>
 						<div class="col-md-3">
 							<span class="img-thumbnail">
-								<img class="img-responsive" src="../../upload_nic/anye1.jpg" alt="Project Image">
+								<img class="img-responsive" src="<?php echo $row->url; ?>" alt="<?php echo $album->name; ?>">
 							</span>
 						</div>
-						<div class="col-md-3">
-							<span class="img-thumbnail">
-								<img class="img-responsive" src="../../upload_nic/anye1.jpg" alt="Project Image">
-							</span>
-						</div>
-						<div class="col-md-3">
-							<span class="img-thumbnail">
-								<img class="img-responsive" src="../../upload_nic/anye1.jpg" alt="Project Image">
-							</span>
-						</div>
-						<div class="col-md-3">
-							<span class="img-thumbnail">
-								<img class="img-responsive" src="../../upload_nic/anye1.jpg" alt="Project Image">
-							</span>
-						</div>
-						<div class="col-md-3">
-							<span class="img-thumbnail">
-								<img class="img-responsive" src="../../upload_nic/anye1.jpg" alt="Project Image">
-							</span>
-						</div>
-						<div class="col-md-3">
-							<span class="img-thumbnail">
-								<img class="img-responsive" src="../../upload_nic/anye1.jpg" alt="Project Image">
-							</span>
-						</div>
+						<?php } ?>
 					</div>
 					<div class="row">
 						<div class="col-md-6 margintop20">
 							<a href="<?php echo $this->config->item('link_image_gallery'); ?>" class="btn btn-quaternary">Back to album</a>
 						</div>
 						<div class="col-md-6">
-							<ul class="pagination pull-right">
-								<li><a href="#">«</a></li>
-								<li class="active"><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">»</a></li>
-							</ul>
+							<?php echo $pagination; ?>
 						</div>
 					</div>
 				</div>
