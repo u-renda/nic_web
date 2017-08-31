@@ -91,26 +91,26 @@ class Extra extends MY_Controller {
 	
 	function status_membership()
 	{
-		redirect(base_url());
-//		$data = array();
-//		$result = array();
-//		
-//		$param = array();
-//		$param['order'] = 'name';
-//		$param['sort'] = 'asc';
-//		$param['limit'] = 185;
-//		$param['new_member'] = 1;
-//		$query = $this->member_model->lists($param);
-//		
-//		if ($query->code == 200)
-//		{
-//			$result = $query->result;
-//		}
-//		
-//        $data['code_member_status'] = $this->config->item('code_member_status');
-//        $data['result'] = $result;
-//        $data['view_content'] = 'extra/status_membership';
-//        $this->display_view('templates/frame', $data);
+		//redirect(base_url());
+		$data = array();
+		$result = array();
+		
+		$param = array();
+		$param['order'] = 'name';
+		$param['sort'] = 'asc';
+		$param['limit'] = 185;
+		$param['new_member'] = 1;
+		$query = $this->member_model->lists($param);
+		
+		if ($query->code == 200)
+		{
+			$result = $query->result;
+		}
+		
+        $data['code_member_status'] = $this->config->item('code_member_status');
+        $data['result'] = $result;
+        $data['view_content'] = 'extra/status_membership';
+        $this->display_view('templates/frame', $data);
 	}
 	
 	function upload_image()
