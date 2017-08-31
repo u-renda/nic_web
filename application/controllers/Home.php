@@ -592,87 +592,87 @@ class Home extends MY_Controller {
 	function transfer_confirmation()
 	{
 		$data = array();
-		$this->display_view('not_found', $data);
+		//$this->display_view('not_found', $data);
 
-		//$data['short_code'] = $this->input->get_post('c');
-		//
-		//if ($data['short_code'] == TRUE)
-		//{
-		//	$query = $this->member_model->info(array('short_code' => $data['short_code']));
-		//	
-		//	if ($query->code == 200 && $query->result->status == 2)
-		//	{
-		//		$param = array();
-		//		$param['id_member'] = $query->result->id_member;
-		//		$param['type'] = 1;
-		//		$query2 = $this->member_transfer_model->lists($param);
-		//		
-		//		if ($query2->code == 200)
-		//		{
-		//			foreach ($query2->result as $row)
-		//			{
-		//				$result = array();
-		//				$result['id_member_transfer'] = $row->id_member_transfer;
-		//				$result['total'] = $row->total;
-		//			}
-		//			
-		//			if ($this->input->post('submit') == TRUE)
-		//			{
-		//				$this->load->library('form_validation');
-		//				$this->form_validation->set_rules('total', 'total', 'required');
-		//				$this->form_validation->set_rules('date', 'tanggal transfer', 'required');
-		//				$this->form_validation->set_rules('account_name', 'pemilik rekening', 'required');
-		//				$this->form_validation->set_rules('account_name', 'pemilik rekening', 'required');
-		//				$this->form_validation->set_rules('photo', 'bukti transfer', 'required', array('required' => '%s harus diisi. Pastikan Anda sudah membaca cara upload foto.'));
-		//				
-		//				if ($this->form_validation->run() == TRUE)
-		//				{
-		//					$param2 = array();
-		//					$param2['id_member_transfer'] = $this->input->post('id_member_transfer');
-		//					$param2['date'] = date('Y-m-d', strtotime($this->input->post('date')));
-		//					$param2['photo'] = $this->input->post('photo');
-		//					$param2['account_name'] = $this->input->post('account_name');
-		//					$param2['other_information'] = $this->input->post('other_information');
-		//					$param2['status'] = 2;
-		//					$query3 = $this->member_transfer_model->update($param2);
-		//					
-		//					if ($query3->code == 200)
-		//					{
-		//						$param3 = array();
-		//						$param3['id_member'] = $query->result->id_member;
-		//						$param3['status'] = 3;
-		//						$query4 = $this->member_model->update($param3);
-		//					
-		//						$response =  array('msg' => 'Confirmation data success', 'type' => 'success', 'location' => $this->config->item('link_transfer_confirmation_success'));
-		//					}
-		//					else
-		//					{
-		//						$response =  array('msg' => 'Confirmation data failed', 'type' => 'error');
-		//					}
-		//					
-		//					echo json_encode($response);
-		//					exit();
-		//				}
-		//			}
-		//			
-		//			$data['result'] = (object) $result;
-		//			$data['view_content'] = 'home/transfer_confirmation';
-		//			$this->display_view('templates/frame', $data);
-		//		}
-		//		else
-		//		{
-		//			$this->display_view('not_found', $data);
-		//		}
-		//	}
-		//	else
-		//	{
-		//		$this->display_view('not_found', $data);
-		//	}
-		//}
-		//else
-		//{
-		//	$this->display_view('not_found', $data);
-		//}
+		$data['short_code'] = $this->input->get_post('c');
+		
+		if ($data['short_code'] == TRUE)
+		{
+			$query = $this->member_model->info(array('short_code' => $data['short_code']));
+			
+			if ($query->code == 200 && $query->result->status == 2)
+			{
+				$param = array();
+				$param['id_member'] = $query->result->id_member;
+				$param['type'] = 1;
+				$query2 = $this->member_transfer_model->lists($param);
+				
+				if ($query2->code == 200)
+				{
+					foreach ($query2->result as $row)
+					{
+						$result = array();
+						$result['id_member_transfer'] = $row->id_member_transfer;
+						$result['total'] = $row->total;
+					}
+					
+					if ($this->input->post('submit') == TRUE)
+					{
+						$this->load->library('form_validation');
+						$this->form_validation->set_rules('total', 'total', 'required');
+						$this->form_validation->set_rules('date', 'tanggal transfer', 'required');
+						$this->form_validation->set_rules('account_name', 'pemilik rekening', 'required');
+						$this->form_validation->set_rules('account_name', 'pemilik rekening', 'required');
+						$this->form_validation->set_rules('photo', 'bukti transfer', 'required', array('required' => '%s harus diisi. Pastikan Anda sudah membaca cara upload foto.'));
+						
+						if ($this->form_validation->run() == TRUE)
+						{
+							$param2 = array();
+							$param2['id_member_transfer'] = $this->input->post('id_member_transfer');
+							$param2['date'] = date('Y-m-d', strtotime($this->input->post('date')));
+							$param2['photo'] = $this->input->post('photo');
+							$param2['account_name'] = $this->input->post('account_name');
+							$param2['other_information'] = $this->input->post('other_information');
+							$param2['status'] = 2;
+							$query3 = $this->member_transfer_model->update($param2);
+							
+							if ($query3->code == 200)
+							{
+								$param3 = array();
+								$param3['id_member'] = $query->result->id_member;
+								$param3['status'] = 3;
+								$query4 = $this->member_model->update($param3);
+							
+								$response =  array('msg' => 'Confirmation data success', 'type' => 'success', 'location' => $this->config->item('link_transfer_confirmation_success'));
+							}
+							else
+							{
+								$response =  array('msg' => 'Confirmation data failed', 'type' => 'error');
+							}
+							
+							echo json_encode($response);
+							exit();
+						}
+					}
+					
+					$data['result'] = (object) $result;
+					$data['view_content'] = 'home/transfer_confirmation';
+					$this->display_view('templates/frame', $data);
+				}
+				else
+				{
+					$this->display_view('not_found', $data);
+				}
+			}
+			else
+			{
+				$this->display_view('not_found', $data);
+			}
+		}
+		else
+		{
+			$this->display_view('not_found', $data);
+		}
 	}
 	
 	function transfer_confirmation_success()
