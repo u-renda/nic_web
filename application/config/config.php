@@ -535,9 +535,9 @@ else
 }
 
 $config['development_mode'] = FALSE;
-$config['image_gallery_mode'] = TRUE; // TRUE = show, FALSE = hidden
-$config['login_mode'] = TRUE; // TRUE = show, FALSE = hidden
-$config['register_mode'] = FALSE; // TRUE = show, FALSE = hidden
+$config['image_gallery_mode'] = FALSE; // TRUE = show, FALSE = hidden
+$config['login_mode'] = FALSE; // TRUE = show, FALSE = hidden
+$config['register_mode'] = TRUE; // TRUE = show, FALSE = hidden
 $config['shop_mode'] = FALSE; // TRUE = show, FALSE = hidden
 
 $config['email_admin'] = 'admin@nezindaclub.com';
@@ -572,11 +572,13 @@ $config['link_register_upload'] = $config['base_url'].'register_upload';
 $config['link_register_success'] = $config['base_url'].'register_success';
 $config['link_shop_lists'] = $config['base_url'].'shop/lists';
 $config['link_shop_detail'] = $config['base_url'].'shop/detail';
+$config['link_shipping_cart'] = $config['base_url'].'shop/shipping_cart';
 $config['link_shopping_cart'] = $config['base_url'].'shop/shopping_cart';
 $config['link_status_membership'] = $config['base_url'].'status_membership';
 $config['link_team'] = $config['base_url'].'pages/team';
 $config['link_transfer_confirmation'] = $config['base_url'].'transfer_confirmation';
 $config['link_transfer_confirmation_success'] = $config['base_url'].'transfer_confirmation_success';
+$config['link_update_cart'] = $config['base_url'].'shop/update_cart';
 $config['link_upload_image'] = $config['base_url'].'upload_image';
 
 $config['code_admin_group'] = array(

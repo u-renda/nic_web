@@ -63,6 +63,7 @@
 <script src="<?php echo base_url('assets/js/theme').'/bootstrap-fileupload.min.js'; ?>"></script>
 <script src="<?php echo base_url('assets/js/theme').'/jquery.isotope.min.js'; ?>"></script>
 <script src="<?php echo base_url('assets/js/theme').'/owl.carousel.min.js'; ?>"></script>
+<script src="<?php echo base_url('assets/js/theme').'/pnotify.custom.js'; ?>"></script>
 <script src="<?php echo base_url('assets/js/theme').'/theme.js'; ?>"></script>
 <script src="<?php echo base_url('assets/js/theme').'/jquery.themepunch.tools.min.js'; ?>"></script>
 <script src="<?php echo base_url('assets/js/theme').'/jquery.themepunch.revolution.min.js'; ?>"></script>
@@ -70,5 +71,6 @@
 <script src="<?php echo base_url('assets/js/theme').'/gallery.js'; ?>"></script>
 <script src="<?php echo base_url('assets/js/upload').'/fileinput.min.js'; ?>"></script>
 <script src="<?php echo base_url('assets/js').'/app.js'; ?>"></script>
+<script src="<?php echo base_url('assets/js').'/style.js'; ?>"></script>
 </body>
 </html>

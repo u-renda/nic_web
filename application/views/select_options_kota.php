@@ -3,7 +3,7 @@
     <?php
     foreach ($kota_lists as $row)
     {
-        echo '<option value="'.$row->id_kota.'">'.$row->kota.'</option>';
+        echo '<option value="'.$row->id_kota.'">'.ucwords($row->kota).'</option>';
     }
     ?>
 </select>

@@ -365,6 +365,12 @@ html .panel-group.panel-group-quaternary .panel-heading a {
 .product-thumb-info h4 {
     height: 42px;
 }
+.shop table.cart .product-price {
+    width: 12%;
+}
+.shop table.cart .product-subtotal {
+    width: 12%;
+}
 
 /**
  * FOOTER
@@ -376,6 +382,21 @@ html .heading-primary, html .lnk-primary, html .text-color-primary {
     background: #060606;
     border-top: 4px solid #060606;
     padding: 30px 0 10px;
+}
+
+/**
+ * NOTIFICATION
+ */
+.ui-pnotify .ui-pnotify-icon > span {
+    display: inline-block;
+    float: none;
+    font-size: 35px;
+    height: 50px;
+    line-height: 48px;
+    margin: 8px 0 0;
+    padding: 0;
+    width: 50px;
+    text-align: center;
 }
 
 @media (min-width: 992px) {

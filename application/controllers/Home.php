@@ -286,7 +286,8 @@ class Home extends MY_Controller {
 						'name'=> $member->name,
 						'email'=> $member->email,
 						'photo'=> $member->photo,
-						'is_login' => TRUE
+						'is_login' => TRUE,
+						'unique_code' => md5(uniqid($member->id_member, true))
 					);
 					
 					// Set session
@@ -309,6 +310,7 @@ class Home extends MY_Controller {
 		$this->session->unset_userdata('email');
 		$this->session->unset_userdata('photo');
 		$this->session->unset_userdata('is_login');
+		$this->session->unset_userdata('unique_code');
 		
 		delete_cookie('username');
 		delete_cookie('password');

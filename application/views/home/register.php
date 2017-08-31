@@ -174,11 +174,11 @@
 										<label class="col-md-12 paddingleft0">Provinsi & Kota <span class="required">*</span></label>
 										<div class="col-md-12 paddinglr0">
 											<select class="form-control" title="Mohon pilih salah satu." name="id_provinsi" id="id_provinsi" required>
-											<option value="">-- Provinsi --</option>
-											<?php foreach ($provinsi_lists as $key => $val) { ?>
-											<option value="<?php echo $val->id_provinsi; ?>" id="<?php echo $val->id_provinsi; ?>"><?php echo ucwords($val->provinsi); ?></option>
-											<?php } ?>
-										</select>
+												<option value="">-- Provinsi --</option>
+												<?php foreach ($provinsi_lists as $key => $val) { ?>
+												<option value="<?php echo $val->id_provinsi; ?>" id="<?php echo $val->id_provinsi; ?>"><?php echo ucwords($val->provinsi); ?></option>
+												<?php } ?>
+											</select>
 										</div>
 										<div class="col-md-12 paddinglr0 margintop10">
 											<div id="area"></div>
@@ -223,6 +223,17 @@
 			</div>
 		</section>
 		<!-- end: page -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span></button>
+						<h4 class="modal-title" id="myModalLabel"></h4>
+					</div>
+					<div class="modal-body"></div>
+				</div>
+			</div>
+		</div>
 
 		<!-- Vendor -->
 		<script src="<?php echo base_url('assets/js').'/jquery.js'; ?>"></script>

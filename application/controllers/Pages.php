@@ -50,7 +50,11 @@ class Pages extends MY_Controller {
 				}
 				
 				// Pagination
-				pages_pagination($query);
+				$param3 = array();
+				$param3['base_url'] = $this->config->item('link_pages_agnezmo');
+				$param3['total'] = $query->total;
+				$param3['limit'] = $query->limit;
+				pages_pagination($param3);
 				
 				$data['pagination'] = $this->pagination->create_links();
 			}

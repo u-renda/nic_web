@@ -11,13 +11,97 @@ class Shop extends MY_Controller {
 			redirect($this->config->item('link_index'));
 		}
 		
+		$this->load->model('cart_model');
+		$this->load->model('cart_shipment_model');
+		$this->load->model('kota_model');
 		$this->load->model('product_model');
     }
+	
+	function add_cart()
+	{
+		$id = $this->input->post('id_product');
+		
+		$query = $this->product_model->info(array('id_product' => $id));
+		
+		if ($query->code == 200)
+		{
+			$result = $query->result;
+			$param = array();
+			
+			if ($this->session->userdata('is_login') == TRUE)
+			{
+				$total = $result->price_member;
+				$param['id_member'] = $this->session->userdata('id_member');
+			}
+			else
+			{
+				$total = $result->price_public;
+			}
+			
+			$param['id_product'] = $id;
+			$param['quantity'] = 1;
+			$param['total'] = $total;
+			$param['status'] = 1;
+			$param['unique_code'] = $this->session->userdata('unique_code');
+			$query2 = $this->cart_model->create($param);
+			
+			if ($query2->code == 200)
+			{
+				$response =  array('msg' => 'Success add to shopping cart', 'type' => 'success', 'title' => 'Shopping Cart');
+			}
+			else
+			{
+				$response =  array('msg' => 'Failed add to shopping cart', 'type' => 'error', 'title' => 'Shopping Cart');
+			}
+			
+			echo json_encode($response);
+			exit();
+		}
+	}
 	
 	function checkout()
 	{
 		$data['view_content'] = 'shop/checkout';
         $this->display_view('templates/frame', $data);
+	}
+	
+	function delete_cart()
+	{
+		$data = array();
+        $data['id'] = $this->input->post('id');
+        $data['action'] = $this->input->post('action');
+		
+        $get = $this->cart_model->info(array('id_cart' => $data['id']));
+		
+        if ($get->code == 200)
+        {
+            if ($this->input->post('delete'))
+            {
+                $param1 = array();
+                $param1['id_cart'] = $data['id'];
+                $query = $this->cart_model->delete($param1);
+
+                if ($query->code == 200)
+                {
+                    $response =  array('msg' => 'Delete data success', 'type' => 'success', 'title' => 'Delete');
+                }
+                else
+                {
+                    $response =  array('msg' => 'Delete data failed', 'type' => 'error', 'title' => 'Delete');
+                }
+
+                echo json_encode($response);
+                exit();
+            }
+            else
+            {
+                $this->load->view('delete_confirm', $data);
+            }
+        }
+        else
+        {
+            echo "Data Not Found";
+        }
 	}
 	
 	function detail()
@@ -30,9 +114,14 @@ class Shop extends MY_Controller {
 			$result = $query->result;
 			
 			$temp = array();
+			$temp['id_product'] = $result->id_product;
 			$temp['name'] = $result->name;
 			$temp['price_public'] = $result->price_public;
+			$temp['price_member'] = $result->price_member;
 			$temp['description'] = $result->description;
+			$temp['size'] = $result->detail->size;
+			$temp['colors'] = $result->detail->colors;
+			$temp['material'] = $result->detail->material;
 			
 			$temp['image'][] = $result->image;			
 			foreach ($result->other_image as $row)
@@ -70,6 +159,13 @@ class Shop extends MY_Controller {
 		$param['offset'] = $offset;
 		$param['sort'] = 'desc';
 		$param['status_not'] = 4;
+		$param['type'] = 0;
+		
+		if ($this->session->userdata('is_login') == TRUE)
+		{
+			$param['type'] = 1;
+		}
+		
 		$query = $this->product_model->lists($param);
 		
 		if ($query != FALSE)
@@ -120,9 +216,94 @@ class Shop extends MY_Controller {
 		$this->display_view('templates/frame', $data);
 	}
 	
+	function shipping_cart()
+	{
+		$data = array();
+		$query = $this->kota_model->info(array('id_kota' => $this->input->post('id_kota')));
+		
+		if ($query->code == 200)
+		{
+			$result = $query->result;
+			
+			$param = array();
+			$param['id_kota'] = $result->id_kota;
+			$param['unique_code'] = $this->session->userdata('unique_code');
+			$param['total'] = $result->price;
+			$query2 = $this->cart_shipment_model->create($param);
+			
+			if ($query2->code == 200)
+			{
+				$response =  array('msg' => 'Success add shipping cart', 'type' => 'success', 'title' => 'Ongkos Kirim');
+			}
+			else
+			{
+				$response =  array('msg' => 'Failed add shipping cart', 'type' => 'error', 'title' => 'Ongkos Kirim');
+			}
+			
+			echo json_encode($response);
+			exit();
+		}
+	}
+	
 	function shopping_cart()
 	{
+		$data = array();
+		$param = array();
+		$param['id_member'] = $this->session->userdata('id_member');
+		$query = $this->cart_model->lists($param);
+		
+		if ($query->code == 200)
+		{
+			$cart = array();
+			$subtotal = 0;
+			$cart_subtotal = 0;
+			foreach ($query->result as $row)
+			{
+				$product_price = 0;
+				if ($this->session->userdata('is_login') == TRUE)
+				{
+					$product_price = $row->product->price_member;
+				}
+				else
+				{
+					$product_price = $row->product->price_public;
+				}
+				
+				$subtotal = $row->quantity * $product_price;
+				$cart_subtotal += $subtotal;
+				
+				$temp = array();
+				$temp['id_cart'] = $row->id_cart;
+				$temp['product_slug'] = $row->product->slug;
+				$temp['product_image'] = $row->product->image;
+				$temp['product_name'] = $row->product->name;
+				$temp['product_price'] = $product_price;
+				$temp['quantity'] = $row->quantity;
+				$temp['subtotal'] = $subtotal;
+				$cart[] = (object) $temp;
+			}
+		}
+		
+		// shipping
+		$shipping = 0;
+		$query2 = $this->cart_shipment_model->info(array('unique_code' => $this->session->userdata('unique_code')));
+		
+		if ($query2->code == 200)
+		{
+			$shipping = $query2->result->total;
+		}
+		
+		$data['cart'] = $cart;
+		$data['cart_subtotal'] = $cart_subtotal;
+		$data['shipping'] = $shipping;
+		$data['total'] = $shipping + $cart_subtotal;
+		$data['provinsi_lists'] = get_provinsi_lists(array('limit' => 40))->result;
 		$data['view_content'] = 'shop/shopping_cart';
         $this->display_view('templates/frame', $data);
+	}
+	
+	function update_cart()
+	{
+		
 	}
 }

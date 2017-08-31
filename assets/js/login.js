@@ -327,10 +327,10 @@ var newPathname = winOrigin + "/" + winPath[1] + "/";
                 url: $("#form-register").action,
                 data: $("#form-register").serialize()+dataString,
                 cache: false,
-                success: function(data)
+                success: function(report)
                 {
 					$('#myModal').modal('hide');
-                    var response = $.parseJSON(data);
+                    var response = $.parseJSON(report);
 					
 					if (response.type == 'success')
 					{
