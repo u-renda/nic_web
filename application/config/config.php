@@ -529,29 +529,30 @@ if(is_bool(LOCALHOST) || LOCALHOST == 'localhost')
 }
 else
 {
-	define('API_HOST', 'http://api.nezindaclub.com/');
-    define('UPLOAD_HOST', 'http://upload.nezindaclub.com/');
+	define('API_HOST', 'http://api.theagnation.com/');
+    define('UPLOAD_HOST', 'http://upload.theagnation.com/');
     define('UPLOAD_FOLDER', '/home/nezind45/public_html/upload_nic/');
 }
 
-$config['development_mode'] = FALSE;
+$config['development_mode'] = TRUE;
 $config['image_gallery_mode'] = FALSE; // TRUE = show, FALSE = hidden
-$config['login_mode'] = FALSE; // TRUE = show, FALSE = hidden
-$config['register_mode'] = TRUE; // TRUE = show, FALSE = hidden
-$config['shop_mode'] = FALSE; // TRUE = show, FALSE = hidden
+$config['login_mode'] = TRUE; // TRUE = show, FALSE = hidden
+$config['register_mode'] = FALSE; // TRUE = show, FALSE = hidden
+$config['shop_mode'] = TRUE; // TRUE = show, FALSE = hidden
 
-$config['email_admin'] = 'admin@nezindaclub.com';
-$config['email_gmail'] = 'nezindaclub.official@gmail.com';
+$config['email_admin'] = 'admin@theagnation.com';
+$config['email_gmail'] = 'officialagnation@gmail.com';
 $config['nic_api'] = API_HOST;
 $config['nic_key'] = 'bd6fb882067e6896c1c193376cd411ee';
 $config['registration_fee'] = 150000;
-$config['title'] = 'NEZindaCLUB';
+$config['title'] = 'AGnation';
 
-$config['facebook'] = 'https://www.facebook.com/NICoffc';
-$config['instagram'] = 'https://www.instagram.com/nic.official';
-$config['twitter'] = 'https://twitter.com/nicofficial';
+$config['facebook'] = 'https://www.facebook.com/the.agnation';
+$config['instagram'] = 'https://www.instagram.com/the.agnation';
+$config['twitter'] = 'https://twitter.com/the_agnation';
 $config['youtube'] = 'https://www.youtube.com/user/TheNICcrew';
 
+$config['link_checkout'] = $config['base_url'].'shop/checkout';
 $config['link_faq'] = $config['base_url'].'pages/faq';
 $config['link_help'] = $config['base_url'].'pages/help';
 $config['link_image_gallery'] = $config['base_url'].'image_gallery';
@@ -565,6 +566,7 @@ $config['link_pages'] = $config['base_url'].'pages/';
 $config['link_pages_agnezmo'] = $config['base_url'].'pages/agnezmo/';
 $config['link_pages_detail'] = $config['base_url'].'pages/detail/';
 $config['link_pages_nic'] = $config['base_url'].'pages/nic/';
+$config['link_order'] = $config['base_url'].'shop/order';
 $config['link_recovery_password'] = $config['base_url'].'recovery_password';
 $config['link_reset_password'] = $config['base_url'].'reset_password';
 $config['link_register'] = $config['base_url'].'register';
@@ -691,4 +693,10 @@ $config['code_product_status'] = array(
     2 => 'Limited',
     3 => 'Pre Order',
     4 => 'Sold Out!'
+);
+$config['code_order_status'] = array(
+    1 => 'Ordered',
+    2 => 'Paid',
+    3 => 'Sent',
+    4 => 'Recieved'
 );
