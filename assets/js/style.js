@@ -1,3 +1,7 @@
+function goBack() {
+    window.history.back();
+}
+
 (function($) {
     
     'use strict';
@@ -14,8 +18,6 @@
             focusInvalid:!1,
             ignore:"",
             rules: {
-                marital_status: 'required',
-                occupation: 'required',
                 idcard_address: 'required',
                 email: {
                     required: true,
@@ -94,6 +96,13 @@
                     url: e.action,
                     data: $(e).serialize(), 
                     cache: false,
+                    beforeSend: function()
+                    {
+                        $('.modal-title').text('Please wait...');
+                        $('.modal-body').html('<i class="fa fa-spinner fa-spin" style="font-size: 34px;"></i>');
+                        $('.modal-dialog').addClass('modal-sm');
+                        $('#myModal').modal('show');
+                    },
                     success: function(data)
                     {
                         var response = $.parseJSON(data);
@@ -245,13 +254,14 @@
     if (document.getElementById('shop_detail_page') !== null) {
 		$('body').delegate("#add_chart", "click", function() {
 			var id_product = $(this).data("id");
+			var size = document.getElementById("size").value;
             var action = "shop/add_cart";
-            var dataString = 'id_product=' + id_product;
+            var dataString = 'id_product=' + id_product + '&size=' + size;
 			$.ajax(
 			{
 				type: "POST",
 				url: newPathname + action,
-				data: dataString, 
+				data: dataString,
 				cache: false,
                 beforeSend: function()
                 {
@@ -323,6 +333,7 @@ $(document).ready(function() {
 				},
 				success: function(data) {
 					$('#area').html(data);
+                    document.getElementById('id_kota2').remove();
 				},
 				error: function(data){
 				}
@@ -336,7 +347,23 @@ $(function () {
 		$("#frmCalculateShipping").validate({
             rules: {
                 id_provinsi: "required",
-                id_kota: "required"
+                id_kota: "required",
+                shipment_address: "required",
+                postal_code: {
+                    required: true,
+                    digits: true,
+                    minlength: 4
+                }
+            },
+            messages: {
+                postal_code: {
+                    digits:"Hanya isi dengan angka.",
+                    minlength: "Minimal 4 angka",
+                    required: "Harus diisi."
+                },
+                shipment_address: {
+                    required: "Harus diisi."
+                }
             },
             submitHandler: function(form) {
                 $('.modal-title').text('Please wait...');
@@ -353,7 +380,7 @@ $(function () {
                     {
                         $('#myModal').modal('hide');
                         var response = $.parseJSON(data);
-						window.location.reload();
+						setTimeout("location.href = '"+response.location+"'",1000);
                     }
                 });
                 return false;

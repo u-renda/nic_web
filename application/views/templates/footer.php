@@ -9,7 +9,7 @@
                 <div class="contact-details">
                     <h4>Contact Us</h4>
                     <ul class="contact">
-                        <li><p><i class="fa fa-at"></i> <strong>Line@:</strong><span class="fontwhite"><?php echo ' @'.strtolower($this->config->item('title')); ?></span></p></li>
+                        <li><p><i class="fa fa-at"></i> <strong>Line@: </strong><span class="fontwhite"><?php echo $this->config->item('line_at'); ?></span></p></li>
                         <li><p><i class="fa fa-envelope"></i> <strong>Email:</strong> <a href="<?php echo 'mailto:'.$this->config->item('email_gmail'); ?>"><?php echo $this->config->item('email_gmail'); ?></a></p></li>
                     </ul>
                 </div>

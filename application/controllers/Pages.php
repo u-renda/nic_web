@@ -40,12 +40,24 @@ class Pages extends MY_Controller {
 					// Get part of the string
 					$content = substr($remove, 0, 390);
 					
+					// media pakai yang watermark
+					$explode = explode('.', $row->media);
+				
+					if(is_bool(LOCALHOST) || LOCALHOST == 'localhost')
+					{
+						@$media = $explode[0].'_watermark.'.$explode[1];
+					}
+					else
+					{
+						@$media = $explode[0].'.'.$explode[1].'_watermark.'.$explode[2];
+					}
+					
 					$temp = array();
 					$temp['title'] = $row->title;
 					$temp['slug'] = $row->slug;
 					$temp['content'] = $content;
 					$temp['created_date'] = $row->created_date;
-					$temp['media'] = $row->media;
+					$temp['media'] = $media;
 					$query2[] = (object) $temp;
 				}
 				
@@ -188,14 +200,14 @@ class Pages extends MY_Controller {
 		}
 	}
 	
-	function nic()
+	function agnation()
 	{
 		if ($this->uri->segment(3) == '')
 		{
 			$offset = $this->input->get('per_page') ? $this->input->get('per_page') : 0;
 			
 			$param = array();
-			$param['limit'] = 1;
+			$param['limit'] = 5;
 			$param['offset'] = $offset;
 			$param['sort'] = 'desc';
 			$param['type'] = 1;
@@ -217,12 +229,24 @@ class Pages extends MY_Controller {
 					// Get part of the string
 					$content = substr($remove, 0, 390);
 					
+					// media pakai yang watermark
+					$explode = explode('.', $row->media);
+				
+					if(is_bool(LOCALHOST) || LOCALHOST == 'localhost')
+					{
+						@$media = $explode[0].'_watermark.'.$explode[1];
+					}
+					else
+					{
+						@$media = $explode[0].'.'.$explode[1].'_watermark.'.$explode[2];
+					}
+					
 					$temp = array();
 					$temp['title'] = $row->title;
 					$temp['slug'] = $row->slug;
 					$temp['content'] = $content;
 					$temp['created_date'] = $row->created_date;
-					$temp['media'] = $row->media;
+					$temp['media'] = $media;
 					$query2[] = (object) $temp;
 				}
 				

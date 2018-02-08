@@ -85,7 +85,7 @@
 										</div>
 									</div>
 									<div class="form-group mb-lg" id="div_idcard">
-										<label class="control-label">Upload ID Card Foto <span class="required">*</span>&nbsp&nbsp
+										<label class="control-label">Upload ID Card Foto (Foto KTP/tanda pengenal lainnya)<span class="required">*</span>&nbsp&nbsp
 											<a href="<?php echo $this->config->item('link_help').'/upload_photo'; ?>" data-plugin-tooltip data-original-title="Klik untuk melihat cara upload foto" target="_blank"><i class="fa fa-question-circle"></i></a>
 										</label>
 										<span class="help-block marginbottom0">

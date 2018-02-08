@@ -534,11 +534,11 @@ else
     define('UPLOAD_FOLDER', '/home/nezind45/public_html/upload_nic/');
 }
 
-$config['development_mode'] = TRUE;
+$config['development_mode'] = FALSE;
 $config['image_gallery_mode'] = FALSE; // TRUE = show, FALSE = hidden
 $config['login_mode'] = TRUE; // TRUE = show, FALSE = hidden
 $config['register_mode'] = FALSE; // TRUE = show, FALSE = hidden
-$config['shop_mode'] = TRUE; // TRUE = show, FALSE = hidden
+$config['shop_mode'] = FALSE; // TRUE = show, FALSE = hidden
 
 $config['email_admin'] = 'admin@theagnation.com';
 $config['email_gmail'] = 'officialagnation@gmail.com';
@@ -551,6 +551,7 @@ $config['facebook'] = 'https://www.facebook.com/the.agnation';
 $config['instagram'] = 'https://www.instagram.com/the.agnation';
 $config['twitter'] = 'https://twitter.com/the_agnation';
 $config['youtube'] = 'https://www.youtube.com/user/TheNICcrew';
+$config['line_at'] = '@agnation';
 
 $config['link_checkout'] = $config['base_url'].'shop/checkout';
 $config['link_faq'] = $config['base_url'].'pages/faq';
@@ -565,7 +566,7 @@ $config['link_member_profile'] = $config['base_url'].'member/profile';
 $config['link_pages'] = $config['base_url'].'pages/';
 $config['link_pages_agnezmo'] = $config['base_url'].'pages/agnezmo/';
 $config['link_pages_detail'] = $config['base_url'].'pages/detail/';
-$config['link_pages_nic'] = $config['base_url'].'pages/nic/';
+$config['link_pages_nic'] = $config['base_url'].'pages/agnation/';
 $config['link_order'] = $config['base_url'].'shop/order';
 $config['link_recovery_password'] = $config['base_url'].'recovery_password';
 $config['link_reset_password'] = $config['base_url'].'reset_password';
@@ -621,7 +622,7 @@ $config['code_member_status'] = array(
 );
 
 $config['code_post_type'] = array(
-    1 => 'NEZindaCLUB',
+    1 => 'AGnation',
     2 => 'Agnez Mo'
 );
 

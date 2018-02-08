@@ -1,8 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Cart_shipment_model extends CI_Model {
+class Cart_total_model extends CI_Model {
 
-    var $page = 'cart_shipment';
+    var $page = 'cart_total';
 
     function __construct()
     {

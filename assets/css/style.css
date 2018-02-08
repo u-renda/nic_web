@@ -371,7 +371,9 @@ html .panel-group.panel-group-quaternary .panel-heading a {
 .shop table.cart .product-subtotal {
     width: 12%;
 }
-
+.shop table.cart .product-name {
+    width: 50%;
+}
 /**
  * FOOTER
  */

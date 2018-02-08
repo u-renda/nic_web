@@ -17,7 +17,7 @@
 									<i class="fa fa-at fontlimegreen"></i>
 								</div>
 								<div class="feature-box-info">
-									<h4 class="mb-none"><?php echo '@'.strtolower($this->config->item('title')); ?></h4>
+									<h4 class="mb-none"><?php echo $this->config->item('line_at'); ?></h4>
 									<p><small>Hubungi line@ kami.</small></p>
 								</div>
 							</div>
@@ -54,7 +54,7 @@
 									<li class="dropdown-submenu"><a href="#">Post</a>
 										<ul class="dropdown-menu">
 											<li><a href="<?php echo $this->config->item('link_pages_agnezmo'); ?>">Agnez Mo</a></li>
-											<li><a href="<?php echo $this->config->item('link_pages_nic'); ?>">NEZindaCLUB</a></li>
+											<li><a href="<?php echo $this->config->item('link_pages_nic'); ?>">AGnation</a></li>
 										</ul>
 									</li>
 									<li><a href="<?php echo $this->config->item('link_team'); ?>">Crew</a></li>
@@ -63,10 +63,11 @@
 							</li>
 							<?php if ($this->config->item('image_gallery_mode') == TRUE) { ?>
 							<li class="dropdown no-dropdown list-item">
-								<a class="" href="<?php echo $this->config->item('link_image_gallery'); ?>">Image Gallery</a>
+								<a class="" href="<?php echo $this->config->item('link_image_gallery'); ?>">Gallery</a>
 							</li>
 							<?php }
 							if ($this->config->item('shop_mode') == TRUE) {
+								//if ($this->session->userdata('is_login') == TRUE) {
 							?>
 							<li class="dropdown list-item">
 								<a class="dropdown-toggle" href="#shop">Merchandise</a>
@@ -75,7 +76,8 @@
 									<li><a href="<?php echo $this->config->item('link_shopping_cart'); ?>"><i class="fa fa-shopping-cart"></i> Shopping Cart</a></li>
 								</ul>
 							</li>
-							<?php }
+							<?php //}
+							}
 							if ($this->session->userdata('is_login') == FALSE) {
 								if ($this->config->item('login_mode') == TRUE) { ?>
 							<li class="dropdown no-dropdown list-item">

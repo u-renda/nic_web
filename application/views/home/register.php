@@ -43,19 +43,19 @@
 									<li class="active">
 										<a href="#w1-account" data-toggle="tab" class="text-center">
 											<span class="badge hidden-xs">1</span>
-											Account
+											Akun
 										</a>
 									</li>
 									<li>
 										<a href="#w1-profile" data-toggle="tab" class="text-center">
 											<span class="badge hidden-xs">2</span>
-											Profile
+											Profil
 										</a>
 									</li>
 									<li>
 										<a href="#w1-confirm" data-toggle="tab" class="text-center">
 											<span class="badge hidden-xs">3</span>
-											Confirm
+											Konfirmasi
 										</a>
 									</li>
 								</ul>
@@ -81,7 +81,7 @@
 										</div>
 									</div>
 									<div class="form-group mb-lg" id="div_idcard">
-										<label class="control-label">Upload ID Card Foto <span class="required">*</span>&nbsp&nbsp
+										<label class="control-label">Upload ID Card Foto (Foto KTP/tanda pengenal lainnya)<span class="required">*</span>&nbsp&nbsp
 											<a href="<?php echo $this->config->item('link_help').'/upload_photo'; ?>" data-plugin-tooltip data-original-title="Klik untuk melihat cara upload foto" target="_blank"><i class="fa fa-question-circle"></i></a>
 										</label>
 										<span class="help-block marginbottom0">
@@ -128,7 +128,7 @@
 										</div>
 									</div>
 									<div class="form-group mb-lg">
-										<label>No Handphone <span class="required">*</span></label>
+										<label>No HP <span class="required">*</span></label>
 										<div class="input-group input-group-icon">
 											<input name="phone_number" type="text" class="form-control" id="phone-number" title="Harus diisi." required>
 										</div>
@@ -207,13 +207,13 @@
 						<div class="panel-footer">
 							<ul class="pager">
 								<li class="previous disabled">
-									<a><i class="fa fa-angle-left"></i> Previous</a>
+									<a><i class="fa fa-angle-left"></i> Sebelumnya</a>
 								</li>
 								<li class="finish hidden pull-right">
 									<button type="submit" value="submit" name="submit" class="btn-finish" id="submit_register">Finish</button>
 								</li>
 								<li class="next">
-									<a class="pointer">Next <i class="fa fa-angle-right"></i></a>
+									<a class="pointer">Selanjutnya <i class="fa fa-angle-right"></i></a>
 								</li>
 							</ul>
 						</div>

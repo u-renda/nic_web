@@ -17,7 +17,7 @@
         </div>
     </section>
     <div class="container">
-		<h2>Meet the NEZindaCLUB official <strong>Crew</strong></h2>
+		<h2>Meet the AGnation <strong>Crew</strong></h2>
 		<div class="row">
 			<div class="col-md-12">
 				<p class="lead">

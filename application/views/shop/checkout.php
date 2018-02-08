@@ -1,4 +1,4 @@
-<div role="main" class="main shop">
+<div role="main" class="main shop" id="checkout_page">
     <section class="page-header">
         <div class="container">
             <div class="row">
@@ -18,187 +18,91 @@
     </section>
     <div class="container">
 		<div class="row">
-			<div class="col-md-12">
-				<h2 class="mb-none"><strong>Checkout</strong></h2>
-				<p>Returning customer? <a href="shop-login.html" class="a-default">Click here to login.</a></p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-9">
+			<div class="col-md-8">
 				<div class="panel-group" id="accordion">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title">
-								<a class="accordion-toggle a-default" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-									Shipping Address
-								</a>
-							</h4>
-						</div>
-						<div id="collapseOne" class="accordion-body collapse in">
-							<div class="panel-body">
-								<form action="/" id="frmBillingAddress" method="post">
-									<div class="row">
-										<div class="form-group">
-											<div class="col-md-12">
-												<label>Country</label>
-												<select class="form-control">
-													<option value="">Select a country</option>
-												</select>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
-											<div class="col-md-6">
-												<label>First Name</label>
-												<input type="text" value="" class="form-control">
-											</div>
-											<div class="col-md-6">
-												<label>Last Name</label>
-												<input type="text" value="" class="form-control">
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
-											<div class="col-md-12">
-												<label>Company Name</label>
-												<input type="text" value="" class="form-control">
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
-											<div class="col-md-12">
-												<label>Address </label>
-												<input type="text" value="" class="form-control">
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
-											<div class="col-md-12">
-												<label>City </label>
-												<input type="text" value="" class="form-control">
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-12">
-											<input type="submit" value="Continue" class="btn btn-primary pull-right mb-xl" data-loading-text="Loading...">
-										</div>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h4 class="panel-title">
 								<a class="accordion-toggle a-default" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-									Review & Payment
+									Periksa Kembali Pesanan Anda
 								</a>
 							</h4>
 						</div>
-						<div id="collapseThree" class="accordion-body collapse">
+						<div id="collapseThree" class="accordion-body collapse in">
 							<div class="panel-body">
-								<table class="shop_table cart">
+								<table class="table table-hover">
 									<thead>
 										<tr>
-											<th class="product-thumbnail">&nbsp;</th>
-											<th class="product-name">Product</th>
-											<th class="product-price">Price</th>
-											<th class="product-quantity">Quantity</th>
-											<th class="product-subtotal">Total</th>
+											<th></th>
+											<th>Produk</th>
+											<th>Ukuran</th>
+											<th>Harga</th>
+											<th>Jumlah Barang</th>
+											<th>Total</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr class="cart_table_item">
-											<td class="product-thumbnail">
-												<a href="shop-product-sidebar.html">
-													<img width="100" height="100" alt="" class="img-responsive" src="../../upload_nic/anye1.jpg">
+										<?php foreach ($cart as $row) { ?>
+										<tr>
+											<td>
+												<a href="<?php echo $this->config->item('link_shop_detail').'/'.$row->product_slug; ?>">
+													<img width="100" height="100" alt="" class="img-responsive" src="<?php echo $row->product_image; ?>">
 												</a>
 											</td>
-											<td class="product-name">
-												<a href="shop-product-sidebar.html" class="a-default">Photo Camera</a>
+											<td>
+												<a href="<?php echo $this->config->item('link_shop_detail').'/'.$row->product_slug; ?>" class="a-default"><?php echo $row->product_name; ?></a>
 											</td>
-											<td class="product-price">
-												<span class="amount">$299</span>
+											<td>
+												<span class="amount"><?php echo $row->size; ?></span>
 											</td>
-											<td class="product-quantity">
-												1
+											<td>
+												<span class="amount"><?php echo 'Rp '.number_format($row->product_price,0,',','.');?></span>
 											</td>
-											<td class="product-subtotal">
-												<span class="amount">$299</span>
+											<td>
+												<?php echo $row->quantity; ?>
+											</td>
+											<td>
+												<span class="amount"><?php echo 'Rp '.number_format($row->subtotal,0,',','.'); ?></span>
 											</td>
 										</tr>
-										<tr class="cart_table_item">
-											<td class="product-thumbnail">
-												<a href="shop-product-sidebar.html">
-													<img width="100" height="100" alt="" class="img-responsive" src="../../upload_nic/anye2.jpg">
-												</a>
-											</td>
-											<td class="product-name">
-												<a href="shop-product-sidebar.html" class="a-default">Golf Bag</a>
-											</td>
-											<td class="product-price">
-												<span class="amount">$72</span>
-											</td>
-											<td class="product-quantity">
-												1
-											</td>
-											<td class="product-subtotal">
-												<span class="amount">$72</span>
+										<?php } ?>
+									</tbody>
+								</table>
+								<hr class="tall">
+								<h4 class="heading-primary">Data Pemesan</h4>
+								<table class="cart-totals">
+									<tbody>
+										<tr class="cart-subtotal">
+											<th><strong>Nama</strong></th>
+											<td>
+												<strong><span class="amount"><?php echo ucwords($this->session->userdata('name')); ?></span></strong>
 											</td>
 										</tr>
-										<tr class="cart_table_item">
-											<td class="product-thumbnail">
-												<a href="shop-product-sidebar.html">
-													<img width="100" height="100" alt="" class="img-responsive" src="../../upload_nic/anye3.jpg">
-												</a>
-											</td>
-											<td class="product-name">
-												<a href="shop-product-sidebar.html" class="a-default">Workout</a>
-											</td>
-											<td class="product-price">
-												<span class="amount">$60</span>
-											</td>
-											<td class="product-quantity">
-												1
-											</td>
-											<td class="product-subtotal">
-												<span class="amount">$60</span>
-											</td>
+										<tr class="shipping">
+											<th>No HP</th>
+											<td><?php echo $this->session->userdata('phone_number'); ?></td>
+										</tr>
+										<tr class="total">
+											<th><strong>Email</strong></th>
+											<td><?php echo $this->session->userdata('email'); ?></td>
 										</tr>
 									</tbody>
 								</table>
 								<hr class="tall">
-								<h4 class="heading-primary">Cart Totals</h4>
+								<h4 class="heading-primary">Alamat Kirim</h4>
 								<table class="cart-totals">
 									<tbody>
 										<tr class="cart-subtotal">
-											<th>
-												<strong>Cart Subtotal</strong>
-											</th>
-											<td>
-												<strong><span class="amount">$431</span></strong>
-											</td>
+											<th><strong>Alamat</strong></th>
+											<td><?php echo $cart_shipment->shipment_address; ?></td>
 										</tr>
 										<tr class="shipping">
-											<th>
-												Shipping
-											</th>
-											<td>
-												Free Shipping<input type="hidden" value="free_shipping" id="shipping_method" name="shipping_method">
-											</td>
+											<th>Kode Pos</th>
+											<td><?php echo $cart_shipment->postal_code; ?></td>
 										</tr>
 										<tr class="total">
-											<th>
-												<strong>Order Total</strong>
-											</th>
-											<td>
-												<strong><span class="amount">$431</span></strong>
-											</td>
+											<th><strong>Provinsi & Kota</strong></th>
+											<td><?php echo ucwords($cart_shipment->provinsi->provinsi.' - '.$cart_shipment->kota->kota); ?></td>
 										</tr>
 									</tbody>
 								</table>
@@ -206,8 +110,44 @@
 						</div>
 					</div>
 				</div>
+			</div>
+			<div class="col-md-4">
+				<h4 class="heading-primary">Detail Harga</h4>
+				<table class="cart-totals">
+					<tbody>
+						<tr class="cart-subtotal">
+							<th>
+								<strong>Subtotal</strong>
+							</th>
+							<td>
+								<strong><span class="amount"><?php echo 'Rp '.number_format($cart_subtotal,0,',','.'); ?></span></strong>
+							</td>
+						</tr>
+						<tr class="shipping">
+							<th>Ongkos Kirim</th>
+							<td><?php echo 'Rp '.number_format($cart_shipment->total,0,',','.'); ?></td>
+						</tr>
+						<tr class="shipping">
+							<th>Kode Unik</th>
+							<td><?php echo 'Rp '.number_format($unique_trf,0,',','.'); ?></td>
+						</tr>
+						<tr class="total">
+							<th>
+								<strong>Total Pembayaran</strong>
+							</th>
+							<td>
+								<strong><span class="amount"><?php echo 'Rp '.number_format($cart_total->total,0,',','.'); ?></span></strong>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
 				<div class="actions-continue">
-					<input type="submit" value="Place Order" name="proceed" class="btn btn-lg btn-primary btn-read mt-xl">
+					<a href="<?php echo $this->config->item('link_shopping_cart'); ?>" class="btn btn-lg btn-quaternary btn-read mt-xl mr-sm">Keranjang Belanja</button>
+					<a href="<?php echo $this->config->item('link_order'); ?>" class="btn btn-lg btn-primary btn-read mt-xl">Proses Order</a>
 				</div>
 			</div>
 		</div>

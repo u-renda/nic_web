@@ -45,4 +45,13 @@ class Cart_model extends CI_Model {
         $result = $this->rest->get($url, $params);
 		return $result;
     }
+
+    function update($params)
+    {
+        $result = null;
+        $url = $this->config->item('nic_api'). $this->page . '/update';
+        $params = array_merge($params, $this->key);
+        $result = $this->rest->post($url, $params);
+		return $result;
+    }
 }

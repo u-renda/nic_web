@@ -8,10 +8,15 @@ class Member extends MY_Controller {
         parent::__construct();
 		
 		if ($this->session->userdata('is_login') == FALSE) { redirect($this->config->item('link_index')); }
+		
+		$this->load->model('cart_model');
+		$this->load->model('cart_shipment_model');
+		$this->load->model('cart_total_model');
 		$this->load->model('member_model');
 		$this->load->model('member_point_model');
 		$this->load->model('member_transfer_model');
 		$this->load->model('order_model');
+		$this->load->model('order_transfer_model');
     }
 	
 	function member_edit()
@@ -119,7 +124,7 @@ class Member extends MY_Controller {
 				$temp['no'] = $i;
 				$temp['id_member_transfer'] = $row->id_member_transfer;
 				$temp['name'] = $row->name;
-				$temp['total'] = number_format($row->total);
+				$temp['total'] = 'Rp '.number_format($row->total, 0, ',', '.');
 				$temp['resi'] = $row->resi;
 				$temp['status'] = $code_member_transfer_status[$row->status];
 				$temp['date'] = $date;
@@ -132,7 +137,7 @@ class Member extends MY_Controller {
 		}
 	}
 	
-	function order()
+	function member_order_lists()
 	{
 		$param = array();
 		$param['id_member'] = $this->session->userdata('id_member');
@@ -141,25 +146,71 @@ class Member extends MY_Controller {
 		if ($query->code == 200)
 		{
 			$data = array();
-			$code_member_transfer_status = $this->config->item('code_member_transfer_status');
 			$i = 1;
+			$code_order_status = $this->config->item('code_order_status');
 			
 			foreach ($query->result as $row)
 			{
-				$date = date('d M Y', strtotime($row->date));
-				if ($row->date == '0000-00-00')
+				$total = 0;
+				$resi = '-';
+				$query2 = $this->cart_total_model->info(array('id_cart_total' => $row->id_cart_total));
+				
+				if ($query2->code == 200)
 				{
-					$date = '-';
+					$shipment_address = '';
+					$shipment_total = 0;
+					$total = $query2->result->total;
+					$total_product = 0;
+					$product = array();
+					$unique_code = $query2->result->unique_code;
+					
+					$query4 = $this->cart_shipment_model->info(array('unique_code' => $unique_code));
+					
+					if ($query4->code == 200)
+					{
+						$shipment_address = $query4->result->shipment_address;
+						$shipment_total = $query4->result->total;
+					}
+					
+					$query5 = $this->cart_model->lists(array('unique_code' => $unique_code));
+					
+					if ($query5->code == 200)
+					{
+						foreach ($query5->result as $row2)
+						{
+							$total_product += $row2->total * $row2->quantity;
+							$image = $row2->product->image;
+							$explode = explode('.', $image);
+							
+							$temp2 = array();
+							$temp2['product_image'] = $explode[0].'_350x350.'.$explode[1];
+							$temp2['product_name'] = $row2->product->name;
+							$temp2['product_slug'] = $row2->product->slug;
+							$temp2['product_quantity'] = $row2->quantity;
+							$product[] = $temp2;
+						}
+					}
+				}
+				
+				$query3 = $this->order_transfer_model->info(array('id_order' => $row->id_order));
+				
+				if ($query3->code == 200)
+				{
+					$resi = $query3->result->resi;
 				}
 				
 				$temp = array();
 				$temp['no'] = $i;
-				$temp['id_order'] = $row->id_member_transfer;
-				$temp['name'] = $row->name;
-				$temp['total'] = number_format($row->total);
-				$temp['resi'] = $row->resi;
-				$temp['status'] = $code_member_transfer_status[$row->status];
-				$temp['date'] = $date;
+				$temp['id_order'] = $row->id_order;
+				$temp['status'] = $code_order_status[$row->status];
+				$temp['total'] = $total;
+				$temp['resi'] = $resi;
+				$temp['shipment_address'] = $shipment_address;
+				$temp['shipment_total'] = $shipment_total;
+				$temp['total_product'] = $total_product;
+				$temp['unique_trf'] = $total - $shipment_total - $total_product;
+				$temp['product'] = $product;
+				$temp['created_date'] = date('d M Y', strtotime($row->created_date));
 				$data[] = (object) $temp;
 				$i++;
 			}
@@ -206,7 +257,7 @@ class Member extends MY_Controller {
 				}
 				else
 				{
-					$photo = $explode[0].'.'.$explode[1].'.'.$explode[2].$code_350x350['extra'].'.'.$explode[3];
+					$photo = $explode[0].'.'.$explode[1].$code_350x350['extra'].'.'.$explode[2];
 				}
 			}
 			
@@ -228,7 +279,7 @@ class Member extends MY_Controller {
 			$data['member'] = (object) $temp;
 			$data['member_event'] = (object) $this->member_event_lists();
 			$data['member_transfer'] = (object) $this->member_transfer_lists();
-			$data['order'] = (object) $this->order();
+			$data['order'] = (object) $this->member_order_lists();
 			
 			$data['code_member_marital_status'] = $this->config->item('code_member_marital_status');
 			$data['view_content'] = 'member/profile';

@@ -1,4 +1,4 @@
-<div role="main" class="main" id="page_team">
+<div role="main" class="main" id="register_success_page">
     <div class="container margintop15">
 		<h2>Register <strong>Success</strong></h2>
 		<div class="row">

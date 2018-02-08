@@ -6,6 +6,7 @@ class Home extends MY_Controller {
 	function __construct()
     {
         parent::__construct();
+		$this->load->model('cart_model');
 		$this->load->model('member_model');
 		$this->load->model('member_transfer_model');
 		$this->load->model('post_model');
@@ -280,6 +281,14 @@ class Home extends MY_Controller {
 				if ($query->code == 200)
 				{
 					$member = $query->result;
+					$unique_code = md5(uniqid($member->id_member, true));
+					
+					$query2 = $this->cart_model->lists(array('id_member' => $member->id_member, 'status' => 1));
+					
+					if ($query2->code == 200 && $query2->total == 1)
+					{
+						$unique_code = $query2->result[0]->unique_code;
+					}
 					
 					$cached = array(
 						'id_member'=> $member->id_member,
@@ -287,7 +296,8 @@ class Home extends MY_Controller {
 						'email'=> $member->email,
 						'photo'=> $member->photo,
 						'is_login' => TRUE,
-						'unique_code' => md5(uniqid($member->id_member, true))
+						'unique_code' => $unique_code,
+						'phone_number' => $member->phone_number
 					);
 					
 					// Set session
@@ -595,6 +605,7 @@ class Home extends MY_Controller {
 		//$this->display_view('not_found', $data);
 
 		$data['short_code'] = $this->input->get_post('c');
+		$data['order_code'] = $this->input->get_post('o');
 		
 		if ($data['short_code'] == TRUE)
 		{
@@ -668,6 +679,11 @@ class Home extends MY_Controller {
 			{
 				$this->display_view('not_found', $data);
 			}
+		}
+		elseif ($data['order_code'] == TRUE)
+		{
+			$data['view_content'] = 'home/transfer_confirmation';
+			$this->display_view('templates/frame', $data);
 		}
 		else
 		{
