@@ -21,15 +21,15 @@
 		<div class="row">
 			<div class="col-md-12">
 				<ol class="list list-ordened list-ordened-style-2">
-					<li>Data yang tertera disini adalah nama-nama yang sudah mendaftar di periode 1 - 31 Januari 2017.</li>
-					<li>Data ini hanya bersifat sementara. Data akan dihilangkan dari website ketika periode pendaftaran sudah selesai.</li>
+					<li>Data yang tertera disini adalah nama-nama yang sudah mendaftar dan paketnya belum dikirim.</li>
+					<li>Data ini hanya bersifat sementara. Data akan hilang dari website ketika paket sudah dikirim.</li>
 					<li>Keterangan status:</li>
 				</ol>
 				<ul class="list-unstyled" style="margin-left: 75px;">
 					<li><strong>Awaiting Review</strong>: Data kalian belum di validasi oleh crew. Mohon kesabarannya dalam menunggu email dari crew.<br></li>
 					<li><strong>Awaiting Transfer</strong>: Data kalian sudah valid. Silahkan cek email kalian untuk melihat informasi selanjutnya.<br></li>
 					<li><strong>Invalid</strong>: Data kalian invalid atau terdapat kesalahan dalam mendaftar. Silahkan cek email kalian untuk melihat informasi selanjutnya.<br></li>
-					<li><strong>Awaiting Approval</strong>: Data konfirmasi pembayaran kalian sudah diterima. Mohon kesabarannya dalam menunggu konfirmasinya dari crew.<br></li>
+					<li><strong>Awaiting Approval</strong>: Data konfirmasi pembayaran kalian sudah diterima. Mohon kesabarannya dalam menunggu balasan dari crew.<br></li>
 				</ul>
 			</div>
 		</div>

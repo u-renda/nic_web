@@ -33,50 +33,36 @@
                 <div class="summary entry-summary">
                     <h1 class="mb-none"><strong><?php echo $product->name; ?></strong></h1>
                     <p class="price">
-						<?php if ($this->session->userdata('is_login') == FALSE) { ?>
-                        <span class="amount"><?php echo 'Rp '.number_format($product->price_public,0,',','.'); ?></span>
-						<?php } else { ?>
-						<span class="amount"><?php echo 'Rp '.number_format($product->price_member,0,',','.'); ?></span>
-						<?php } ?>
+                        <span class="amount"><?php echo 'Rp '.number_format($product->price,0,',','.'); ?></span>
                     </p>
-                    <p class="taller"><?php echo $product->description; ?></p>
-					<?php if ($product->size != '') { ?>
-                    <p class="taller">
-						Ukuran yang dipilih: <input type="text" class="input-text" title="size" name="size" size="10" id="size" value="M">
-					</p>
-					<?php } else { ?>
-					<input type="hidden" value="" id="size">
-					<?php } ?>
-                    <button href="#" class="btn btn-primary btn-read btn-icon" id="add_chart" data-id="<?php echo $product->id_product; ?>">Add to cart</button>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="tabs tabs-product">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a href="#productInfo" data-toggle="tab" class="border-radius-top5">Aditional Information</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="productInfo">
-                            <table class="table table-striped mt-xl">
-                                <tbody>
-                                    <tr>
-										<th width="1%">Ukuran:</th>
-                                        <td><?php echo $product->size; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <th width="1%">Warna:</th>
-                                        <td><?php echo ucwords($product->colors); ?></td>
-                                    </tr>
-                                    <tr>
-                                        <th width="1%">Material:</th>
-                                        <td><?php echo ucwords($product->material); ?></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                    <p><?php echo $product->description; ?></p>
+					<form action="<?php echo $this->config->item('link_add_cart'); ?>" method="post" class="cart" id="cart">
+						<?php if (isset($product->product_size) == TRUE) { ?>
+							<p id="size-button">
+							<?php foreach ($product->product_size as $row2) { ?>
+								<button type="button" class="btn btn-borders btn-primary mr-xs mb-sm size" id="<?php echo $row2['size']; ?>"><?php echo $row2['size']; ?></button>
+							<?php } ?>
+							</p>
+						<?php } ?>
+						<div class="col-md-6 pl-none">
+							<div data-plugin-spinner data-plugin-options='{ "value":0, "min":0 }' id="jumlah">
+								<div class="input-group">
+									<div class="spinner-buttons input-group-btn">
+										<button type="button" class="btn btn-default spinner-up">
+											<i class="fa fa-plus"></i>
+										</button>
+									</div>
+									<input type="text" class="spinner-input form-control" maxlength="3" readonly>
+									<div class="spinner-buttons input-group-btn">
+										<button type="button" class="btn btn-default spinner-down">
+											<i class="fa fa-minus"></i>
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<input type="submit" class="btn btn-primary btn-read btn-icon" data-id="<?php echo $product->id_product; ?>" value="Add to cart" name="submit">
+					</form>
                 </div>
             </div>
         </div>

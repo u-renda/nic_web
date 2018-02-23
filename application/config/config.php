@@ -537,8 +537,8 @@ else
 $config['development_mode'] = FALSE;
 $config['image_gallery_mode'] = FALSE; // TRUE = show, FALSE = hidden
 $config['login_mode'] = TRUE; // TRUE = show, FALSE = hidden
-$config['register_mode'] = FALSE; // TRUE = show, FALSE = hidden
-$config['shop_mode'] = FALSE; // TRUE = show, FALSE = hidden
+$config['register_mode'] = TRUE; // TRUE = show, FALSE = hidden
+$config['shop_mode'] = TRUE; // TRUE = show, FALSE = hidden
 
 $config['email_admin'] = 'admin@theagnation.com';
 $config['email_gmail'] = 'officialagnation@gmail.com';
@@ -553,6 +553,7 @@ $config['twitter'] = 'https://twitter.com/the_agnation';
 $config['youtube'] = 'https://www.youtube.com/user/TheNICcrew';
 $config['line_at'] = '@agnation';
 
+$config['link_add_cart'] = $config['base_url'].'shop/add_cart';
 $config['link_checkout'] = $config['base_url'].'shop/checkout';
 $config['link_faq'] = $config['base_url'].'pages/faq';
 $config['link_help'] = $config['base_url'].'pages/help';
@@ -693,7 +694,8 @@ $config['code_product_status'] = array(
     1 => 'Sale!',
     2 => 'Limited',
     3 => 'Pre Order',
-    4 => 'Sold Out!'
+    4 => 'Sold Out!',
+    5 => 'Stock'
 );
 $config['code_order_status'] = array(
     1 => 'Ordered',

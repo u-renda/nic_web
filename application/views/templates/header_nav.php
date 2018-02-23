@@ -100,9 +100,9 @@
 								</ul>
 							</li>
 							<?php } ?>
-							<!--<li class="dropdown no-dropdown list-item">
-								<a class="" href="<?php //echo base_url().'status_membership'; ?>">Status Membership</a>
-							</li>-->
+							<li class="dropdown no-dropdown list-item">
+								<a class="" href="<?php echo base_url().'status_membership'; ?>">Status Membership</a>
+							</li>
 						</ul>
 					</nav>
 				</div>

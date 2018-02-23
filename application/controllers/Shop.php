@@ -28,6 +28,7 @@ class Shop extends MY_Controller {
 	
 	function add_cart()
 	{
+		print_r($this->input->post());die();
 		$id = $this->input->post('id_product');
 		$size = $this->input->post('size');
 		
@@ -194,17 +195,28 @@ class Shop extends MY_Controller {
 			$temp = array();
 			$temp['id_product'] = $result->id_product;
 			$temp['name'] = $result->name;
-			$temp['price_public'] = $result->price_public;
-			$temp['price_member'] = $result->price_member;
+			$temp['price'] = $result->price;
 			$temp['description'] = $result->description;
-			$temp['size'] = $result->detail->size;
-			$temp['colors'] = $result->detail->colors;
-			$temp['material'] = $result->detail->material;
 			
 			$temp['image'][] = $result->image;			
 			foreach ($result->other_image as $row)
 			{
 				$temp['image'][] = $row->image;
+			}
+			
+			if (count($result->size) > 0)
+			{
+				foreach ($result->size as $row2)
+				{
+					if ($row2->quantity > 0)
+					{
+						$temp2 = array();
+						$temp2['id_product_size'] = $row2->id_product_size;
+						$temp2['size'] = $row2->size;
+						$temp2['quantity'] = $row2->quantity;
+						$temp['product_size'][] = $temp2;
+					}
+				}
 			}
 		}
 		else
@@ -259,8 +271,7 @@ class Shop extends MY_Controller {
 				$temp['slug'] = $row->slug;
 				$temp['image'] = $image;
 				$temp['type'] = $row->type;
-				$temp['price_public'] = number_format($row->price_public, 0, ',', '.');
-				$temp['price_member'] = number_format($row->price_member, 0, ',', '.');
+				$temp['price'] = number_format($row->price, 0, ',', '.');
 				$temp['status'] = $row->status;
 				$product[] = (object) $temp;
 			}

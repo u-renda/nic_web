@@ -252,41 +252,53 @@ function goBack() {
     
     // Shop Detail
     if (document.getElementById('shop_detail_page') !== null) {
-		$('body').delegate("#add_chart", "click", function() {
-			var id_product = $(this).data("id");
-			var size = document.getElementById("size").value;
-            var action = "shop/add_cart";
-            var dataString = 'id_product=' + id_product + '&size=' + size;
-			$.ajax(
-			{
-				type: "POST",
-				url: newPathname + action,
-				data: dataString,
-				cache: false,
-                beforeSend: function()
-                {
-                    $('.modal-title').text('Please wait...');
-					$('.modal-body').html('<i class="fa fa-spinner fa-spin" style="font-size: 34px;"></i>');
-					$('.modal-dialog').addClass('modal-sm');
-					$('#myModal').modal('show');
-                },
-				success: function(result)
-				{
-					$('#myModal').modal('hide');
-					var response = $.parseJSON(result);
-					
-					if (response.type == 'success')
-					{
-						PNotify.prototype.options.styling = "fontawesome";
-						new PNotify({
-							title: response.title,
-							text: response.msg,
-							type: response.type
-						});
-					}
-				}
-			});
+        // button size tetap ke klik
+        var sizeBtn = $('.size');
+        
+        sizeBtn.click(function() {
+            var cek = $(this).attr('id');
+            //console.log($('#size-button'));
+            $("#size").remove();
+            $('#size-button').append('<input type="hidden" name="size" value="'+cek+'" id="size">');
+            $(this).addClass('fontgreen');
         });
+        
+        
+//		$('body').delegate("#add_chart", "click", function() {
+//			var id_product = $(this).data("id");
+//			var size = document.getElementById("size").value;
+//            var action = "shop/add_cart";
+//            var dataString = 'id_product=' + id_product + '&size=' + size;
+//			$.ajax(
+//			{
+//				type: "POST",
+//				url: newPathname + action,
+//				data: dataString,
+//				cache: false,
+//                beforeSend: function()
+//                {
+//                    $('.modal-title').text('Please wait...');
+//					$('.modal-body').html('<i class="fa fa-spinner fa-spin" style="font-size: 34px;"></i>');
+//					$('.modal-dialog').addClass('modal-sm');
+//					$('#myModal').modal('show');
+//                },
+//				success: function(result)
+//				{
+//					$('#myModal').modal('hide');
+//					var response = $.parseJSON(result);
+//					
+//					if (response.type == 'success')
+//					{
+//						PNotify.prototype.options.styling = "fontawesome";
+//						new PNotify({
+//							title: response.title,
+//							text: response.msg,
+//							type: response.type
+//						});
+//					}
+//				}
+//			});
+//        });
         
         return false;
     }

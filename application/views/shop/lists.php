@@ -45,15 +45,7 @@
 							<a href="<?php echo $this->config->item('link_shop_detail').'/'.$row->slug; ?>">
 								<h4><?php echo ucwords($row->name); ?></h4>
 								<span class="price">
-									<?php
-									if ($this->session->userdata('is_login') == TRUE) {
-										if ($row->type == 0) { ?>
-										<del><span class="amount"><?php echo 'Rp '.$row->price_public; ?></span></del>
-										<?php } ?>
-										<ins><span class="amount"><?php echo 'Rp '.$row->price_member; ?></span></ins>
-									<?php } else { ?>
-									<span class="amount"><?php echo 'Rp '.$row->price_public; ?></span>
-									<?php } ?>
+									<ins><span class="amount"><?php echo 'Rp '.$row->price; ?></span></ins>
 								</span>
 							</a>
 						</span>

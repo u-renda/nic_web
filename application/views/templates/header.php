@@ -19,6 +19,7 @@
     <link href="<?php echo base_url('assets/css/theme').'/owl.carousel.min.css'; ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/theme').'/owl.theme.default.min.css'; ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/theme').'/pnotify.custom.css'; ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/css/theme').'/spinner.css'; ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/theme').'/theme.css'; ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/theme').'/theme-elements.css'; ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/theme').'/theme-blog.css'; ?>" rel="stylesheet">
